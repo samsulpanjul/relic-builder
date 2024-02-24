@@ -70,7 +70,7 @@ export default function StatsLayout({ selectedRelic, selectedMainStat, imgRelic,
                     Reset
                   </button>
                 </div>
-                <div className="flex flex-col mx-auto w-3/6 h-[300px] overflow-y-scroll gap-y-2 gap-x-20">
+                <div className="flex flex-col mx-auto min-w-7/12 h-[300px] overflow-y-scroll gap-y-2 gap-x-20">
                   {dataSubStat.map((item, index) => (
                     <div key={item.id}>
                       <div className="flex flex-col gap-2 justify-center">
@@ -87,7 +87,7 @@ export default function StatsLayout({ selectedRelic, selectedMainStat, imgRelic,
                 </div>
               </StatsDisplay>
               {imgRelic && selectedMainStat && (
-                <div className="w-1/2 bg-slate-800 p-5 m-auto relative">
+                <div className="w-5/12 bg-slate-800 p-5 m-auto relative">
                   <button className="text-sm rounded-lg px-2 py-1 hover:bg-[#141414] bg-[#141414a9] absolute top-5 right-5" onClick={handleCopyClick}>
                     {copied ? "Copied!" : "Copy"}
                   </button>
@@ -102,19 +102,22 @@ export default function StatsLayout({ selectedRelic, selectedMainStat, imgRelic,
                       SubAffixLists =<br />
                       &#123;
                       {/* // Start */}
-                      {dataSubStat.map((item, index) => (
-                        <div key={item.subStat} className={checkedItems[index] ? "" : "hidden"}>
-                          {"    new RelicAffix"}
-                          <br />
-                          {"    "}&#123;
-                          <br />
-                          {`        AffixId = ${item.id},`}
-                          <br />
-                          {`        Step = ${countSteps[index] * 10},`}
-                          <br />
-                          {"    "}&#125;,
-                        </div>
-                      ))}
+                      {dataSubStat.map(
+                        (item, index) =>
+                          checkedItems[index] && (
+                            <div key={item.subStat}>
+                              {"    new RelicAffix"}
+                              <br />
+                              {"    "}&#123;
+                              <br />
+                              {`        AffixId = ${item.id},`}
+                              <br />
+                              {`        Step = ${countSteps[index] * 10},`}
+                              <br />
+                              {"    "}&#125;,
+                            </div>
+                          )
+                      )}
                       {/* End */}
                       &#125;
                     </code>

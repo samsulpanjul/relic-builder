@@ -8,7 +8,6 @@ export default function RelicLayout({ selectedItem, dataSubStat }) {
 
   const handleClickRelic = (item) => {
     setSelectedRelic(item);
-    console.log(item);
   };
 
   const handleClickMainStat = (item) => {
@@ -17,7 +16,7 @@ export default function RelicLayout({ selectedItem, dataSubStat }) {
   };
 
   return (
-    <div className="ml-[400px] mt-5 w-[800px] flex flex-col gap-5">
+    <div className="ml-[400px] mt-5 min-w-[800px] flex flex-col gap-5">
       <StatsLayout selectedRelic={selectedRelic} selectedMainStat={selectedMainStat} imgRelic={imgRelic} selectedItem={selectedItem} dataSubStat={dataSubStat} handleClickRelic={handleClickRelic} handleClickMainStat={handleClickMainStat} />
     </div>
   );
