@@ -112,7 +112,9 @@ export default function StatsLayout({ selectedRelic, selectedMainStat, imgRelic,
                               <br />
                               {`        AffixId = ${item.id},`}
                               <br />
-                              {`        Step = ${countSteps[index] * 10},`}
+                              {`        Cnt = ${countSteps[index]},`}
+                              <br />
+                              {`        Step = ${countSteps[index] * 2},`}
                               <br />
                               {"    "}&#125;,
                             </div>

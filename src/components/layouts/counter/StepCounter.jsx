@@ -17,7 +17,7 @@ export default function StepCounter({ countStep, setCountStep }) {
       <button className="text-xl font-bold px-3 py-1 hover:bg-[#141414] bg-[#141414a9] rounded-xl" onClick={handleIncrementStep}>
         +
       </button>
-      <p className="text-xl font-medium">step(s)</p>
+      <p className="text-xl font-medium">roll(s)</p>
     </div>
   );
 }
