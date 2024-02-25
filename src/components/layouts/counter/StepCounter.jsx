@@ -1,11 +1,11 @@
-export default function StepCounter({ countStep, setCountStep }) {
+export default function StepCounter({ countSteps, setCountSteps }) {
   const handleIncrementStep = () => {
-    setCountStep(countStep + 1);
+    setCountSteps(countSteps + 1);
   };
 
   const handleDecrementStep = () => {
-    setCountStep(countStep - 1);
-    if (countStep === 1) setCountStep(1);
+    setCountSteps(countSteps - 1);
+    if (countSteps === 1) setCountSteps(1);
   };
 
   return (
@@ -13,7 +13,7 @@ export default function StepCounter({ countStep, setCountStep }) {
       <button className="text-xl font-bold px-3 py-1 hover:bg-[#141414] bg-[#141414a9] rounded-xl" onClick={handleDecrementStep}>
         -
       </button>
-      <p className="text-3xl font-medium">{countStep}</p>
+      <p className="text-3xl font-medium">{countSteps}</p>
       <button className="text-xl font-bold px-3 py-1 hover:bg-[#141414] bg-[#141414a9] rounded-xl" onClick={handleIncrementStep}>
         +
       </button>

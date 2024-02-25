@@ -5,7 +5,6 @@ import StatsDisplay from "./StatsDisplay";
 import StepCounter from "../counter/StepCounter";
 
 export default function StatsLayout({ selectedRelic, selectedMainStat, imgRelic, selectedItem, dataSubStat, handleClickRelic, handleClickMainStat, onCountStepChange, step }) {
-  const [countStep, setCountStep] = useState(1);
   const [checkedItems, setCheckedItems] = useState(Array(dataSubStat.length).fill(false));
   const [countSteps, setCountSteps] = useState(Array(dataSubStat.length).fill(1));
   const [copied, setCopied] = useState(false);
@@ -31,7 +30,6 @@ export default function StatsLayout({ selectedRelic, selectedMainStat, imgRelic,
   };
 
   const handleResetClick = () => {
-    setCountStep(1);
     setCountSteps(Array(dataSubStat.length).fill(1));
     setCheckedItems(Array(dataSubStat.length).fill(false));
   };
@@ -79,7 +77,7 @@ export default function StatsLayout({ selectedRelic, selectedMainStat, imgRelic,
                             <input type="checkbox" className="toggle toggle-md" onChange={() => handleChecked(index)} checked={checkedItems[index]} />
                             <p className="text-md font-semibold px-3 py-2 rounded-lg">{item.subStat}</p>
                           </div>
-                          <StepCounter countStep={countSteps[index]} setCountStep={(newStep) => handleCountStepChange(index, newStep)} />
+                          <StepCounter countSteps={countSteps[index]} setCountSteps={(newStep) => handleCountStepChange(index, newStep)} />
                         </div>
                       </div>
                     </div>
