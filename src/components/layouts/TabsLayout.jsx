@@ -22,7 +22,7 @@ export default function TabsLayout({ dataRelic, handleClick }) {
           (item) =>
             item.relic === false && (
               <div key={item.id} className="hover:bg-slate-800 bg-slate-900 rounded-full px-2 cursor-pointer p-2">
-                <img src={item.img} alt="Relic" className=" w-[100px]" onClick={() => handleClick(item)} />
+                <img src={item.img} alt="Planetary" className=" w-[100px]" onClick={() => handleClick(item)} />
               </div>
             )
         )}

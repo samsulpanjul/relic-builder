@@ -762,7 +762,7 @@ const relic = [
     relic: false,
     name: "Sigonia, the Unclaimed Desolation",
     img: "relic-sets/71030.webp",
-    pc2: "When enemies are defeated, the wearer's CRIT DMG increases by 4%, up to 10 times.",
+    pc2: "2-Pc: When enemies are defeated, the wearer's CRIT DMG increases by 4%, up to 10 times.",
     pc4: "",
     set: [
       {
@@ -786,7 +786,7 @@ const relic = [
     relic: false,
     name: "Izumo Gensei and Takama Divine Realm",
     img: "relic-sets/71031.webp",
-    pc2: "Increases the wearer's ATK by 12%. When entering battle, if at least one other ally follows the same Path as the wearer, then the wearer's CRIT Rate increases by 12%.",
+    pc2: "2-Pc: Increases the wearer's ATK by 12%. When entering battle, if at least one other ally follows the same Path as the wearer, then the wearer's CRIT Rate increases by 12%.",
     pc4: "",
     set: [
       {

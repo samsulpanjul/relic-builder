@@ -1,8 +1,8 @@
 import relic from "./utils/dataRelic";
 import { subStats } from "./utils/dataStat";
 import { useState } from "react";
-import TabsLayout from "./components/layouts/tabs/TabsLayout";
-import RelicLayout from "./components/layouts/relics/RelicLayout";
+import TabsLayout from "./components/layouts/TabsLayout";
+import RelicLayout from "./components/layouts/RelicLayout";
 
 function App() {
   const dataRelic = relic;
