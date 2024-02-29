@@ -1,8 +1,8 @@
 export default function FreeSR({ imgRelic, selectedMainStat, dataSubStat, checkedItems, countSteps, textAreaRef, copied, handleCopyClick }) {
   return (
     <div className="w-5/12 mx-auto">
-      <pre className="bg-slate-800 p-5 relative">
-        <button className="text-sm font-sans rounded-lg px-2 py-1 hover:bg-[#141414] bg-[#141414a9] absolute top-5 right-5" onClick={handleCopyClick}>
+      <pre className="dark:bg-slate-800 bg-slate-200 p-5 relative">
+        <button className="text-sm font-sans rounded-lg px-2 py-1 bg-slate-300 hover:bg-slate-400 dark:hover:bg-[#141414] dark:bg-[#141414a9] absolute top-5 right-5" onClick={handleCopyClick}>
           {copied ? "Copied!" : "Copy"}
         </button>
         <code ref={textAreaRef}>

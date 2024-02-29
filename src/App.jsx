@@ -14,7 +14,7 @@ function App() {
   };
 
   return (
-    <div className="flex px-10 text-slate-200 pb-[300px]">
+    <div className="flex px-10 text-slate-900 dark:text-slate-200 pb-[150px]">
       <TabsLayout handleClick={handleClick} dataRelic={dataRelic} />
       <RelicLayout selectedItem={selectedItem} dataSubStat={dataSubStat} />
     </div>

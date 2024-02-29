@@ -7,7 +7,7 @@ export default function SubStat({ dataSubStat, checkedItems, handleChecked, coun
         <div key={item.id} className="flex justify-between place-items-center gap-5 max-w-full">
           <label className="label cursor-pointer flex place-items-center gap-5">
             <input type="checkbox" className="toggle toggle-md" onChange={() => handleChecked(index)} checked={checkedItems[index]} />
-            <span className="text-lg font-semibold label-text text-slate-200">{item.subStat}</span>
+            <span className="text-lg font-semibold label-text text-slate-900 dark:text-slate-200">{item.subStat}</span>
           </label>
           <StepCounter countSteps={countSteps[index]} setCountSteps={(newStep) => handleCountStepChange(index, newStep)} />
         </div>

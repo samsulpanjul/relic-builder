@@ -57,7 +57,7 @@ export default function RelicLayout({ selectedItem, dataSubStat }) {
             <p className="text-3xl font-bold text-center">Select Main Stat</p>
             <div className="flex gap-2 justify-center flex-wrap">
               {selectedRelic.mainStat.map((item, index) => (
-                <button key={item.name} className="text-lg rounded-lg font-bold cursor-pointer hover:bg-[#141414] bg-[#141414a9] px-3 py-2" onClick={() => handleClickMainStat(item)}>
+                <button key={item.name} className="text-lg rounded-lg font-bold cursor-pointer bg-slate-300 hover:bg-slate-400 dark:hover:bg-[#141414] dark:bg-[#141414a9] px-3 py-2" onClick={() => handleClickMainStat(item)}>
                   {item.name}
                 </button>
               ))}
@@ -75,7 +75,7 @@ export default function RelicLayout({ selectedItem, dataSubStat }) {
           <StatsDisplay>
             <div className="flex justify-center gap-10">
               <p className="text-3xl font-bold text-center">Sub Stat</p>
-              <button className="text-lg w-fit rounded-lg font-bold cursor-pointer hover:bg-[#141414] bg-[#141414a9] px-3 py-2" onClick={handleResetClick}>
+              <button className="text-lg w-fit rounded-lg font-bold cursor-pointer bg-slate-300 hover:bg-slate-400 dark:hover:bg-[#141414] dark:bg-[#141414a9] px-3 py-2" onClick={handleResetClick}>
                 Reset
               </button>
             </div>
