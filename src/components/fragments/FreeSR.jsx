@@ -35,7 +35,7 @@ export default function FreeSR({ imgRelic, selectedMainStat, dataSubStat, checke
                     </div>
                   )
               )}
-              &#9;&#93;
+              &#9;&#93;,
               <br />
             </>
           )}
