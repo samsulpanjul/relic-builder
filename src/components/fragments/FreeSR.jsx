@@ -8,7 +8,7 @@ export default function FreeSR({ imgRelic, selectedMainStat, dataSubStat, checke
         <code ref={textAreaRef}>
           BattleRelic &#123;
           <br />
-          &#9;id= {imgRelic.relicId},
+          &#9;id: {imgRelic.relicId},
           <br />
           &#9;level: 15,
           <br />
