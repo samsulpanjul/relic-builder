@@ -3,7 +3,7 @@ import { mainStatBody, mainStatFeet, mainStatLink, mainStatPlanar } from "./data
 const relic = [
   {
     id: 1,
-    relic: true,
+    type: "relic",
     name: "Passerby of Wandering Cloud",
     img: "relic-sets/71000.webp",
     pc2: "2-Pc: Increases Outgoing Healing by 10%.",
@@ -29,7 +29,7 @@ const relic = [
   },
   {
     id: 2,
-    relic: true,
+    type: "relic",
     name: "Musketeer of Wild Wheat",
     img: "relic-sets/71001.webp",
     pc2: "2-Pc: ATK increases by 12%.",
@@ -55,7 +55,7 @@ const relic = [
   },
   {
     id: 3,
-    relic: true,
+    type: "relic",
     name: "Knight of Purity Palace",
     img: "relic-sets/71002.webp",
     pc2: "2-Pc: Increases DEF by 15%.",
@@ -81,7 +81,7 @@ const relic = [
   },
   {
     id: 4,
-    relic: true,
+    type: "relic",
     name: "Hunter of Glacial Forest",
     img: "relic-sets/71003.webp",
     pc2: "2-Pc: Increases Ice DMG by 10%.",
@@ -107,7 +107,7 @@ const relic = [
   },
   {
     id: 5,
-    relic: true,
+    type: "relic",
     name: "Champion of Streetwise Boxing",
     img: "relic-sets/71004.webp",
     pc2: "2-Pc: Increases Physical DMG by 10%.",
@@ -133,7 +133,7 @@ const relic = [
   },
   {
     id: 6,
-    relic: true,
+    type: "relic",
     name: "Guard of Wuthering Snow",
     img: "relic-sets/71005.webp",
     pc2: "2-Pc: Reduces DMG taken by 8%.",
@@ -159,7 +159,7 @@ const relic = [
   },
   {
     id: 7,
-    relic: true,
+    type: "relic",
     name: "Firesmith of Lava-Forging",
     img: "relic-sets/71006.webp",
     pc2: "2-Pc: Increases Fire DMG by 10%.",
@@ -185,7 +185,7 @@ const relic = [
   },
   {
     id: 8,
-    relic: true,
+    type: "relic",
     name: "Genius of Brilliant Stars",
     img: "relic-sets/71007.webp",
     pc2: "2-Pc: Increases Quantum DMG by 10%.",
@@ -211,7 +211,7 @@ const relic = [
   },
   {
     id: 9,
-    relic: true,
+    type: "relic",
     name: "Band of Sizzling Thunder",
     img: "relic-sets/71008.webp",
     pc2: "2-Pc: Increases Lightning DMG by 10%.",
@@ -237,7 +237,7 @@ const relic = [
   },
   {
     id: 10,
-    relic: true,
+    type: "relic",
     name: "Eagle of Twilight Line",
     img: "relic-sets/71009.webp",
     pc2: "2-Pc: Increases Wind DMG by 10%.",
@@ -263,7 +263,7 @@ const relic = [
   },
   {
     id: 11,
-    relic: true,
+    type: "relic",
     name: "Thief of Shooting Meteor",
     img: "relic-sets/71010.webp",
     pc2: "2-Pc: Increases Break Effect by 16%.",
@@ -289,7 +289,7 @@ const relic = [
   },
   {
     id: 12,
-    relic: true,
+    type: "relic",
     name: "Wastelander of Banditry Desert",
     img: "relic-sets/71011.webp",
     pc2: "2-Pc: Increases Imaginary DMG by 10%.",
@@ -315,7 +315,7 @@ const relic = [
   },
   {
     id: 13,
-    relic: false,
+    type: "planar",
     name: "Space Sealing Station",
     img: "relic-sets/71012.webp",
     pc2: "2-Pc: Increases the wearer's ATK by 12%. When the wearer's SPD reaches 120 or higher, the wearer's ATK increases by an extra 12%.",
@@ -339,7 +339,7 @@ const relic = [
   },
   {
     id: 14,
-    relic: false,
+    type: "planar",
     name: "Fleet of the Ageless",
     img: "relic-sets/71013.webp",
     pc2: "2-Pc: Increases the wearer's Max HP by 12%. When the wearer's SPD reaches 120 or higher, all allies' ATK increases by 8%.",
@@ -363,7 +363,7 @@ const relic = [
   },
   {
     id: 15,
-    relic: false,
+    type: "planar",
     name: "Pan-Cosmic Commercial Enterprise",
     img: "relic-sets/71014.webp",
     pc2: "2-Pc: Increases the wearer's Effect Hit Rate by 10%. Meanwhile, the wearer's ATK increases by an amount that is equal to 25% of the current Effect Hit Rate, up to a maximum of 25%.",
@@ -387,7 +387,7 @@ const relic = [
   },
   {
     id: 16,
-    relic: false,
+    type: "planar",
     name: "Belobog of the Architects",
     img: "relic-sets/71015.webp",
     pc2: "2-Pc: Increases the wearer's DEF by 15%. When the wearer's Effect Hit Rate is 50% or higher, the wearer gains an extra 15% DEF.",
@@ -411,7 +411,7 @@ const relic = [
   },
   {
     id: 17,
-    relic: false,
+    type: "planar",
     name: "Celestial Differentiator",
     img: "relic-sets/71016.webp",
     pc2: "2-Pc: Increases the wearer's CRIT DMG by 16%. When the wearer's current CRIT DMG reaches 120% or higher, after entering battle, the wearer's CRIT Rate increases by 60% until the end of their first attack.",
@@ -435,7 +435,7 @@ const relic = [
   },
   {
     id: 18,
-    relic: false,
+    type: "planar",
     name: "Inert Salsotto",
     img: "relic-sets/71017.webp",
     pc2: "2-Pc: Increases the wearer's CRIT Rate by 8%. When the wearer's current CRIT Rate reaches 50% or higher, the wearer's Ultimate and follow-up attack DMG increases by 15%.",
@@ -459,7 +459,7 @@ const relic = [
   },
   {
     id: 19,
-    relic: false,
+    type: "planar",
     name: "Talia: Kingdom of Banditry",
     img: "relic-sets/71018.webp",
     pc2: "2-Pc: Increases the wearer's Break Effect by 16%. When the wearer's SPD reaches 145 or higher, the wearer's Break Effect increases by an extra 20%.",
@@ -483,7 +483,7 @@ const relic = [
   },
   {
     id: 20,
-    relic: false,
+    type: "planar",
     name: "Sprightly Vonwacq",
     img: "relic-sets/71019.webp",
     pc2: "2-Pc: Increases the wearer's Energy Regeneration Rate by 5%. When the wearer's SPD reaches 120 or higher, the wearer's action is Advanced Forward by 40% immediately upon entering battle.",
@@ -507,7 +507,7 @@ const relic = [
   },
   {
     id: 21,
-    relic: true,
+    type: "relic",
     name: "Longevous Disciple",
     img: "relic-sets/71020.webp",
     pc2: "2-Pc: Increases Max HP by 12%.",
@@ -533,7 +533,7 @@ const relic = [
   },
   {
     id: 22,
-    relic: true,
+    type: "relic",
     name: "Messenger Traversing Hackerspace",
     img: "relic-sets/71021.webp",
     pc2: "2-Pc: Increases SPD by 6%.",
@@ -559,7 +559,7 @@ const relic = [
   },
   {
     id: 23,
-    relic: false,
+    type: "planar",
     name: "Rutilant Arena",
     img: "relic-sets/71022.webp",
     pc2: "2-Pc: Increases the wearer's CRIT Rate by 8%. When the wearer's current CRIT Rate reaches 70% or higher, the wearer's Basic ATK and Skill DMG increase by 20%.",
@@ -583,7 +583,7 @@ const relic = [
   },
   {
     id: 24,
-    relic: false,
+    type: "planar",
     name: "Broken Keel",
     img: "relic-sets/71023.webp",
     pc2: "2-Pc: Increases the wearer's Effect RES by 10%. When the wearer's Effect RES is at 30% or higher, all allies' CRIT DMG increases by 10%.",
@@ -607,7 +607,7 @@ const relic = [
   },
   {
     id: 25,
-    relic: true,
+    type: "relic",
     name: "The Ashblazing Grand Duke",
     img: "relic-sets/71024.webp",
     pc2: "2-Pc: Increases the DMG dealt by follow-up attacks by 20%.",
@@ -633,7 +633,7 @@ const relic = [
   },
   {
     id: 26,
-    relic: true,
+    type: "relic",
     name: "Prisoner in Deep Confinement",
     img: "relic-sets/71025.webp",
     pc2: "2-Pc: ATK increases by 12%.",
@@ -659,7 +659,7 @@ const relic = [
   },
   {
     id: 27,
-    relic: false,
+    type: "planar",
     name: "Firmament Frontline: Glamoth",
     img: "relic-sets/71026.webp",
     pc2: "2-Pc: Increases the wearer's ATK by 12%. When the wearer's SPD is equal to or higher than 135/160, the wearer deals 12%/18% more DMG.",
@@ -683,7 +683,7 @@ const relic = [
   },
   {
     id: 28,
-    relic: false,
+    type: "planar",
     name: "Penacony, Land of the Dreams",
     img: "relic-sets/71027.webp",
     pc2: "2-Pc: Increases wearer's Energy Regeneration Rate by 5%. Increases DMG by 10% for all other allies that are of the same Type as the wearer.",
@@ -707,7 +707,7 @@ const relic = [
   },
   {
     id: 29,
-    relic: true,
+    type: "relic",
     name: "Pioneer Diver of Dead Waters",
     img: "relic-sets/71028.webp",
     pc2: "2-Pc: Increases DMG dealt to enemies with debuff by 12%.",
@@ -733,7 +733,7 @@ const relic = [
   },
   {
     id: 30,
-    relic: true,
+    type: "relic",
     name: "Watchmaker, Master of Dream Machinations",
     img: "relic-sets/71029.webp",
     pc2: "2-Pc: Increases Break Effect by 16%.",
@@ -759,7 +759,7 @@ const relic = [
   },
   {
     id: 31,
-    relic: false,
+    type: "planar",
     name: "Sigonia, the Unclaimed Desolation",
     img: "relic-sets/71030.webp",
     pc2: "2-Pc: When enemies are defeated, the wearer's CRIT DMG increases by 4%, up to 10 times.",
@@ -783,7 +783,7 @@ const relic = [
   },
   {
     id: 32,
-    relic: false,
+    type: "planar",
     name: "Izumo Gensei and Takama Divine Realm",
     img: "relic-sets/71031.webp",
     pc2: "2-Pc: Increases the wearer's ATK by 12%. When entering battle, if at least one other ally follows the same Path as the wearer, then the wearer's CRIT Rate increases by 12%.",
@@ -807,7 +807,7 @@ const relic = [
   },
   {
     id: 33,
-    relic: true,
+    type: "relic",
     name: "Iron Cavalry Against the Scourge",
     img: "relic-sets/71032.webp",
     pc2: "2-Pc: Increases Break Effect by 16%.",
@@ -833,7 +833,7 @@ const relic = [
   },
   {
     id: 34,
-    relic: true,
+    type: "relic",
     name: "The Wind-Soaring Valorous",
     img: "relic-sets/71033.webp",
     pc2: "2-Pc: ATK increases by 12%.",
@@ -859,7 +859,7 @@ const relic = [
   },
   {
     id: 35,
-    relic: false,
+    type: "planar",
     name: "Duran, Dynasty of Running Wolves",
     img: "relic-sets/71034.webp",
     pc2: "2-Pc: When allies use follow-up attacks, the wearer receives 1 stack of Merit, stacking up to 6 times. Every stack of Merit increases the DMG dealt by the wearer's follow-up attacks by 4%. When there are 6 stacks, additionally increases the wearer's CRIT DMG by 24%.",
@@ -883,7 +883,7 @@ const relic = [
   },
   {
     id: 36,
-    relic: false,
+    type: "planar",
     name: "Forge of the Kalpagni Lantern",
     img: "relic-sets/71035.webp",
     pc2: "2-Pc: Increase the wearer's SPD by 6%. When the wearer hits enemy targets with Fire Weakness, the wearer's Break Effect increases by 40%, lasting for 1 turn(s).",

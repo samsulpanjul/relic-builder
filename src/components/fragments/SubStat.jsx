@@ -1,17 +1,35 @@
-import StepCounter from "./StepCounter";
+import Combobox from "./Combobox";
+import { subStats } from "@/utils/dataStat";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-export default function SubStat({ dataSubStat, checkedItems, handleChecked, countSteps, handleCountStepChange }) {
+export default function SubStat({ index, sub, setSubStat, increaseSubStep, decreaseSubStep, setRoll, upgrade }) {
   return (
-    <div className="flex flex-col mx-auto min-w-7/12 h-[300px] overflow-y-scroll gap-y-2 gap-x-20">
-      {dataSubStat.map((item, index) => (
-        <div key={item.id} className="flex justify-between place-items-center gap-5 max-w-full">
-          <label className="label cursor-pointer flex place-items-center gap-5">
-            <input type="checkbox" className="toggle toggle-md" onChange={() => handleChecked(index)} checked={checkedItems[index]} />
-            <span className="text-lg font-semibold label-text text-slate-900 dark:text-slate-200">{item.subStat}</span>
-          </label>
-          <StepCounter countSteps={countSteps[index]} setCountSteps={(newStep) => handleCountStepChange(index, newStep)} />
-        </div>
-      ))}
+    <div className="grid grid-cols-3">
+      <Combobox cn="w-fit" data={subStats} name={"sub stat"} value={sub[index].stat} setValue={(val) => setSubStat(index, val)} />
+      <div className="flex items-center gap-3">
+        <Button disabled={upgrade === 0 || sub[index].step === 1} onClick={() => decreaseSubStep(index)}>
+          -
+        </Button>
+        <p>{sub[index].step - 1}</p>
+        <Button disabled={upgrade === 5 || sub[index].step === 6 || sub[index].stat === ""} onClick={() => increaseSubStep(index)}>
+          +
+        </Button>
+        <p>upgrade</p>
+      </div>
+      <div className="flex items-center gap-3">
+        <p>Roll: </p>
+        <Select onValueChange={(val) => setRoll(index, val)}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Mid" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="0">Low</SelectItem>
+            <SelectItem value="1">Mid</SelectItem>
+            <SelectItem value="2">High</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
     </div>
   );
 }

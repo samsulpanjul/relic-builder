@@ -1,8 +1,9 @@
 import relic from "./utils/dataRelic";
 import { subStats } from "./utils/dataStat";
 import { useState } from "react";
-import TabsLayout from "./components/layouts/TabsLayout";
-import RelicLayout from "./components/layouts/RelicLayout";
+import CreateRelic from "./components/fragments/CreateRelic";
+import { ThemeProvider } from "./components/theme-provider";
+import Code from "@/components/fragments/Code";
 
 function App() {
   const dataRelic = relic;
@@ -14,10 +15,12 @@ function App() {
   };
 
   return (
-    <div className="flex px-10 text-slate-900 dark:text-slate-200 pb-[150px]">
-      <TabsLayout handleClick={handleClick} dataRelic={dataRelic} />
-      <RelicLayout selectedItem={selectedItem} dataSubStat={dataSubStat} />
-    </div>
+    <ThemeProvider>
+      <div className="w-10/12 m-auto p-10 pb-[150px]">
+        <CreateRelic />
+        <Code />
+      </div>
+    </ThemeProvider>
   );
 }
 
