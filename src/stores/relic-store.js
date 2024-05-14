@@ -46,7 +46,6 @@ export const useHeadStore = create((set) => ({
       sub: state.sub.map((subItem, i) => (i === index ? { ...subItem, roll: roll } : subItem)),
     })),
   upgrade: 0,
-  // create a handler to reset all values
   resetHead: () =>
     set({
       relicHead: "",
@@ -358,5 +357,68 @@ export const useRopeStore = create((set) => ({
         { stat: "", step: 1, roll: 1 },
       ],
       upgradeRope: 0,
+    }),
+}));
+
+export const useRelicStore = create((set) => ({
+  relic: "",
+  setRelic: (relic) => set({ relic, piece: 1 }),
+  piece: 1,
+  setPiece: (piece) => set({ piece }),
+  mainStat: "",
+  setMainStat: (mainStat) => set({ mainStat }),
+  sub: [
+    {
+      stat: "",
+      step: 1,
+      roll: 1,
+    },
+    {
+      stat: "",
+      step: 1,
+      roll: 1,
+    },
+    {
+      stat: "",
+      step: 1,
+      roll: 1,
+    },
+    {
+      stat: "",
+      step: 1,
+      roll: 1,
+    },
+  ],
+  setSubStat: (index, stat) =>
+    set((state) => ({
+      sub: state.sub.map((subItem, i) => (i === index ? { ...subItem, stat: stat } : subItem)),
+    })),
+  increaseSubStep: (index) =>
+    set((state) => ({
+      sub: state.sub.map((subItem, i) => (i === index ? { ...subItem, step: subItem.step + 1 } : subItem)),
+      upgrade: state.upgrade + 1,
+    })),
+  decreaseSubStep: (index) =>
+    set((state) => ({
+      sub: state.sub.map((subItem, i) => (i === index ? { ...subItem, step: subItem.step - 1 } : subItem)),
+      upgrade: state.upgrade - 1,
+    })),
+  setRoll: (index, roll) =>
+    set((state) => ({
+      sub: state.sub.map((subItem, i) => (i === index ? { ...subItem, roll: roll } : subItem)),
+    })),
+  upgrade: 0,
+  reset: () =>
+    set({
+      relic: "",
+      piece: 1,
+      mainStat: "",
+      sub: [
+        { stat: "", step: 1, roll: 1 },
+        { stat: "", step: 1, roll: 1 },
+        { stat: "", step: 1, roll: 1 },
+        { stat: "", step: 1, roll: 1 },
+      ],
+      upgrade: 0,
     }),
 }));

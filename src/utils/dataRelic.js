@@ -1,6 +1,6 @@
 import { mainStatBody, mainStatFeet, mainStatLink, mainStatPlanar } from "./dataStat.js";
 
-const relic = [
+const dataRelic = [
   {
     id: 1,
     type: "relic",
@@ -907,4 +907,4 @@ const relic = [
   },
 ];
 
-export default relic;
+export default dataRelic;

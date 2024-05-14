@@ -1,3 +1,7 @@
+const mainStatHead = [{ id: 1, name: "HP%", value: 112 }];
+
+const mainStatHand = [{ id: 1, name: "ATK", value: 56 }];
+
 const mainStatBody = [
   { id: 1, name: "HP%", value: 6.9 },
   { id: 2, name: "ATK%", value: 6.9 },
@@ -99,4 +103,4 @@ const subStats = [
   },
 ];
 
-export { mainStatBody, mainStatFeet, subStats, mainStatPlanar, mainStatLink };
+export { mainStatHead, mainStatHand, mainStatBody, mainStatFeet, mainStatPlanar, mainStatLink, subStats };
