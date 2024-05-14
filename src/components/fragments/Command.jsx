@@ -27,7 +27,7 @@ export default function Command() {
             /relic give {dataRelic.find((val) => val.name === relic)?.set[piece - 1]?.relicId} {relic && "15"} {mainStat} {relic && sub.reduce((acc, curr) => (curr.stat !== "" ? acc + 1 : acc), 0)}{" "}
             {sub.map((subItem) => (subItem.stat !== "" ? `${subStats.find((stat) => stat.name === subItem.stat)?.id} ${subItem.step} ` : ""))}
           </span>
-          <button className="text-sm font-sans rounded-lg px-2 py-2 hover:bg-[#141414] bg-[#141414a9] h-fit w-16" onClick={handleCopyClick}>
+          <button className="text-sm font-sans rounded-lg px-2 py-2 hover:bg-neutral-700 bg-neutral-600 h-fit w-16" onClick={handleCopyClick}>
             {copied ? "Copied!" : "Copy"}
           </button>
         </div>
