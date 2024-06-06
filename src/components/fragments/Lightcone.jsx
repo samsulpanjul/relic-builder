@@ -126,7 +126,7 @@ export default function Lightcone() {
           <div className="flex flex-col gap-5">
             <div>
               <span>Level: {level}</span>
-              <Slider className="cursor-pointer mt-1" defaultValue={[80]} max={80} min={1} step={10} onValueChange={(val) => setLevel(val)} />
+              <Slider className="cursor-pointer mt-1" defaultValue={[80]} value={[level]} max={80} min={1} step={1} onValueChange={(val) => setLevel([val < 10 ? 1 : Math.floor(val / 10) * 10])} />
             </div>
             <div>
               <span>Superimpose: {rank}</span>

@@ -117,12 +117,12 @@ export default function Char() {
         </DialogContent>
       </Dialog>
       <div className="grid grid-cols-2">
-        <img className="w-[300px]" src={`https://api.hakush.in/hsr/UI/avatarshopicon/${id}.webp`} alt="" />
+        <img className="w-[300px]" src={`https://api.hakush.in/hsr/UI/avatarshopicon/${id}.webp`} alt={id} />
         {id && (
           <div className="flex flex-col gap-5">
             <div>
               <span>Level: {level}</span>
-              <Slider className="cursor-not-allowed mt-1" defaultValue={[80]} max={80} min={1} step={10} onValueChange={(val) => setLevel(val)} disabled />
+              <Slider className="cursor-not-allowed mt-1" defaultValue={[80]} max={80} min={1} step={1} onValueChange={(val) => setLevel([val < 10 ? 1 : Math.floor(val / 10) * 10])} disabled />
             </div>
             <div>
               <span>Eidolon: {rank}</span>
