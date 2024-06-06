@@ -13,10 +13,3 @@ export const getItem = (data, item, callback) => {
     .then((data) => callback(data))
     .catch((err) => console.log("Error ", err));
 };
-
-export const getIcon = (data, item, callback) => {
-  fetch(`https://api.hakush.in/hsr/UI/${data}/${item}.webp`)
-    .then((response) => response.json())
-    .then((data) => callback(data))
-    .catch((err) => console.log("Error ", err));
-};
