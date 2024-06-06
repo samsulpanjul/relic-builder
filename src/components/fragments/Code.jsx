@@ -21,7 +21,7 @@ export default function Code({}) {
     const mainStatBodyId = mainStatBody.find((stat) => stat.name === mainStatBodyy)?.id;
     const mainStatFeetId = mainStatFeet.find((stat) => stat.name === mainStatFeett)?.id;
     const mainStatPlanarId = mainStatPlanar.find((stat) => stat.name === mainStatPlanarr)?.id;
-    const mainStatLinkId = mainStatLink.find((stat) => stat.id === mainStatRope)?.id;
+    const mainStatLinkId = mainStatLink.find((stat) => stat.name === mainStatRope)?.id;
     return {
       relicId,
       mainStatHeadId: 1,
@@ -41,7 +41,7 @@ export default function Code({}) {
         <Relic name={relicBody} relic={getRelic(relicBody, 2).relicId} mainStat={getRelic(relicBody, 2).mainStatBodyId} sub={subBody} />
         <Relic name={relicFeet} relic={getRelic(relicFeet, 3).relicId} mainStat={getRelic(relicFeet, 3).mainStatFeetId} sub={subFeet} />
         <Relic name={relicPlanar} relic={getRelic(relicPlanar, 0).relicId} mainStat={getRelic(relicPlanar, 0).mainStatPlanarId} sub={subPlanar} />
-        <Relic name={relicRope} relic={getRelic(relicRope, 1).relicId} mainStat={getRelic(relicRope, 1).mainStatRopeId} sub={subRope} />
+        <Relic name={relicRope} relic={getRelic(relicRope, 1).relicId} mainStat={getRelic(relicRope, 1).mainStatLinkId} sub={subRope} />
       </div>
     )
   );
