@@ -1,18 +1,15 @@
-import Combobox from "./Combobox";
 import { subStats } from "@/utils/dataStat";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useRelicStore } from "@/stores/relic-store";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useState } from "react";
 
-export default function SubStat({ index, sub, setSubStat, increaseSubStep, decreaseSubStep, setRoll, upgrade }) {
+export default function SubStat({ index, sub, mainStat, setSubStat, increaseSubStep, decreaseSubStep, setRoll, upgrade }) {
   const [open, setOpen] = useState(false);
-  const [relic, mainStat, subb, setSubStatt] = useRelicStore((state) => [state.relic, state.mainStat, state.sub, state.setSubStat]);
 
   return (
-    <div className="grid grid-cols-3">
+    <div className="grid grid-cols-6">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button variant="outline" role="combobox" aria-expanded={open} className={`justify-between w-40`}>
@@ -27,13 +24,13 @@ export default function SubStat({ index, sub, setSubStat, increaseSubStep, decre
               <CommandGroup>
                 {subStats.map((item) => (
                   <CommandItem
-                    disabled={subb.some((val) => val.stat === item.name) || relic === ""}
+                    disabled={sub.some((val) => val.stat === item.name || item.name === mainStat) || mainStat == ""}
                     key={item.id}
                     onSelect={(currentValue) => {
-                      setSubStatt(index, currentValue === sub[index].stat ? sub[index].stat : currentValue);
+                      setSubStat(index, currentValue === sub[index].stat ? sub[index].stat : currentValue);
                       setOpen(false);
                     }}
-                    value={item.id}
+                    value={item.name}
                   >
                     <div className="flex items-center gap-5">
                       <span className="text-md">{item.name}</span>
@@ -45,7 +42,15 @@ export default function SubStat({ index, sub, setSubStat, increaseSubStep, decre
           </Command>
         </PopoverContent>
       </Popover>
-      <div className="flex items-center gap-3">
+      <div className="text-center self-center">
+        {sub[index].stat !== "" ? (
+          <p>
+            {(subStats.find((stat) => stat.name === sub[index].stat)?.base * sub[index].step).toFixed(1)}
+            {sub[index].stat === "HP" || sub[index].stat === "ATK" || sub[index].stat === "DEF" || sub[index].stat === "Speed" ? "" : "%"}
+          </p>
+        ) : null}
+      </div>
+      <div className="flex items-center gap-3 col-span-2">
         <Button disabled={upgrade === 0 || sub[index].step === 1} onClick={() => decreaseSubStep(index)}>
           -
         </Button>
@@ -54,6 +59,19 @@ export default function SubStat({ index, sub, setSubStat, increaseSubStep, decre
           +
         </Button>
         <p>upgrade</p>
+      </div>
+      <div className="flex items-center gap-3">
+        <p>Roll: </p>
+        <Select disabled defaultValue={2} onValueChange={(val) => setRoll(index, val)}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="High" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value={0}>Low</SelectItem>
+            <SelectItem value={1}>Mid</SelectItem>
+            <SelectItem value={2}>High</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );

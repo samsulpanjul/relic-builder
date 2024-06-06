@@ -1,105 +1,105 @@
-const mainStatHead = [{ id: 1, name: "HP%", value: 112 }];
+const mainStatHead = [{ id: 1, name: "HP", base: 112.896, perLv: 1.4, max: 705.6 }];
 
-const mainStatHand = [{ id: 1, name: "ATK", value: 56 }];
+const mainStatHand = [{ id: 1, name: "ATK", base: 56.448, perLv: 19.7568, max: 352.8 }];
 
 const mainStatBody = [
-  { id: 1, name: "HP%", value: 6.9 },
-  { id: 2, name: "ATK%", value: 6.9 },
-  { id: 3, name: "DEF%", value: 8.6 },
-  { id: 4, name: "Crit Rate", value: 5.1 },
-  { id: 5, name: "Crit DMG", value: 10.3 },
-  { id: 6, name: "Outgoing Healing", value: 5.5 },
-  { id: 7, name: "Effect HIT Rate", value: 6.9 },
+  { id: 1, name: "HP%", base: 6.912, perLv: 2.4192, max: 43.2 },
+  { id: 2, name: "ATK%", base: 6.912, perLv: 2.4192, max: 43.2 },
+  { id: 3, name: "DEF%", base: 8.64, perLv: 3.024, max: 54 },
+  { id: 4, name: "Crit Rate", base: 5.184, perLv: 1.8144, max: 32.4 },
+  { id: 5, name: "Crit DMG", base: 10.368, perLv: 3.6288, max: 64.8 },
+  { id: 6, name: "Outgoing Healing", base: 5.5296, perLv: 1.9354, max: 34.5606 },
+  { id: 7, name: "Effect HIT Rate", base: 6.912, perLv: 2.4192, max: 43.2 },
 ];
 
 const mainStatFeet = [
-  { id: 1, name: "HP%", value: 6.9 },
-  { id: 2, name: "ATK%", value: 6.9 },
-  { id: 3, name: "DEF%", value: 8.6 },
-  { id: 4, name: "Speed", value: 1 },
+  { id: 1, name: "HP%", base: 6.912, perLv: 2.4192, max: 43.2 },
+  { id: 2, name: "ATK%", base: 6.912, perLv: 2.4192, max: 43.2 },
+  { id: 3, name: "DEF%", base: 8.64, perLv: 3.024, max: 54 },
+  { id: 4, name: "Speed", base: 4.032, perLv: 1.4, max: 25.032 },
 ];
 
 const mainStatPlanar = [
-  { id: 1, name: "HP%", value: 6.9 },
-  { id: 2, name: "ATK%", value: 6.9 },
-  { id: 3, name: "DEF%", value: 8.6 },
-  { id: 4, name: "Physical Damage", value: 6.2 },
-  { id: 5, name: "Fire Damage", value: 6.2 },
-  { id: 6, name: "Ice Damage", value: 6.2 },
-  { id: 7, name: "Lightning Damage", value: 6.2 },
-  { id: 8, name: "Wind Damage", value: 6.2 },
-  { id: 9, name: "Quantum Damage", value: 6.2 },
-  { id: 10, name: "Imaginary Damage", value: 6.2 },
+  { id: 1, name: "HP%", base: 6.912, perLv: 2.4192, max: 43.2 },
+  { id: 2, name: "ATK%", base: 6.912, perLv: 2.4192, max: 43.2 },
+  { id: 3, name: "DEF%", base: 8.64, perLv: 3.024, max: 54 },
+  { id: 4, name: "Physical Damage", base: 6.2208, perLv: 2.1773, max: 38.8803 },
+  { id: 5, name: "Fire Damage", base: 6.2208, perLv: 2.1773, max: 38.8803 },
+  { id: 6, name: "Ice Damage", base: 6.2208, perLv: 2.1773, max: 38.8803 },
+  { id: 7, name: "Lightning Damage", base: 6.2208, perLv: 2.1773, max: 38.8803 },
+  { id: 8, name: "Wind Damage", base: 6.2208, perLv: 2.1773, max: 38.8803 },
+  { id: 9, name: "Quantum Damage", base: 6.2208, perLv: 2.1773, max: 38.8803 },
+  { id: 10, name: "Imaginary Damage", base: 6.2208, perLv: 2.1773, max: 38.8803 },
 ];
 
 const mainStatLink = [
-  { id: 1, name: "Break Effect", value: 10.3 },
-  { id: 2, name: "Energy Regeneration Rate", value: 3.1 },
-  { id: 3, name: "HP%", value: 6.9 },
-  { id: 4, name: "ATK%", value: 6.9 },
-  { id: 5, name: "DEF%", value: 8.6 },
+  { id: 1, name: "Break Effect", base: 10.368, perLv: 3.6277, max: 64.8 },
+  { id: 2, name: "Energy Regeneration Rate", base: 3.1104, perLv: 1.0886, max: 19.4394 },
+  { id: 3, name: "HP%", base: 6.912, perLv: 2.4192, max: 43.2 },
+  { id: 4, name: "ATK%", base: 6.912, perLv: 2.4192, max: 43.2 },
+  { id: 5, name: "DEF%", base: 8.64, perLv: 3.024, max: 54 },
 ];
 
 const subStats = [
   {
     id: 1,
     name: "HP",
-    value: 42,
+    base: 42.33751,
   },
   {
     id: 2,
     name: "ATK",
-    value: 21,
+    base: 21.168754,
   },
   {
     id: 3,
     name: "DEF",
-    value: 21,
+    base: 21.168754,
   },
   {
     id: 4,
     name: "HP%",
-    value: 4.4,
+    base: 4.32,
   },
   {
     id: 5,
     name: "ATK%",
-    value: 4.4,
+    base: 4.32,
   },
   {
     id: 6,
     name: "DEF%",
-    value: 5.4,
+    base: 5.4,
   },
   {
     id: 7,
     name: "Speed",
-    value: 2.6,
+    base: 2.6,
   },
   {
     id: 8,
     name: "Crit Rate",
-    value: 3.2,
+    base: 3.24,
   },
   {
     id: 9,
     name: "Crit DMG",
-    value: 6.5,
+    base: 6.48,
   },
   {
     id: 10,
     name: "Effect HIT Rate",
-    value: 4.3,
+    base: 4.32,
   },
   {
     id: 11,
     name: "Effect RES",
-    value: 4.3,
+    base: 4.32,
   },
   {
     id: 12,
     name: "Break Effect",
-    value: 6.5,
+    base: 6.48,
   },
 ];
 

@@ -1,6 +1,9 @@
 import { create } from "zustand";
+import { subStats } from "@/utils/dataStat";
 
-export const useHeadStore = create((set) => ({
+const subStat = subStats.map((stat) => stat.name);
+
+export const useHeadStore = create((set, get) => ({
   relicHead: "",
   setRelicHead: (relicHead) => set({ relicHead }),
   mainStatHead: "",
@@ -58,9 +61,34 @@ export const useHeadStore = create((set) => ({
       ],
       upgrade: 0,
     }),
+  randomSubHead: () => {
+    set((state) => {
+      const usedStats = [state.mainStatHead];
+      const newSubStats = state.sub.map((subItem) => {
+        let newStat;
+        do {
+          newStat = subStat[Math.floor(Math.random() * subStat.length)];
+        } while (usedStats.includes(newStat));
+        usedStats.push(newStat);
+        return { ...subItem, stat: newStat };
+      });
+      return { sub: newSubStats };
+    });
+  },
+  randomStep: () => {
+    const subLength = get().sub.length;
+    set((state) => ({
+      sub: state.sub.map((subItem) => ({ ...subItem, step: 1 })),
+      upgrade: 0,
+    }));
+    for (let i = 0; i < 5; i++) {
+      const randomIndex = Math.floor(Math.random() * subLength);
+      get().increaseSubStep(randomIndex);
+    }
+  },
 }));
 
-export const useHandStore = create((set) => ({
+export const useHandStore = create((set, get) => ({
   relicHand: "",
   setRelicHand: (relicHand) => set({ relicHand }),
   mainStatHand: "",
@@ -110,7 +138,7 @@ export const useHandStore = create((set) => ({
     set({
       relicHand: "",
       mainStatHand: "",
-      sub: [
+      subHand: [
         { stat: "", step: 1, roll: 1 },
         { stat: "", step: 1, roll: 1 },
         { stat: "", step: 1, roll: 1 },
@@ -118,9 +146,34 @@ export const useHandStore = create((set) => ({
       ],
       upgradeHand: 0,
     }),
+  randomSubHand: () => {
+    set((state) => {
+      const usedStats = [state.mainStatHand];
+      const newSubStats = state.subHand.map((subItem) => {
+        let newStat;
+        do {
+          newStat = subStat[Math.floor(Math.random() * subStat.length)];
+        } while (usedStats.includes(newStat));
+        usedStats.push(newStat);
+        return { ...subItem, stat: newStat };
+      });
+      return { subHand: newSubStats };
+    });
+  },
+  randomStep: () => {
+    const subLength = get().subHand.length;
+    set((state) => ({
+      subHand: state.subHand.map((subItem) => ({ ...subItem, step: 1 })),
+      upgradeHand: 0,
+    }));
+    for (let i = 0; i < 5; i++) {
+      const randomIndex = Math.floor(Math.random() * subLength);
+      get().increaseSubStepHand(randomIndex);
+    }
+  },
 }));
 
-export const useBodyStore = create((set) => ({
+export const useBodyStore = create((set, get) => ({
   relicBody: "",
   setRelicBody: (relicBody) => set({ relicBody }),
   mainStatBody: "",
@@ -170,7 +223,7 @@ export const useBodyStore = create((set) => ({
     set({
       relicBody: "",
       mainStatBody: "",
-      sub: [
+      subBody: [
         { stat: "", step: 1, roll: 1 },
         { stat: "", step: 1, roll: 1 },
         { stat: "", step: 1, roll: 1 },
@@ -178,9 +231,34 @@ export const useBodyStore = create((set) => ({
       ],
       upgradeBody: 0,
     }),
+  randomSubBody: () => {
+    set((state) => {
+      const usedStats = [state.mainStatBody];
+      const newSubStats = state.subBody.map((subItem) => {
+        let newStat;
+        do {
+          newStat = subStat[Math.floor(Math.random() * subStat.length)];
+        } while (usedStats.includes(newStat));
+        usedStats.push(newStat);
+        return { ...subItem, stat: newStat };
+      });
+      return { subBody: newSubStats };
+    });
+  },
+  randomStep: () => {
+    const subLength = get().subBody.length;
+    set((state) => ({
+      subBody: state.subBody.map((subItem) => ({ ...subItem, step: 1 })),
+      upgradeBody: 0,
+    }));
+    for (let i = 0; i < 5; i++) {
+      const randomIndex = Math.floor(Math.random() * subLength);
+      get().increaseSubStepBody(randomIndex);
+    }
+  },
 }));
 
-export const useFeetStore = create((set) => ({
+export const useFeetStore = create((set, get) => ({
   relicFeet: "",
   setRelicFeet: (relicFeet) => set({ relicFeet }),
   mainStatFeet: "",
@@ -230,7 +308,7 @@ export const useFeetStore = create((set) => ({
     set({
       relicFeet: "",
       mainStatFeet: "",
-      sub: [
+      subFeet: [
         { stat: "", step: 1, roll: 1 },
         { stat: "", step: 1, roll: 1 },
         { stat: "", step: 1, roll: 1 },
@@ -238,9 +316,34 @@ export const useFeetStore = create((set) => ({
       ],
       upgradeFeet: 0,
     }),
+  randomSubFeet: () => {
+    set((state) => {
+      const usedStats = [state.mainStatFeet];
+      const newSubStats = state.subFeet.map((subItem) => {
+        let newStat;
+        do {
+          newStat = subStat[Math.floor(Math.random() * subStat.length)];
+        } while (usedStats.includes(newStat));
+        usedStats.push(newStat);
+        return { ...subItem, stat: newStat };
+      });
+      return { subFeet: newSubStats };
+    });
+  },
+  randomStep: () => {
+    const subLength = get().subFeet.length;
+    set((state) => ({
+      subFeet: state.subFeet.map((subItem) => ({ ...subItem, step: 1 })),
+      upgradeFeet: 0,
+    }));
+    for (let i = 0; i < 5; i++) {
+      const randomIndex = Math.floor(Math.random() * subLength);
+      get().increaseSubStepFeet(randomIndex);
+    }
+  },
 }));
 
-export const usePlanarStore = create((set) => ({
+export const usePlanarStore = create((set, get) => ({
   relicPlanar: "",
   setRelicPlanar: (relicPlanar) => set({ relicPlanar }),
   mainStatPlanar: "",
@@ -290,7 +393,7 @@ export const usePlanarStore = create((set) => ({
     set({
       relicPlanar: "",
       mainStatPlanar: "",
-      sub: [
+      subPlanar: [
         { stat: "", step: 1, roll: 1 },
         { stat: "", step: 1, roll: 1 },
         { stat: "", step: 1, roll: 1 },
@@ -298,9 +401,34 @@ export const usePlanarStore = create((set) => ({
       ],
       upgradePlanar: 0,
     }),
+  randomSubPlanar: () => {
+    set((state) => {
+      const usedStats = [state.mainStatPlanar];
+      const newSubStats = state.subPlanar.map((subItem) => {
+        let newStat;
+        do {
+          newStat = subStat[Math.floor(Math.random() * subStat.length)];
+        } while (usedStats.includes(newStat));
+        usedStats.push(newStat);
+        return { ...subItem, stat: newStat };
+      });
+      return { subPlanar: newSubStats };
+    });
+  },
+  randomStep: () => {
+    const subLength = get().subPlanar.length;
+    set((state) => ({
+      subPlanar: state.subPlanar.map((subItem) => ({ ...subItem, step: 1 })),
+      upgradePlanar: 0,
+    }));
+    for (let i = 0; i < 5; i++) {
+      const randomIndex = Math.floor(Math.random() * subLength);
+      get().increaseSubStepPlanar(randomIndex);
+    }
+  },
 }));
 
-export const useRopeStore = create((set) => ({
+export const useRopeStore = create((set, get) => ({
   relicRope: "",
   setRelicRope: (relicRope) => set({ relicRope }),
   mainStatRope: "",
@@ -350,7 +478,7 @@ export const useRopeStore = create((set) => ({
     set({
       relicRope: "",
       mainStatRope: "",
-      sub: [
+      subRope: [
         { stat: "", step: 1, roll: 1 },
         { stat: "", step: 1, roll: 1 },
         { stat: "", step: 1, roll: 1 },
@@ -358,67 +486,29 @@ export const useRopeStore = create((set) => ({
       ],
       upgradeRope: 0,
     }),
-}));
-
-export const useRelicStore = create((set) => ({
-  relic: "",
-  setRelic: (relic) => set({ relic, piece: 1 }),
-  piece: 1,
-  setPiece: (piece) => set({ piece }),
-  mainStat: "",
-  setMainStat: (mainStat) => set({ mainStat }),
-  sub: [
-    {
-      stat: "",
-      step: 1,
-      roll: 1,
-    },
-    {
-      stat: "",
-      step: 1,
-      roll: 1,
-    },
-    {
-      stat: "",
-      step: 1,
-      roll: 1,
-    },
-    {
-      stat: "",
-      step: 1,
-      roll: 1,
-    },
-  ],
-  setSubStat: (index, stat) =>
+  randomSubRope: () => {
+    set((state) => {
+      const usedStats = [state.mainStatRope];
+      const newSubStats = state.subRope.map((subItem) => {
+        let newStat;
+        do {
+          newStat = subStat[Math.floor(Math.random() * subStat.length)];
+        } while (usedStats.includes(newStat));
+        usedStats.push(newStat);
+        return { ...subItem, stat: newStat };
+      });
+      return { subRope: newSubStats };
+    });
+  },
+  randomStep: () => {
+    const subLength = get().subRope.length;
     set((state) => ({
-      sub: state.sub.map((subItem, i) => (i === index ? { ...subItem, stat: stat } : subItem)),
-    })),
-  increaseSubStep: (index) =>
-    set((state) => ({
-      sub: state.sub.map((subItem, i) => (i === index ? { ...subItem, step: subItem.step + 1 } : subItem)),
-      upgrade: state.upgrade + 1,
-    })),
-  decreaseSubStep: (index) =>
-    set((state) => ({
-      sub: state.sub.map((subItem, i) => (i === index ? { ...subItem, step: subItem.step - 1 } : subItem)),
-      upgrade: state.upgrade - 1,
-    })),
-  setRoll: (index, roll) =>
-    set((state) => ({
-      sub: state.sub.map((subItem, i) => (i === index ? { ...subItem, roll: roll } : subItem)),
-    })),
-  upgrade: 0,
-  reset: () =>
-    set({
-      relic: "",
-      piece: 1,
-      mainStat: "",
-      sub: [
-        { stat: "", step: 1, roll: 1 },
-        { stat: "", step: 1, roll: 1 },
-        { stat: "", step: 1, roll: 1 },
-        { stat: "", step: 1, roll: 1 },
-      ],
-      upgrade: 0,
-    }),
+      subRope: state.subRope.map((subItem) => ({ ...subItem, step: 1 })),
+      upgradeRope: 0,
+    }));
+    for (let i = 0; i < 5; i++) {
+      const randomIndex = Math.floor(Math.random() * subLength);
+      get().increaseSubStepRope(randomIndex);
+    }
+  },
 }));
