@@ -723,6 +723,158 @@ const dataRelic = [
       },
     ],
   },
-];
+  {
+    id: 71038,
+    type: "relic",
+    name: "Sacerdos' Relived Ordeal",
+    pc2: "2-Pc: Increases SPD by 6%.",
+    pc4: "4-Pc: When using Skill or Ultimate on one ally target, increases the ability target's CRIT DMG by 18%, lasting for 2 turn(s). This effect can stack up to 2 time(s).",
+    set: [
+      { id: 121_1, relicId: 61211, name: "Head" },
+      { id: 121_2, relicId: 61212, name: "Hands" },
+      { id: 120_3, relicId: 61213, name: "Body" },
+      { id: 120_4, relicId: 61214, name: "Feet" },
+    ],
+  },
+  {
+    id: 71039,
+    type: "relic",
+    name: "Scholar Lost in Erudition",
+    pc2: "2-Pc: Increases CRIT Rate by 8%.",
+    pc4: "4-Pc: Increases DMG dealt by Skill and Ultimate by 20%. After using Ultimate, additionally increases the DMG dealt by the next Skill by 25%.",
+    set: [
+      { id: 122_1, relicId: 61221, name: "Head" },
+      { id: 122_2, relicId: 61222, name: "Hands" },
+      {
+        id: 122_3,
+        relicId: 61223,
+        name: "Body",
+      },
+      {
+        id: 122_4,
+        relicId: 61224,
+        name: "Feet",
+      },
+    ],
+  },
+  {
+    id: 71040,
+    type: "relic",
+    name: "Hero of Triumphant Song",
+    pc2: "2-Pc: Increases ATK by 12%.",
+    pc4: "4-Pc: While the wearer's memosprite is on the field, increases the wearer's SPD by 6%. When the wearer's memosprite attacks, increases the wearer's and memosprite's CRIT DMG by 30%, lasting for 2 turn(s).",
+    set: [
+      { id: 123_1, relicId: 61231, name: "Head" },
+      { id: 123_2, relicId: 61232, name: "Hands" },
+      {
+        id: 123_3,
+        relicId: 61233,
+        name: "Body",
+      },
+      {
+        id: 123_4,
+        relicId: 61234,
+        name: "Feet",
+      },
+    ],
+  },
+  {
+    id: 71041,
+    type: "relic",
+    name: "Poet of Mourning Collapse",
+    pc2: "2-Pc: Increases Quantum DMG by 10%.",
+    pc4: "4-Pc: Decreases the wearer's SPD by 8%. Before entering battle, if the wearer's SPD is lower than 110/95, increases the wearer's CRIT Rate by 20%/32%. This effect applies to the wearer's memosprite at the same time.",
+    set: [
+      { id: 122_1, relicId: 61221, name: "Head" },
+      { id: 122_2, relicId: 61222, name: "Hands" },
+      {
+        id: 122_3,
+        relicId: 61223,
+        name: "Body",
+      },
+      {
+        id: 122_4,
+        relicId: 61224,
+        name: "Feet",
+      },
+    ],
+  },
+  {
+    id: 71036,
+    type: "planar",
+    name: "Lushaka, the Sunken Seas",
+    pc2: "2-Pc: Increases the wearer's Energy Regeneration Rate by 5%. If the wearer is not the first character in the team lineup, then increases the ATK of the first character in the team lineup by 12%.",
+    pc4: "",
+    set: [
+      {
+        id: 317_5,
+        relicId: 63175,
+        name: "Planar Sphere",
+      },
+      {
+        id: 317_6,
+        relicId: 63176,
+        name: "Link Rope",
+      },
+    ],
+  },
+  {
+    id: 71037,
+    type: "planar",
+    name: "The Wondrous BananAmusement Park",
+    pc2: "2-Pc: Increases the wearer's CRIT DMG by 16%. When a target summoned by the wearer is on the field, CRIT DMG additionally increases by 32%.",
+    pc4: "",
+    set: [
+      {
+        id: 317_5,
+        relicId: 63175,
+        name: "Planar Sphere",
+      },
+      {
+        id: 317_6,
+        relicId: 63176,
+        name: "Link Rope",
+      },
+    ],
+  },
+  {
+    id: 71042,
+    type: "planar",
+    name: "Bone Collection's Serene Demesne",
+    pc2: "2-Pc: Increases the wearer's Max HP by 12%. When the wearer's Max HP is 5000 or higher, increases the wearer's and their memosprite's CRIT DMG by 28%.",
+    pc4: "",
+    set: [
+      {
+        id: 319_5,
+        relicId: 63195,
+        name: "Planar Sphere",
+      },
+      {
+        id: 319_6,
+        relicId: 63196,
+        name: "Link Rope",
+      },
+    ],
+  },
+  {
+    id: 71043,
+    type: "planar",
+    name: "Giant Tree of Rapt Brooding",
+    pc2: "2-Pc: Increases the wearer's SPD by 6%. When the wearer's SPD is 135/180 or higher, the wearer and their memosprite's Outgoing Healing increases by 12%/20%.",
+    pc4: "",
+    set: [
+      {
+        id: 320_5,
+        relicId: 63205,
+        name: "Planar Sphere",
+      },
+      {
+        id: 320_6,
+        relicId: 63206,
+        name: "Link Rope",
+      },
+    ],
+  },
+]
 
-export default dataRelic;
+export default dataRelic

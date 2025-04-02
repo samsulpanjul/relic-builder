@@ -1,35 +1,54 @@
-import relic from "../../utils/dataRelic";
-import Combobox from "./Combobox";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import relic from "../../utils/dataRelic"
+import Combobox from "./Combobox"
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
 export default function RelicPiece({ reset, relicMain, name, relicPc, setRelic, mainStat, setMainStat, upgradePc, random, randomStep, children }) {
   return (
     <div className="border-b py-5">
       <div className="flex items-center gap-5">
         <span className="text-xl font-semibold pb-3">{name}</span>
-        <Button variant={"destructive"} onClick={reset}>
+        <Button
+          variant={"destructive"}
+          onClick={reset}
+        >
           Reset
         </Button>
       </div>
       <div className="grid grid-cols-5">
         <div className="col-span-2">
           <p className="text-md">Relic Set</p>
-          <ComboboxRelic data={relic} name={"relic set"} value={relicPc} setValue={setRelic} />
+          <ComboboxRelic
+            data={relic}
+            name={"relic set"}
+            value={relicPc}
+            setValue={setRelic}
+          />
           <p>{relic.map((set) => (set.name === relicPc ? set.pc2 : null))}</p>
           <p>{relic.map((set) => (set.name === relicPc ? set.pc4 : null))}</p>
           <p className="pt-5">Select Main Stat</p>
-          <Combobox data={relicMain} name={"main stat"} value={mainStat} setValue={setMainStat} />
+          <Combobox
+            data={relicMain}
+            name={"main stat"}
+            value={mainStat}
+            setValue={setMainStat}
+          />
         </div>
         <div className="col-span-3">
           <div className="flex items-center gap-3">
             <h2>Sub Stat</h2>
-            <Button disabled={!mainStat} onClick={random}>
+            <Button
+              disabled={!mainStat}
+              onClick={random}
+            >
               Random sub stat
             </Button>
-            <Button disabled={!mainStat} onClick={randomStep}>
+            <Button
+              disabled={!mainStat}
+              onClick={randomStep}
+            >
               Random upgrade
             </Button>
           </div>
@@ -38,16 +57,24 @@ export default function RelicPiece({ reset, relicMain, name, relicPc, setRelic, 
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function ComboboxRelic({ data, name, value, setValue }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover
+      open={open}
+      onOpenChange={setOpen}
+    >
       <PopoverTrigger asChild>
-        <Button variant="outline" role="combobox" aria-expanded={open} className={`justify-between`}>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className={`justify-between`}
+        >
           {value ? data.find((item) => item.name === value)?.name : `Select ${name}...`}
         </Button>
       </PopoverTrigger>
@@ -63,12 +90,16 @@ function ComboboxRelic({ data, name, value, setValue }) {
                     <CommandItem
                       key={item.id}
                       onSelect={(currentValue) => {
-                        setValue(currentValue === value ? value : currentValue);
-                        setOpen(false);
+                        setValue(currentValue === value ? value : currentValue)
+                        setOpen(false)
                       }}
                     >
                       <div className="flex items-center gap-5">
-                        <img className="h-[50px]" src={`https://api.hakush.in/hsr/UI/itemfigures/${item.id}.webp`} alt={item.name} />
+                        <img
+                          className="h-[50px]"
+                          src={`https://api.hakush.in/hsr/UI/itemfigures/${item.id}.webp`}
+                          alt={item.name}
+                        />
                         <span className="text-lg">{item.name}</span>
                       </div>
                     </CommandItem>
@@ -79,5 +110,5 @@ function ComboboxRelic({ data, name, value, setValue }) {
         </Command>
       </PopoverContent>
     </Popover>
-  );
+  )
 }
