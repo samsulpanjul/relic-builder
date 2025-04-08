@@ -875,6 +875,48 @@ const dataRelic = [
       },
     ],
   },
+  {
+    id: 71044,
+    type: "relic",
+    name: "Warrior Goddess of Daythunder",
+    pc2: "2-Pc: Increases SPD by 6%.",
+    pc4: '4-Pc: When the wearer and their memosprite provide healing to ally targets aside from themselves, the wearer gains "Gentle Rain," which can be triggered up to 1 time per turn, lasting for 2 turn(s). When the wearer has "Gentle Rain", increases SPD by 6%, and increases all allies\' CRIT DMG by 15%. This effect cannot be stacked.',
+    set: [
+      { id: 125_1, relicId: 61251, name: "Head" },
+      { id: 125_2, relicId: 61252, name: "Hands" },
+      {
+        id: 125_3,
+        relicId: 61253,
+        name: "Body",
+      },
+      {
+        id: 125_4,
+        relicId: 61254,
+        name: "Feet",
+      },
+    ],
+  },
+  {
+    id: 71045,
+    type: "relic",
+    name: "Captain Over Cursed Waves",
+    pc2: "2-Pc: Increases CRIT DMG by 16%.",
+    pc4: '4-Pc: When the wearer is the target of another ally target\'s ability, gains 1 stack of "Help." Stacks up to 3 times. When using Ultimate, consumes all "Help," each stack increasing the wearer\'s ATK by 16%, lasting until the end of the turn.',
+    set: [
+      { id: 126_1, relicId: 61261, name: "Head" },
+      { id: 126_2, relicId: 61262, name: "Hands" },
+      {
+        id: 126_3,
+        relicId: 61263,
+        name: "Body",
+      },
+      {
+        id: 126_4,
+        relicId: 61264,
+        name: "Feet",
+      },
+    ],
+  },
 ]
 
 export default dataRelic
