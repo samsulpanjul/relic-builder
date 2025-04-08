@@ -1,7 +1,23 @@
-import { create } from "zustand";
-import { subStats } from "@/utils/dataStat";
+import { create } from "zustand"
+import { subStats } from "@/utils/dataStat"
 
-const subStat = subStats.map((stat) => stat.name);
+const subStat = subStats.map((stat) => stat.name)
+
+export const useRelicStore = create((set) => ({
+  relics: {},
+  isLoading: false,
+  error: null,
+  fetchRelics: async () => {
+    set({ isLoading: true, error: null })
+    try {
+      const res = await fetch("https://api.hakush.in/hsr/data/relicset.json") // ganti dengan path kamu
+      const data = await res.json()
+      set({ relics: data, isLoading: false })
+    } catch (err) {
+      set({ error: err.message, isLoading: false })
+    }
+  },
+}))
 
 export const useHeadStore = create((set, get) => ({
   relicHead: "",
@@ -63,30 +79,30 @@ export const useHeadStore = create((set, get) => ({
     }),
   randomSubHead: () => {
     set((state) => {
-      const usedStats = [state.mainStatHead];
+      const usedStats = [state.mainStatHead]
       const newSubStats = state.sub.map((subItem) => {
-        let newStat;
+        let newStat
         do {
-          newStat = subStat[Math.floor(Math.random() * subStat.length)];
-        } while (usedStats.includes(newStat));
-        usedStats.push(newStat);
-        return { ...subItem, stat: newStat };
-      });
-      return { sub: newSubStats };
-    });
+          newStat = subStat[Math.floor(Math.random() * subStat.length)]
+        } while (usedStats.includes(newStat))
+        usedStats.push(newStat)
+        return { ...subItem, stat: newStat }
+      })
+      return { sub: newSubStats }
+    })
   },
   randomStep: () => {
-    const subLength = get().sub.length;
+    const subLength = get().sub.length
     set((state) => ({
       sub: state.sub.map((subItem) => ({ ...subItem, step: 1 })),
       upgrade: 0,
-    }));
+    }))
     for (let i = 0; i < 5; i++) {
-      const randomIndex = Math.floor(Math.random() * subLength);
-      get().increaseSubStep(randomIndex);
+      const randomIndex = Math.floor(Math.random() * subLength)
+      get().increaseSubStep(randomIndex)
     }
   },
-}));
+}))
 
 export const useHandStore = create((set, get) => ({
   relicHand: "",
@@ -148,30 +164,30 @@ export const useHandStore = create((set, get) => ({
     }),
   randomSubHand: () => {
     set((state) => {
-      const usedStats = [state.mainStatHand];
+      const usedStats = [state.mainStatHand]
       const newSubStats = state.subHand.map((subItem) => {
-        let newStat;
+        let newStat
         do {
-          newStat = subStat[Math.floor(Math.random() * subStat.length)];
-        } while (usedStats.includes(newStat));
-        usedStats.push(newStat);
-        return { ...subItem, stat: newStat };
-      });
-      return { subHand: newSubStats };
-    });
+          newStat = subStat[Math.floor(Math.random() * subStat.length)]
+        } while (usedStats.includes(newStat))
+        usedStats.push(newStat)
+        return { ...subItem, stat: newStat }
+      })
+      return { subHand: newSubStats }
+    })
   },
   randomStep: () => {
-    const subLength = get().subHand.length;
+    const subLength = get().subHand.length
     set((state) => ({
       subHand: state.subHand.map((subItem) => ({ ...subItem, step: 1 })),
       upgradeHand: 0,
-    }));
+    }))
     for (let i = 0; i < 5; i++) {
-      const randomIndex = Math.floor(Math.random() * subLength);
-      get().increaseSubStepHand(randomIndex);
+      const randomIndex = Math.floor(Math.random() * subLength)
+      get().increaseSubStepHand(randomIndex)
     }
   },
-}));
+}))
 
 export const useBodyStore = create((set, get) => ({
   relicBody: "",
@@ -233,30 +249,30 @@ export const useBodyStore = create((set, get) => ({
     }),
   randomSubBody: () => {
     set((state) => {
-      const usedStats = [state.mainStatBody];
+      const usedStats = [state.mainStatBody]
       const newSubStats = state.subBody.map((subItem) => {
-        let newStat;
+        let newStat
         do {
-          newStat = subStat[Math.floor(Math.random() * subStat.length)];
-        } while (usedStats.includes(newStat));
-        usedStats.push(newStat);
-        return { ...subItem, stat: newStat };
-      });
-      return { subBody: newSubStats };
-    });
+          newStat = subStat[Math.floor(Math.random() * subStat.length)]
+        } while (usedStats.includes(newStat))
+        usedStats.push(newStat)
+        return { ...subItem, stat: newStat }
+      })
+      return { subBody: newSubStats }
+    })
   },
   randomStep: () => {
-    const subLength = get().subBody.length;
+    const subLength = get().subBody.length
     set((state) => ({
       subBody: state.subBody.map((subItem) => ({ ...subItem, step: 1 })),
       upgradeBody: 0,
-    }));
+    }))
     for (let i = 0; i < 5; i++) {
-      const randomIndex = Math.floor(Math.random() * subLength);
-      get().increaseSubStepBody(randomIndex);
+      const randomIndex = Math.floor(Math.random() * subLength)
+      get().increaseSubStepBody(randomIndex)
     }
   },
-}));
+}))
 
 export const useFeetStore = create((set, get) => ({
   relicFeet: "",
@@ -318,30 +334,30 @@ export const useFeetStore = create((set, get) => ({
     }),
   randomSubFeet: () => {
     set((state) => {
-      const usedStats = [state.mainStatFeet];
+      const usedStats = [state.mainStatFeet]
       const newSubStats = state.subFeet.map((subItem) => {
-        let newStat;
+        let newStat
         do {
-          newStat = subStat[Math.floor(Math.random() * subStat.length)];
-        } while (usedStats.includes(newStat));
-        usedStats.push(newStat);
-        return { ...subItem, stat: newStat };
-      });
-      return { subFeet: newSubStats };
-    });
+          newStat = subStat[Math.floor(Math.random() * subStat.length)]
+        } while (usedStats.includes(newStat))
+        usedStats.push(newStat)
+        return { ...subItem, stat: newStat }
+      })
+      return { subFeet: newSubStats }
+    })
   },
   randomStep: () => {
-    const subLength = get().subFeet.length;
+    const subLength = get().subFeet.length
     set((state) => ({
       subFeet: state.subFeet.map((subItem) => ({ ...subItem, step: 1 })),
       upgradeFeet: 0,
-    }));
+    }))
     for (let i = 0; i < 5; i++) {
-      const randomIndex = Math.floor(Math.random() * subLength);
-      get().increaseSubStepFeet(randomIndex);
+      const randomIndex = Math.floor(Math.random() * subLength)
+      get().increaseSubStepFeet(randomIndex)
     }
   },
-}));
+}))
 
 export const usePlanarStore = create((set, get) => ({
   relicPlanar: "",
@@ -403,30 +419,30 @@ export const usePlanarStore = create((set, get) => ({
     }),
   randomSubPlanar: () => {
     set((state) => {
-      const usedStats = [state.mainStatPlanar];
+      const usedStats = [state.mainStatPlanar]
       const newSubStats = state.subPlanar.map((subItem) => {
-        let newStat;
+        let newStat
         do {
-          newStat = subStat[Math.floor(Math.random() * subStat.length)];
-        } while (usedStats.includes(newStat));
-        usedStats.push(newStat);
-        return { ...subItem, stat: newStat };
-      });
-      return { subPlanar: newSubStats };
-    });
+          newStat = subStat[Math.floor(Math.random() * subStat.length)]
+        } while (usedStats.includes(newStat))
+        usedStats.push(newStat)
+        return { ...subItem, stat: newStat }
+      })
+      return { subPlanar: newSubStats }
+    })
   },
   randomStep: () => {
-    const subLength = get().subPlanar.length;
+    const subLength = get().subPlanar.length
     set((state) => ({
       subPlanar: state.subPlanar.map((subItem) => ({ ...subItem, step: 1 })),
       upgradePlanar: 0,
-    }));
+    }))
     for (let i = 0; i < 5; i++) {
-      const randomIndex = Math.floor(Math.random() * subLength);
-      get().increaseSubStepPlanar(randomIndex);
+      const randomIndex = Math.floor(Math.random() * subLength)
+      get().increaseSubStepPlanar(randomIndex)
     }
   },
-}));
+}))
 
 export const useRopeStore = create((set, get) => ({
   relicRope: "",
@@ -488,27 +504,27 @@ export const useRopeStore = create((set, get) => ({
     }),
   randomSubRope: () => {
     set((state) => {
-      const usedStats = [state.mainStatRope];
+      const usedStats = [state.mainStatRope]
       const newSubStats = state.subRope.map((subItem) => {
-        let newStat;
+        let newStat
         do {
-          newStat = subStat[Math.floor(Math.random() * subStat.length)];
-        } while (usedStats.includes(newStat));
-        usedStats.push(newStat);
-        return { ...subItem, stat: newStat };
-      });
-      return { subRope: newSubStats };
-    });
+          newStat = subStat[Math.floor(Math.random() * subStat.length)]
+        } while (usedStats.includes(newStat))
+        usedStats.push(newStat)
+        return { ...subItem, stat: newStat }
+      })
+      return { subRope: newSubStats }
+    })
   },
   randomStep: () => {
-    const subLength = get().subRope.length;
+    const subLength = get().subRope.length
     set((state) => ({
       subRope: state.subRope.map((subItem) => ({ ...subItem, step: 1 })),
       upgradeRope: 0,
-    }));
+    }))
     for (let i = 0; i < 5; i++) {
-      const randomIndex = Math.floor(Math.random() * subLength);
-      get().increaseSubStepRope(randomIndex);
+      const randomIndex = Math.floor(Math.random() * subLength)
+      get().increaseSubStepRope(randomIndex)
     }
   },
-}));
+}))

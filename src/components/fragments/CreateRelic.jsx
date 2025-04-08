@@ -1,11 +1,11 @@
-import { useHandStore, useHeadStore, useBodyStore, useFeetStore, usePlanarStore, useRopeStore } from "../../stores/relic-store";
-import { useShallow } from "zustand/react/shallow";
-import RelicPiece from "./RelicPiece";
-import SubStat from "./SubStat";
-import PlanarPiece from "./PlanarPiece";
-import { Button } from "../ui/button";
-import { mainStatHead, mainStatHand, mainStatBody, mainStatFeet, mainStatPlanar, mainStatLink } from "@/utils/dataStat";
-import Code from "./Code";
+import { useHandStore, useHeadStore, useBodyStore, useFeetStore, usePlanarStore, useRopeStore } from "../../stores/relic-store"
+import { useShallow } from "zustand/react/shallow"
+import RelicPiece from "./RelicPiece"
+import SubStat from "./SubStat"
+import PlanarPiece from "./PlanarPiece"
+import { Button } from "../ui/button"
+import { mainStatHead, mainStatHand, mainStatBody, mainStatFeet, mainStatPlanar, mainStatLink } from "@/utils/dataStat"
+import Code from "./Code"
 
 export default function CreateRelic() {
   const [relicHead, setRelicHead, mainStatHeadd, setMainStatHead, sub, setSubStat, increaseSubStep, decreaseSubStep, setRoll, upgrade, resetHead, randomSubHead, randomStepHead] = useHeadStore(
@@ -24,7 +24,7 @@ export default function CreateRelic() {
       state.randomSubHead,
       state.randomStep,
     ])
-  );
+  )
 
   const [relicHand, setRelicHand, mainStatHandd, setMainStatHand, subHand, setSubStatHand, increaseSubStepHand, decreaseSubStepHand, setRollHand, upgradeHand, resetHand, randomSubHand, randomStepHand] = useHandStore(
     useShallow((state) => [
@@ -42,7 +42,7 @@ export default function CreateRelic() {
       state.randomSubHand,
       state.randomStep,
     ])
-  );
+  )
   const [relicBody, setRelicBody, mainStatBodyy, setMainStatBody, subBody, setSubStatBody, increaseSubStepBody, decreaseSubStepBody, setRollBody, upgradeBody, resetBody, randomSubBody, randomStepBody] = useBodyStore(
     useShallow((state) => [
       state.relicBody,
@@ -59,7 +59,7 @@ export default function CreateRelic() {
       state.randomSubBody,
       state.randomStep,
     ])
-  );
+  )
   const [relicFeet, setRelicFeet, mainStatFeett, setMainStatFeet, subFeet, setSubStatFeet, increaseSubStepFeet, decreaseSubStepFeet, setRollFeet, upgradeFeet, resetFeet, randomSubFeet, randomStepFeet] = useFeetStore(
     useShallow((state) => [
       state.relicFeet,
@@ -76,7 +76,7 @@ export default function CreateRelic() {
       state.randomSubFeet,
       state.randomStep,
     ])
-  );
+  )
   const [relicPlanar, setRelicPlanar, mainStatPlanarr, setMainStatPlanar, subPlanar, setSubStatPlanar, increaseSubStepPlanar, decreaseSubStepPlanar, setRollPlanar, upgradePlanar, resetPlanar, randomSubPlanar, randomStepPlanar] =
     usePlanarStore(
       useShallow((state) => [
@@ -94,7 +94,7 @@ export default function CreateRelic() {
         state.randomSubPlanar,
         state.randomStep,
       ])
-    );
+    )
   const [relicRope, setRelicRope, mainStatRopee, setMainStatRope, subRope, setSubStatRope, increaseSubStepRope, decreaseSubStepRope, setRollRope, upgradeRope, resetRope, randomSubRope, randomStepRope] = useRopeStore(
     useShallow((state) => [
       state.relicRope,
@@ -111,7 +111,7 @@ export default function CreateRelic() {
       state.randomSubRope,
       state.randomStep,
     ])
-  );
+  )
 
   return (
     <div>
@@ -119,12 +119,12 @@ export default function CreateRelic() {
         <span className="text-2xl font-bold">Relic</span>
         <Button
           onClick={() => {
-            resetHead();
-            resetHand();
-            resetBody();
-            resetFeet();
-            resetRope();
-            resetPlanar();
+            resetHead()
+            resetHand()
+            resetBody()
+            resetFeet()
+            resetRope()
+            resetPlanar()
           }}
           variant="destructive"
         >
@@ -144,10 +144,46 @@ export default function CreateRelic() {
           random={randomSubHead}
           randomStep={randomStepHead}
         >
-          <SubStat index={0} sub={sub} mainStat={mainStatHeadd} setSubStat={setSubStat} increaseSubStep={increaseSubStep} decreaseSubStep={decreaseSubStep} setRoll={setRoll} upgrade={upgrade} />
-          <SubStat index={1} sub={sub} mainStat={mainStatHeadd} setSubStat={setSubStat} increaseSubStep={increaseSubStep} decreaseSubStep={decreaseSubStep} setRoll={setRoll} upgrade={upgrade} />
-          <SubStat index={2} sub={sub} mainStat={mainStatHeadd} setSubStat={setSubStat} increaseSubStep={increaseSubStep} decreaseSubStep={decreaseSubStep} setRoll={setRoll} upgrade={upgrade} />
-          <SubStat index={3} sub={sub} mainStat={mainStatHeadd} setSubStat={setSubStat} increaseSubStep={increaseSubStep} decreaseSubStep={decreaseSubStep} setRoll={setRoll} upgrade={upgrade} />
+          <SubStat
+            index={0}
+            sub={sub}
+            mainStat={mainStatHeadd}
+            setSubStat={setSubStat}
+            increaseSubStep={increaseSubStep}
+            decreaseSubStep={decreaseSubStep}
+            setRoll={setRoll}
+            upgrade={upgrade}
+          />
+          <SubStat
+            index={1}
+            sub={sub}
+            mainStat={mainStatHeadd}
+            setSubStat={setSubStat}
+            increaseSubStep={increaseSubStep}
+            decreaseSubStep={decreaseSubStep}
+            setRoll={setRoll}
+            upgrade={upgrade}
+          />
+          <SubStat
+            index={2}
+            sub={sub}
+            mainStat={mainStatHeadd}
+            setSubStat={setSubStat}
+            increaseSubStep={increaseSubStep}
+            decreaseSubStep={decreaseSubStep}
+            setRoll={setRoll}
+            upgrade={upgrade}
+          />
+          <SubStat
+            index={3}
+            sub={sub}
+            mainStat={mainStatHeadd}
+            setSubStat={setSubStat}
+            increaseSubStep={increaseSubStep}
+            decreaseSubStep={decreaseSubStep}
+            setRoll={setRoll}
+            upgrade={upgrade}
+          />
         </RelicPiece>
         <RelicPiece
           reset={resetHand}
@@ -161,10 +197,46 @@ export default function CreateRelic() {
           random={randomSubHand}
           randomStep={randomStepHand}
         >
-          <SubStat index={0} sub={subHand} mainStat={mainStatHandd} setSubStat={setSubStatHand} increaseSubStep={increaseSubStepHand} decreaseSubStep={decreaseSubStepHand} setRoll={setRollHand} upgrade={upgradeHand} />
-          <SubStat index={1} sub={subHand} mainStat={mainStatHandd} setSubStat={setSubStatHand} increaseSubStep={increaseSubStepHand} decreaseSubStep={decreaseSubStepHand} setRoll={setRollHand} upgrade={upgradeHand} />
-          <SubStat index={2} sub={subHand} mainStat={mainStatHandd} setSubStat={setSubStatHand} increaseSubStep={increaseSubStepHand} decreaseSubStep={decreaseSubStepHand} setRoll={setRollHand} upgrade={upgradeHand} />
-          <SubStat index={3} sub={subHand} mainStat={mainStatHandd} setSubStat={setSubStatHand} increaseSubStep={increaseSubStepHand} decreaseSubStep={decreaseSubStepHand} setRoll={setRollHand} upgrade={upgradeHand} />
+          <SubStat
+            index={0}
+            sub={subHand}
+            mainStat={mainStatHandd}
+            setSubStat={setSubStatHand}
+            increaseSubStep={increaseSubStepHand}
+            decreaseSubStep={decreaseSubStepHand}
+            setRoll={setRollHand}
+            upgrade={upgradeHand}
+          />
+          <SubStat
+            index={1}
+            sub={subHand}
+            mainStat={mainStatHandd}
+            setSubStat={setSubStatHand}
+            increaseSubStep={increaseSubStepHand}
+            decreaseSubStep={decreaseSubStepHand}
+            setRoll={setRollHand}
+            upgrade={upgradeHand}
+          />
+          <SubStat
+            index={2}
+            sub={subHand}
+            mainStat={mainStatHandd}
+            setSubStat={setSubStatHand}
+            increaseSubStep={increaseSubStepHand}
+            decreaseSubStep={decreaseSubStepHand}
+            setRoll={setRollHand}
+            upgrade={upgradeHand}
+          />
+          <SubStat
+            index={3}
+            sub={subHand}
+            mainStat={mainStatHandd}
+            setSubStat={setSubStatHand}
+            increaseSubStep={increaseSubStepHand}
+            decreaseSubStep={decreaseSubStepHand}
+            setRoll={setRollHand}
+            upgrade={upgradeHand}
+          />
         </RelicPiece>
         <RelicPiece
           reset={resetBody}
@@ -178,10 +250,46 @@ export default function CreateRelic() {
           random={randomSubBody}
           randomStep={randomStepBody}
         >
-          <SubStat index={0} sub={subBody} mainStat={mainStatBodyy} setSubStat={setSubStatBody} increaseSubStep={increaseSubStepBody} decreaseSubStep={decreaseSubStepBody} setRoll={setRollBody} upgrade={upgradeBody} />
-          <SubStat index={1} sub={subBody} mainStat={mainStatBodyy} setSubStat={setSubStatBody} increaseSubStep={increaseSubStepBody} decreaseSubStep={decreaseSubStepBody} setRoll={setRollBody} upgrade={upgradeBody} />
-          <SubStat index={2} sub={subBody} mainStat={mainStatBodyy} setSubStat={setSubStatBody} increaseSubStep={increaseSubStepBody} decreaseSubStep={decreaseSubStepBody} setRoll={setRollBody} upgrade={upgradeBody} />
-          <SubStat index={3} sub={subBody} mainStat={mainStatBodyy} setSubStat={setSubStatBody} increaseSubStep={increaseSubStepBody} decreaseSubStep={decreaseSubStepBody} setRoll={setRollBody} upgrade={upgradeBody} />
+          <SubStat
+            index={0}
+            sub={subBody}
+            mainStat={mainStatBodyy}
+            setSubStat={setSubStatBody}
+            increaseSubStep={increaseSubStepBody}
+            decreaseSubStep={decreaseSubStepBody}
+            setRoll={setRollBody}
+            upgrade={upgradeBody}
+          />
+          <SubStat
+            index={1}
+            sub={subBody}
+            mainStat={mainStatBodyy}
+            setSubStat={setSubStatBody}
+            increaseSubStep={increaseSubStepBody}
+            decreaseSubStep={decreaseSubStepBody}
+            setRoll={setRollBody}
+            upgrade={upgradeBody}
+          />
+          <SubStat
+            index={2}
+            sub={subBody}
+            mainStat={mainStatBodyy}
+            setSubStat={setSubStatBody}
+            increaseSubStep={increaseSubStepBody}
+            decreaseSubStep={decreaseSubStepBody}
+            setRoll={setRollBody}
+            upgrade={upgradeBody}
+          />
+          <SubStat
+            index={3}
+            sub={subBody}
+            mainStat={mainStatBodyy}
+            setSubStat={setSubStatBody}
+            increaseSubStep={increaseSubStepBody}
+            decreaseSubStep={decreaseSubStepBody}
+            setRoll={setRollBody}
+            upgrade={upgradeBody}
+          />
         </RelicPiece>
         <RelicPiece
           reset={resetFeet}
@@ -195,10 +303,46 @@ export default function CreateRelic() {
           random={randomSubFeet}
           randomStep={randomStepFeet}
         >
-          <SubStat index={0} sub={subFeet} mainStat={mainStatFeett} setSubStat={setSubStatFeet} increaseSubStep={increaseSubStepFeet} decreaseSubStep={decreaseSubStepFeet} setRoll={setRollFeet} upgrade={upgradeFeet} />
-          <SubStat index={1} sub={subFeet} mainStat={mainStatFeett} setSubStat={setSubStatFeet} increaseSubStep={increaseSubStepFeet} decreaseSubStep={decreaseSubStepFeet} setRoll={setRollFeet} upgrade={upgradeFeet} />
-          <SubStat index={2} sub={subFeet} mainStat={mainStatFeett} setSubStat={setSubStatFeet} increaseSubStep={increaseSubStepFeet} decreaseSubStep={decreaseSubStepFeet} setRoll={setRollFeet} upgrade={upgradeFeet} />
-          <SubStat index={3} sub={subFeet} mainStat={mainStatFeett} setSubStat={setSubStatFeet} increaseSubStep={increaseSubStepFeet} decreaseSubStep={decreaseSubStepFeet} setRoll={setRollFeet} upgrade={upgradeFeet} />
+          <SubStat
+            index={0}
+            sub={subFeet}
+            mainStat={mainStatFeett}
+            setSubStat={setSubStatFeet}
+            increaseSubStep={increaseSubStepFeet}
+            decreaseSubStep={decreaseSubStepFeet}
+            setRoll={setRollFeet}
+            upgrade={upgradeFeet}
+          />
+          <SubStat
+            index={1}
+            sub={subFeet}
+            mainStat={mainStatFeett}
+            setSubStat={setSubStatFeet}
+            increaseSubStep={increaseSubStepFeet}
+            decreaseSubStep={decreaseSubStepFeet}
+            setRoll={setRollFeet}
+            upgrade={upgradeFeet}
+          />
+          <SubStat
+            index={2}
+            sub={subFeet}
+            mainStat={mainStatFeett}
+            setSubStat={setSubStatFeet}
+            increaseSubStep={increaseSubStepFeet}
+            decreaseSubStep={decreaseSubStepFeet}
+            setRoll={setRollFeet}
+            upgrade={upgradeFeet}
+          />
+          <SubStat
+            index={3}
+            sub={subFeet}
+            mainStat={mainStatFeett}
+            setSubStat={setSubStatFeet}
+            increaseSubStep={increaseSubStepFeet}
+            decreaseSubStep={decreaseSubStepFeet}
+            setRoll={setRollFeet}
+            upgrade={upgradeFeet}
+          />
         </RelicPiece>
         <PlanarPiece
           reset={resetPlanar}
@@ -212,10 +356,46 @@ export default function CreateRelic() {
           random={randomSubPlanar}
           randomStep={randomStepPlanar}
         >
-          <SubStat index={0} sub={subPlanar} mainStat={mainStatPlanarr} setSubStat={setSubStatPlanar} increaseSubStep={increaseSubStepPlanar} decreaseSubStep={decreaseSubStepPlanar} setRoll={setRollPlanar} upgrade={upgradePlanar} />
-          <SubStat index={1} sub={subPlanar} mainStat={mainStatPlanarr} setSubStat={setSubStatPlanar} increaseSubStep={increaseSubStepPlanar} decreaseSubStep={decreaseSubStepPlanar} setRoll={setRollPlanar} upgrade={upgradePlanar} />
-          <SubStat index={2} sub={subPlanar} mainStat={mainStatPlanarr} setSubStat={setSubStatPlanar} increaseSubStep={increaseSubStepPlanar} decreaseSubStep={decreaseSubStepPlanar} setRoll={setRollPlanar} upgrade={upgradePlanar} />
-          <SubStat index={3} sub={subPlanar} mainStat={mainStatPlanarr} setSubStat={setSubStatPlanar} increaseSubStep={increaseSubStepPlanar} decreaseSubStep={decreaseSubStepPlanar} setRoll={setRollPlanar} upgrade={upgradePlanar} />
+          <SubStat
+            index={0}
+            sub={subPlanar}
+            mainStat={mainStatPlanarr}
+            setSubStat={setSubStatPlanar}
+            increaseSubStep={increaseSubStepPlanar}
+            decreaseSubStep={decreaseSubStepPlanar}
+            setRoll={setRollPlanar}
+            upgrade={upgradePlanar}
+          />
+          <SubStat
+            index={1}
+            sub={subPlanar}
+            mainStat={mainStatPlanarr}
+            setSubStat={setSubStatPlanar}
+            increaseSubStep={increaseSubStepPlanar}
+            decreaseSubStep={decreaseSubStepPlanar}
+            setRoll={setRollPlanar}
+            upgrade={upgradePlanar}
+          />
+          <SubStat
+            index={2}
+            sub={subPlanar}
+            mainStat={mainStatPlanarr}
+            setSubStat={setSubStatPlanar}
+            increaseSubStep={increaseSubStepPlanar}
+            decreaseSubStep={decreaseSubStepPlanar}
+            setRoll={setRollPlanar}
+            upgrade={upgradePlanar}
+          />
+          <SubStat
+            index={3}
+            sub={subPlanar}
+            mainStat={mainStatPlanarr}
+            setSubStat={setSubStatPlanar}
+            increaseSubStep={increaseSubStepPlanar}
+            decreaseSubStep={decreaseSubStepPlanar}
+            setRoll={setRollPlanar}
+            upgrade={upgradePlanar}
+          />
         </PlanarPiece>
         <PlanarPiece
           reset={resetRope}
@@ -229,13 +409,49 @@ export default function CreateRelic() {
           random={randomSubRope}
           randomStep={randomStepRope}
         >
-          <SubStat index={0} sub={subRope} mainStat={mainStatRopee} setSubStat={setSubStatRope} increaseSubStep={increaseSubStepRope} decreaseSubStep={decreaseSubStepRope} setRoll={setRollRope} upgrade={upgradeRope} />
-          <SubStat index={1} sub={subRope} mainStat={mainStatRopee} setSubStat={setSubStatRope} increaseSubStep={increaseSubStepRope} decreaseSubStep={decreaseSubStepRope} setRoll={setRollRope} upgrade={upgradeRope} />
-          <SubStat index={2} sub={subRope} mainStat={mainStatRopee} setSubStat={setSubStatRope} increaseSubStep={increaseSubStepRope} decreaseSubStep={decreaseSubStepRope} setRoll={setRollRope} upgrade={upgradeRope} />
-          <SubStat index={3} sub={subRope} mainStat={mainStatRopee} setSubStat={setSubStatRope} increaseSubStep={increaseSubStepRope} decreaseSubStep={decreaseSubStepRope} setRoll={setRollRope} upgrade={upgradeRope} />
+          <SubStat
+            index={0}
+            sub={subRope}
+            mainStat={mainStatRopee}
+            setSubStat={setSubStatRope}
+            increaseSubStep={increaseSubStepRope}
+            decreaseSubStep={decreaseSubStepRope}
+            setRoll={setRollRope}
+            upgrade={upgradeRope}
+          />
+          <SubStat
+            index={1}
+            sub={subRope}
+            mainStat={mainStatRopee}
+            setSubStat={setSubStatRope}
+            increaseSubStep={increaseSubStepRope}
+            decreaseSubStep={decreaseSubStepRope}
+            setRoll={setRollRope}
+            upgrade={upgradeRope}
+          />
+          <SubStat
+            index={2}
+            sub={subRope}
+            mainStat={mainStatRopee}
+            setSubStat={setSubStatRope}
+            increaseSubStep={increaseSubStepRope}
+            decreaseSubStep={decreaseSubStepRope}
+            setRoll={setRollRope}
+            upgrade={upgradeRope}
+          />
+          <SubStat
+            index={3}
+            sub={subRope}
+            mainStat={mainStatRopee}
+            setSubStat={setSubStatRope}
+            increaseSubStep={increaseSubStepRope}
+            decreaseSubStep={decreaseSubStepRope}
+            setRoll={setRollRope}
+            upgrade={upgradeRope}
+          />
         </PlanarPiece>
       </div>
       <Code />
     </div>
-  );
+  )
 }

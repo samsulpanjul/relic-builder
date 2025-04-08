@@ -1,11 +1,20 @@
-import relic from "../../utils/dataRelic"
 import Combobox from "./Combobox"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { getData } from "@/services/hakush"
+import { useReplace } from "@/hooks/useReplace"
+import { useRelicStore } from "@/stores/relic-store"
 
 export default function RelicPiece({ reset, relicMain, name, relicPc, setRelic, mainStat, setMainStat, upgradePc, random, randomStep, children }) {
+  const { relics: data } = useRelicStore()
+
+  const relic = Object.values(data).find((item) => item.en === relicPc)
+
+  const pc2 = useReplace(relic?.set["2"].en, relic?.set["2"].ParamList)
+  const pc4 = useReplace(relic?.set["4"].en, relic?.set["4"].ParamList)
+
   return (
     <div className="border-b py-5">
       <div className="flex items-center gap-5">
@@ -21,13 +30,18 @@ export default function RelicPiece({ reset, relicMain, name, relicPc, setRelic, 
         <div className="col-span-2">
           <p className="text-md">Relic Set</p>
           <ComboboxRelic
-            data={relic}
+            data={data}
             name={"relic set"}
             value={relicPc}
             setValue={setRelic}
           />
-          <p>{relic.map((set) => (set.name === relicPc ? set.pc2 : null))}</p>
-          <p>{relic.map((set) => (set.name === relicPc ? set.pc4 : null))}</p>
+          <p>{relicPc}</p>
+          {relicPc && (
+            <>
+              <p>2-pc: {pc2}</p>
+              <p>4-pc: {pc4}</p>
+            </>
+          )}
           <p className="pt-5">Select Main Stat</p>
           <Combobox
             data={relicMain}
@@ -75,7 +89,7 @@ function ComboboxRelic({ data, name, value, setValue }) {
           aria-expanded={open}
           className={`justify-between`}
         >
-          {value ? data.find((item) => item.name === value)?.name : `Select ${name}...`}
+          {value ? value : `Select ${name}...`}
         </Button>
       </PopoverTrigger>
       <PopoverContent>
@@ -84,11 +98,10 @@ function ComboboxRelic({ data, name, value, setValue }) {
           <CommandEmpty>No character found.</CommandEmpty>
           <CommandList>
             <CommandGroup>
-              {data.map(
-                (item) =>
-                  item.type === "relic" && (
+              {Object.entries(data).map(([id, data]) => (
+                <div key={id}>
+                  {data.set[4] && (
                     <CommandItem
-                      key={item.id}
                       onSelect={(currentValue) => {
                         setValue(currentValue === value ? value : currentValue)
                         setOpen(false)
@@ -97,14 +110,15 @@ function ComboboxRelic({ data, name, value, setValue }) {
                       <div className="flex items-center gap-5">
                         <img
                           className="h-[50px]"
-                          src={`https://api.hakush.in/hsr/UI/itemfigures/${item.id}.webp`}
-                          alt={item.name}
+                          src={`https://api.hakush.in/hsr/UI/itemfigures/${data.icon.split("/").pop()?.replace(".png", "")}.webp`}
+                          alt={data.en}
                         />
-                        <span className="text-lg">{item.name}</span>
+                        <span className="text-lg">{data.en}</span>
                       </div>
                     </CommandItem>
-                  )
-              )}
+                  )}
+                </div>
+              ))}
             </CommandGroup>
           </CommandList>
         </Command>
