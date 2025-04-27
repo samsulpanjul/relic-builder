@@ -7,6 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 
+const path = ["Knight", "Mage", "Priest", "Rogue", "Shaman", "Warlock", "Warrior", "Memory"];
+const element = ["Fire", "Ice", "Imaginary", "Physical", "Quantum", "Thunder", "Wind"];
+
 export default function Char() {
   const [listId, setListId] = useState([]);
   const [characterData, setCharacterData] = useState({});
@@ -63,20 +66,12 @@ export default function Char() {
             <div className="w-full">
               <Input type="text" placeholder="Search..." onChange={handleSearch} />
               <div className="flex gap-1 mt-2">
-                <Path path={"Knight"} filter={handleBaseChange} base={filterBaseType} />
-                <Path path={"Mage"} filter={handleBaseChange} base={filterBaseType} />
-                <Path path={"Priest"} filter={handleBaseChange} base={filterBaseType} />
-                <Path path={"Rogue"} filter={handleBaseChange} base={filterBaseType} />
-                <Path path={"Shaman"} filter={handleBaseChange} base={filterBaseType} />
-                <Path path={"Warlock"} filter={handleBaseChange} base={filterBaseType} />
-                <Path path={"Warrior"} filter={handleBaseChange} base={filterBaseType} />
-                <Element ele={"Fire"} filter={handleDamageChange} damage={filterDamageType} />
-                <Element ele={"Ice"} filter={handleDamageChange} damage={filterDamageType} />
-                <Element ele={"Imaginary"} filter={handleDamageChange} damage={filterDamageType} />
-                <Element ele={"Physical"} filter={handleDamageChange} damage={filterDamageType} />
-                <Element ele={"Quantum"} filter={handleDamageChange} damage={filterDamageType} />
-                <Element ele={"Thunder"} filter={handleDamageChange} damage={filterDamageType} />
-                <Element ele={"Wind"} filter={handleDamageChange} damage={filterDamageType} />
+                {path.map((path) => (
+                  <Path key={path} path={path} filter={handleBaseChange} base={filterBaseType} />
+                ))}
+                {element.map((ele) => (
+                  <Element key={ele} ele={ele} filter={handleDamageChange} damage={filterDamageType} />
+                ))}
                 <div
                   className={`filter text-white text-2xl font-semibold flex items-center justify-center ${
                     filterRankType.includes("CombatPowerAvatarRarityType5") ? "bg-black/75 dark:bg-white/15 border border-black dark:border-white" : "border"
