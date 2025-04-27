@@ -92,7 +92,7 @@ function ComboboxPlanar({ data, name, value, setValue }) {
       <PopoverContent>
         <Command>
           <CommandInput placeholder={`Search ${name}...`} />
-          <CommandEmpty>No character found.</CommandEmpty>
+          <CommandEmpty>No planar found.</CommandEmpty>
           <CommandList>
             <CommandGroup>
               {Object.entries(data).map(([id, data]) => (

@@ -3,7 +3,6 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { getData } from "@/services/hakush"
 import { useReplace } from "@/hooks/useReplace"
 import { useRelicStore } from "@/stores/relic-store"
 
@@ -95,7 +94,7 @@ function ComboboxRelic({ data, name, value, setValue }) {
       <PopoverContent>
         <Command>
           <CommandInput placeholder={`Search ${name}...`} />
-          <CommandEmpty>No character found.</CommandEmpty>
+          <CommandEmpty>No relic found.</CommandEmpty>
           <CommandList>
             <CommandGroup>
               {Object.entries(data).map(([id, data]) => (
