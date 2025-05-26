@@ -7,7 +7,7 @@ export default function Combobox({ data, name, value, setValue, cn = "" }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen} modal={true}>
       <PopoverTrigger asChild>
         <Button variant="outline" role="combobox" aria-expanded={open} className={`justify-between ${cn}`}>
           {value ? data.find((item) => item.name === value)?.name : `Select ${name}...`}

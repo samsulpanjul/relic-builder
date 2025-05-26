@@ -5,17 +5,18 @@ import Lightcone from "./Lightcone";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useShallow } from "zustand/react/shallow";
 import Code from "./Code";
+import CharacterStat from "./CharacterStat";
 
-export default function Character() {
+export default function Character({ isEdit = false }) {
   const [idChar, rankChar, energy] = useCharStore(useShallow((state) => [state.id, state.rank, state.energy]));
   const [idLc, levelLc, rankLc, promotionLc] = useLightconeStore(useShallow((state) => [state.id, state.level, state.rank, state.promotion]));
 
   return (
     <>
-      <div className="max-w-full min-w-full border-2 rounded-md p-3 max-h-[800px] overflow-auto">
+      <div className="w-full border-2 rounded-md p-3 max-h-[calc(100vh-14rem)] overflow-auto">
         <div className="pb-5">
           <div className="grid grid-cols-2 divide-x-2">
-            <Char />
+            <Char isEdit={isEdit} />
             <Lightcone />
           </div>
         </div>
@@ -23,9 +24,9 @@ export default function Character() {
           <CreateRelic />
         </div>
       </div>
-      <div>
+      <div className="flex gap-4">
         <Dialog>
-          <DialogTrigger className="dark:text-white text-black underline font-semibold w-full rounded-md py-3 text-lg">See all commands</DialogTrigger>
+          <DialogTrigger className=" text-white underline font-semibold w-full rounded-md py-3 text-lg">See all commands</DialogTrigger>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Commands</DialogTitle>
@@ -47,6 +48,17 @@ export default function Character() {
               )}
               <Code />
             </div>
+          </DialogContent>
+        </Dialog>
+        <Dialog>
+          <DialogTrigger disabled={!idChar} className="bg-white text-black underline font-semibold w-full rounded-md py-3 text-lg disabled:bg-opacity-50 disabled:cursor-not-allowed">
+            View stats
+          </DialogTrigger>
+          <DialogContent className="max-w-[850px]">
+            <DialogHeader>
+              <DialogTitle>Character stats</DialogTitle>
+            </DialogHeader>
+            <CharacterStat />
           </DialogContent>
         </Dialog>
       </div>

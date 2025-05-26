@@ -10,15 +10,31 @@ import { Checkbox } from "@/components/ui/checkbox";
 const path = ["Knight", "Mage", "Priest", "Rogue", "Shaman", "Warlock", "Warrior", "Memory"];
 const element = ["Fire", "Ice", "Imaginary", "Physical", "Quantum", "Thunder", "Wind"];
 
-export default function Char() {
+export default function Char({ isEdit = false }) {
   const [listId, setListId] = useState([]);
   const [characterData, setCharacterData] = useState({});
   const [search, setSearch] = useState("");
   const [filterBaseType, setFilterBaseType] = useState([]);
   const [filterDamageType, setFilterDamageType] = useState([]);
   const [filterRankType, setFilterRankType] = useState([]);
-  const [id, setId, level, setLevel, rank, setRank, promotion, setPromotion, trace, setTrace, energy, setEnergy] = useCharStore(
-    useShallow((state) => [state.id, state.setId, state.level, state.setLevel, state.rank, state.setRank, state.promotion, state.setPromotion, state.trace, state.setTrace, state.energy, state.setEnergy])
+  const [setName, id, setId, level, setLevel, rank, setRank, promotion, setPromotion, trace, setTrace, energy, setEnergy, technique, setTechnique] = useCharStore(
+    useShallow((state) => [
+      state.setName,
+      state.id,
+      state.setId,
+      state.level,
+      state.setLevel,
+      state.rank,
+      state.setRank,
+      state.promotion,
+      state.setPromotion,
+      state.trace,
+      state.setTrace,
+      state.energy,
+      state.setEnergy,
+      state.technique,
+      state.setTechnique,
+    ])
   );
 
   useEffect(() => {
@@ -57,8 +73,15 @@ export default function Char() {
     <div className="flex flex-col px-3">
       <span className="text-2xl font-bold mb-1">Character</span>
       <Dialog>
-        <DialogTrigger className="bg-black text-white dark:bg-white dark:text-black rounded-md px-5 py-2 font-semibold">Select character</DialogTrigger>
-        <DialogContent className="max-h-[800px] min-h-[800px] scroll-auto max-w-7xl overflow-auto">
+        <DialogTrigger disabled={isEdit} className="bg-black text-white dark:bg-white dark:text-black rounded-md px-5 py-2 font-semibold disabled:opacity-50 disabled:cursor-not-allowed">
+          Select character
+        </DialogTrigger>
+        <DialogContent
+          className="max-h-[800px] min-h-[800px] scroll-auto max-w-7xl overflow-auto"
+          onInteractOutside={() => {
+            setSearch("");
+          }}
+        >
           <DialogHeader className={"shrink"}>
             <DialogTitle>Character</DialogTitle>
           </DialogHeader>
@@ -91,7 +114,7 @@ export default function Char() {
               </div>
             </div>
 
-            {filteredId.map((id) => {
+            {filteredId.reverse().map((id) => {
               const character = characterData[id];
 
               if (character) {
@@ -99,7 +122,11 @@ export default function Char() {
                   <DialogClose asChild key={id}>
                     <div
                       className={`w-[150px] border hover:border-black dark:hover:border-white rounded-lg py-1 px-2 cursor-pointer ${character.rank === "CombatPowerAvatarRarityType5" ? "five-star" : "four-star"}`}
-                      onClick={() => setId(id)}
+                      onClick={() => {
+                        setId(id);
+                        setName(character.en);
+                        setSearch("");
+                      }}
                     >
                       <img src={`https://api.hakush.in/hsr/UI/avatarshopicon/${id}.webp`} alt={character.en} />
                       <p className="font-semibold text-white">{character.en}</p>
@@ -121,27 +148,28 @@ export default function Char() {
             </div>
             <div>
               <span>Eidolon: {rank}</span>
-              <Slider className="cursor-pointer mt-1" defaultValue={[0]} max={6} min={0} step={1} onValueChange={(val) => setRank(val)} />
+              <Slider className="cursor-pointer mt-1" defaultValue={[0]} max={6} min={0} step={1} value={[rank]} onValueChange={(val) => setRank(val)} />
             </div>
             <div>
               <span>Ascension: {promotion}</span>
               <Slider className="cursor-not-allowed mt-1" defaultValue={[6]} max={6} min={1} step={1} onValueChange={(val) => setPromotion(val)} disabled />
             </div>
-            <div className="bg-slate-300 dark:bg-slate-800 px-3 py-1">
-              /set avatar eidolon {id} {rank}
+            <div>
+              <span>Energy: {Math.floor(energy / 100)}%</span>
+              <Slider className="cursor-pointer mt-1" defaultValue={[5000]} max={10000} min={0} step={100} value={[energy]} onValueChange={(val) => setEnergy(val)} />
             </div>
             <div className="flex items-center space-x-2">
-              <Checkbox id="trace" onCheckedChange={(val) => setTrace(val)} defaultChecked={true} />
+              <Checkbox id="trace" value={trace} onCheckedChange={(val) => setTrace(val)} defaultChecked={true} />
               <label htmlFor="trace" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                 Max trace
               </label>
             </div>
-            {trace && <div className="bg-slate-300 dark:bg-slate-800 px-3 py-1">/set avatar max_trace {id}</div>}
-            <div>
-              <span>Energy: {Math.floor(energy / 100)}%</span>
-              <Slider className="cursor-pointer mt-1" defaultValue={[5000]} max={10000} min={0} step={100} onValueChange={(val) => setEnergy(val)} />
+            <div className="flex items-center space-x-2">
+              <Checkbox id="technique" checked={technique} onCheckedChange={(val) => setTechnique(val)} defaultChecked={false} />
+              <label htmlFor="technique" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                Use technique
+              </label>
             </div>
-            <div className="bg-slate-300 dark:bg-slate-800 px-3 py-1">/set avatar energy {energy}</div>
           </div>
         )}
       </div>

@@ -55,7 +55,12 @@ export default function Lightcone() {
       <span className="text-2xl font-bold mb-1">Lightcone</span>
       <Dialog>
         <DialogTrigger className=" bg-black text-white dark:bg-white dark:text-black rounded-md px-5 py-2 font-semibold">Select lightcone</DialogTrigger>
-        <DialogContent className="max-h-[800px] min-h-[800px] scroll-auto max-w-7xl overflow-auto">
+        <DialogContent
+          className="max-h-[800px] min-h-[800px] scroll-auto max-w-7xl overflow-auto"
+          onInteractOutside={() => {
+            setSearch("");
+          }}
+        >
           <DialogHeader className={"shrink"}>
             <DialogTitle>Lightcone</DialogTitle>
           </DialogHeader>
@@ -93,7 +98,7 @@ export default function Lightcone() {
               </div>
             </div>
 
-            {filteredId.map((id) => {
+            {filteredId.reverse().map((id) => {
               const character = characterData[id];
 
               if (character) {
@@ -103,7 +108,10 @@ export default function Lightcone() {
                       className={`w-[150px] border hover:border-black dark:hover:border-white rounded-lg py-1 px-2 cursor-pointer ${
                         character.rank === "CombatPowerLightconeRarity5" ? "five-star" : character.rank === "CombatPowerLightconeRarity4" ? "four-star" : "three-star"
                       }`}
-                      onClick={() => setId(id)}
+                      onClick={() => {
+                        setId(id);
+                        setSearch("");
+                      }}
                     >
                       <img src={`https://api.hakush.in/hsr/UI/lightconemediumicon/${id}.webp`} alt={character.en} />
                       <p className="font-semibold text-white">{character.en}</p>
@@ -128,11 +136,11 @@ export default function Lightcone() {
             </div>
             <div>
               <span>Superimpose: {rank}</span>
-              <Slider className="cursor-pointer mt-1" defaultValue={[1]} max={5} min={1} step={1} onValueChange={(val) => setRank(val)} />
+              <Slider className="cursor-pointer mt-1" defaultValue={[1]} value={[rank]} max={5} min={1} step={1} onValueChange={(val) => setRank(val)} />
             </div>
             <div>
               <span>Ascension: {promotion}</span>
-              <Slider className="cursor-pointer mt-1" defaultValue={[6]} max={6} min={1} step={1} onValueChange={(val) => setPromotion(val)} />
+              <Slider className="cursor-pointer mt-1" defaultValue={[6]} value={[promotion]} max={6} min={1} step={1} onValueChange={(val) => setPromotion(val)} />
             </div>
             <div className="bg-slate-300 dark:bg-slate-800 px-3 py-1">
               /give equipment {id} {level} {rank} {promotion}
