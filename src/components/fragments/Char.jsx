@@ -144,19 +144,19 @@ export default function Char({ isEdit = false }) {
           <div className="flex flex-col gap-5">
             <div>
               <span>Level: {level}</span>
-              <Slider className="cursor-not-allowed mt-1" defaultValue={[80]} max={80} min={1} step={1} onValueChange={(val) => setLevel([val < 10 ? 1 : Math.floor(val / 10) * 10])} disabled />
+              <Slider className="cursor-not-allowed mt-1" defaultValue={[80]} max={80} min={1} step={1} value={[level]} onValueChange={([val]) => setLevel(val < 10 ? 1 : Math.floor(val / 10) * 10)} disabled />
             </div>
             <div>
               <span>Eidolon: {rank}</span>
-              <Slider className="cursor-pointer mt-1" defaultValue={[0]} max={6} min={0} step={1} value={[rank]} onValueChange={(val) => setRank(val)} />
+              <Slider className="cursor-pointer mt-1" defaultValue={[0]} max={6} min={0} step={1} value={[rank]} onValueChange={([val]) => setRank(val)} />
             </div>
             <div>
               <span>Ascension: {promotion}</span>
-              <Slider className="cursor-not-allowed mt-1" defaultValue={[6]} max={6} min={1} step={1} onValueChange={(val) => setPromotion(val)} disabled />
+              <Slider className="cursor-not-allowed mt-1" defaultValue={[6]} max={6} min={1} step={1} value={[promotion]} onValueChange={([val]) => setPromotion(val)} disabled />
             </div>
             <div>
               <span>Energy: {Math.floor(energy / 100)}%</span>
-              <Slider className="cursor-pointer mt-1" defaultValue={[5000]} max={10000} min={0} step={100} value={[energy]} onValueChange={(val) => setEnergy(val)} />
+              <Slider className="cursor-pointer mt-1" defaultValue={[5000]} max={10000} min={0} step={100} value={[energy]} onValueChange={([val]) => setEnergy(val)} />
             </div>
             <div className="flex items-center space-x-2">
               <Checkbox id="trace" value={trace} onCheckedChange={(val) => setTrace(val)} defaultChecked={true} />

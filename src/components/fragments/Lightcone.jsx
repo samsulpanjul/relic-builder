@@ -132,15 +132,15 @@ export default function Lightcone() {
           <div className="flex flex-col gap-5">
             <div>
               <span>Level: {level}</span>
-              <Slider className="cursor-pointer mt-1" defaultValue={[80]} value={[level]} max={80} min={1} step={1} onValueChange={(val) => setLevel([val < 10 ? 1 : Math.floor(val / 10) * 10])} />
+              <Slider className="cursor-pointer mt-1" defaultValue={[80]} value={[level]} max={80} min={1} step={1} onValueChange={([val]) => setLevel(val < 10 ? 1 : Math.floor(val / 10) * 10)} />
             </div>
             <div>
               <span>Superimpose: {rank}</span>
-              <Slider className="cursor-pointer mt-1" defaultValue={[1]} value={[rank]} max={5} min={1} step={1} onValueChange={(val) => setRank(val)} />
+              <Slider className="cursor-pointer mt-1" defaultValue={[1]} value={[rank]} max={5} min={1} step={1} onValueChange={([val]) => setRank(val)} />
             </div>
             <div>
               <span>Ascension: {promotion}</span>
-              <Slider className="cursor-pointer mt-1" defaultValue={[6]} value={[promotion]} max={6} min={1} step={1} onValueChange={(val) => setPromotion(val)} />
+              <Slider className="cursor-pointer mt-1" defaultValue={[6]} value={[promotion]} max={6} min={1} step={1} onValueChange={([val]) => setPromotion(val)} />
             </div>
             <div className="bg-slate-300 dark:bg-slate-800 px-3 py-1">
               /give equipment {id} {level} {rank} {promotion}
