@@ -38,8 +38,14 @@ export default function DialogAddCharacter() {
     const lv = 15;
     const mainStatId = mainStat;
     const subStatCount = sub.reduce((acc, curr) => (curr.stat !== "" ? acc + 1 : acc), 0);
+    const subStat = sub
+      .map((s) => {
+        const subId = subStats.find((sub) => sub.name === s.stat)?.id;
+        return `${subId}:${s.step}:${s.step}`;
+      })
+      .join(",");
 
-    return `${id},${lv},${mainStatId},${subStatCount},${sub.map((s) => `${subStats.find((sub) => sub.name === s.stat)?.id}:${s.step}:${s.step * s.roll}`).join(",")}`;
+    return `${id},${lv},${mainStatId},${subStatCount},${subStat}`;
   };
 
   const reset = () => {
@@ -89,6 +95,21 @@ export default function DialogAddCharacter() {
     }
     if (config.some((char) => char.id == id)) {
       alert("Character already exists.");
+      return;
+    }
+    if (!lightcone.id) {
+      alert("Select a lightcone first.");
+      return;
+    }
+    if (
+      relics.some((relic) => {
+        const [relicId, relicLv, mainStatId, subCount, ...subStat] = relic.split(",");
+        const subId = subStat.map((sub) => sub.split(":")[0]);
+
+        return relicId === "null" || mainStatId === "undefined" || subId.includes("undefined");
+      })
+    ) {
+      alert("There are relics you haven't configured.");
       return;
     }
 
