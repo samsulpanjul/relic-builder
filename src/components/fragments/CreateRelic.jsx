@@ -143,6 +143,11 @@ export default function CreateRelic() {
           setMainStat={setMainStatHead}
           random={randomSubHead}
           randomStep={randomStepHead}
+          setAll={() => {
+            setRelicHand(relicHead);
+            setRelicBody(relicHead);
+            setRelicFeet(relicHead);
+          }}
         >
           <SubStat index={0} sub={sub} mainStat={mainStatHeadd} setSubStat={setSubStat} increaseSubStep={increaseSubStep} decreaseSubStep={decreaseSubStep} setRoll={setRoll} upgrade={upgrade} />
           <SubStat index={1} sub={sub} mainStat={mainStatHeadd} setSubStat={setSubStat} increaseSubStep={increaseSubStep} decreaseSubStep={decreaseSubStep} setRoll={setRoll} upgrade={upgrade} />
@@ -211,6 +216,9 @@ export default function CreateRelic() {
           setMainStat={setMainStatPlanar}
           random={randomSubPlanar}
           randomStep={randomStepPlanar}
+          setAll={() => {
+            setRelicRope(relicPlanar);
+          }}
         >
           <SubStat index={0} sub={subPlanar} mainStat={mainStatPlanarr} setSubStat={setSubStatPlanar} increaseSubStep={increaseSubStepPlanar} decreaseSubStep={decreaseSubStepPlanar} setRoll={setRollPlanar} upgrade={upgradePlanar} />
           <SubStat index={1} sub={subPlanar} mainStat={mainStatPlanarr} setSubStat={setSubStatPlanar} increaseSubStep={increaseSubStepPlanar} decreaseSubStep={decreaseSubStepPlanar} setRoll={setRollPlanar} upgrade={upgradePlanar} />

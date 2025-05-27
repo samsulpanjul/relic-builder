@@ -6,7 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { useRelicStore } from "@/stores/relic-store";
 import { useReplace } from "@/hooks/useReplace";
 
-export default function PlanarPiece({ reset, relicMain, name, relicPc, setRelic, mainStat, setMainStat, upgradePc, random, randomStep, children }) {
+export default function PlanarPiece({ reset, relicMain, name, relicPc, setRelic, mainStat, setMainStat, upgradePc, random, randomStep, setAll = null, children }) {
   const { relics: data } = useRelicStore();
 
   const relic = Object.values(data).find((item) => item.en === relicPc);
@@ -20,6 +20,7 @@ export default function PlanarPiece({ reset, relicMain, name, relicPc, setRelic,
         <Button variant={"destructive"} onClick={reset}>
           Reset
         </Button>
+        {setAll && <Button onClick={() => setAll()}>Set all</Button>}
       </div>
       <div className="grid grid-cols-5">
         <div className="col-span-2">
