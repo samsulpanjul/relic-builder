@@ -26,7 +26,7 @@ export default function Character({ isEdit = false }) {
       </div>
       <div className="flex gap-4">
         <Dialog>
-          <DialogTrigger className=" text-white underline font-semibold w-full rounded-md py-3 text-lg">See all commands</DialogTrigger>
+          <DialogTrigger className="dark:text-white underline font-semibold w-full rounded-md py-3 text-lg">See all commands</DialogTrigger>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Commands</DialogTitle>
@@ -51,7 +51,7 @@ export default function Character({ isEdit = false }) {
           </DialogContent>
         </Dialog>
         <Dialog>
-          <DialogTrigger disabled={!idChar} className="bg-white text-black underline font-semibold w-full rounded-md py-3 text-lg disabled:bg-opacity-50 disabled:cursor-not-allowed">
+          <DialogTrigger disabled={!idChar} className="dark:bg-white dark:text-black bg-black text-white underline font-semibold w-full rounded-md py-3 text-lg disabled:bg-opacity-50 disabled:cursor-not-allowed">
             View stats
           </DialogTrigger>
           <DialogContent className="max-w-[850px]">

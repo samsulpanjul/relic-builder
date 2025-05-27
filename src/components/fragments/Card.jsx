@@ -6,8 +6,11 @@ import { useShallow } from "zustand/react/shallow";
 import { mainStatHead, mainStatHand, mainStatBody, mainStatFeet, mainStatPlanar, mainStatLink, subStats } from "@/utils/dataStat";
 import { useBodyStore, useFeetStore, useHandStore, useHeadStore, usePlanarStore, useRelicStore, useRopeStore } from "@/stores/relic-store";
 import { useRelicData } from "@/hooks/useRelicData";
+import { useState } from "react";
 
 export default function Card({ id }) {
+  const [open, setOpen] = useState(false);
+
   const { relics: RelicsData } = useRelicStore();
   const [config, deleteConfig, editConfig] = useConfigCharacterStore(useShallow((state) => [state.config, state.deleteConfig, state.editConfig]));
   const [nameChar, setNameChar, idChar, setIdChar, levelChar, setLevelChar, rankChar, setRankChar, promotionChar, setPromotionChar, energyChar, setEnergyChar, technique, setTechnique, resetChar] = useCharStore(
@@ -168,7 +171,6 @@ export default function Card({ id }) {
       relic(planarRelicData.relicId, planarRelicData.mainStatPlanarId, subPlanar),
       relic(ropeRelicData.relicId, ropeRelicData.mainStatLinkId, subRope),
     ];
-    console.log(relics);
 
     const character = {
       name: nameChar,
@@ -186,13 +188,14 @@ export default function Card({ id }) {
     editConfig(characterId, character);
 
     reset();
+    setOpen(false);
   };
 
   return (
     <div className="border-2 rounded-md w-[200px]">
       <img src={`https://api.hakush.in/hsr/UI/avatarshopicon/${id}.webp`} alt="mybini" />
       <div className="flex flex-col gap-2 p-2">
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger className="bg-black text-white dark:bg-white dark:text-black rounded-md px-5 py-2 font-semibold" onClick={() => handleOpenDialog(id)}>
             Edit
           </DialogTrigger>
@@ -201,22 +204,23 @@ export default function Card({ id }) {
             onInteractOutside={(e) => {
               e.preventDefault();
             }}
+            onEscapeKeyDown={() => {
+              reset();
+              setOpen(false);
+            }}
           >
             <Character isEdit={true} />
             <DialogFooter>
-              <DialogClose asChild>
-                <Button
-                  variant="destructive"
-                  onClick={() => {
-                    reset();
-                  }}
-                >
-                  Close
-                </Button>
-              </DialogClose>
-              <DialogClose asChild>
-                <Button onClick={handleEditCharacter}>Edit</Button>
-              </DialogClose>
+              <Button
+                variant="destructive"
+                onClick={() => {
+                  reset();
+                  setOpen(false);
+                }}
+              >
+                Close
+              </Button>
+              <Button onClick={handleEditCharacter}>Edit</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

@@ -83,9 +83,18 @@ export default function DialogAddCharacter() {
       use_technique: technique,
     };
 
-    reset();
+    if (!id) {
+      alert("Select a character first.");
+      return;
+    }
+    if (config.some((char) => char.id == id)) {
+      alert("Character already exists.");
+      return;
+    }
 
     addConfig(character);
+    reset();
+    setOpen(false);
   };
 
   return (
@@ -95,6 +104,10 @@ export default function DialogAddCharacter() {
         className="max-w-[calc(100vw-2rem)]"
         onInteractOutside={(e) => {
           e.preventDefault();
+        }}
+        onEscapeKeyDown={() => {
+          reset();
+          setOpen(false);
         }}
       >
         <Character />
@@ -108,22 +121,7 @@ export default function DialogAddCharacter() {
           >
             Cancel
           </Button>
-          <Button
-            onClick={() => {
-              if (!id) {
-                alert("Select a character first.");
-                return;
-              }
-              if (config.some((char) => char.id == id)) {
-                alert("Character already exists.");
-                return;
-              }
-              handleAddCharacter();
-              setOpen(false);
-            }}
-          >
-            Add
-          </Button>
+          <Button onClick={handleAddCharacter}>Add</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

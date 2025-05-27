@@ -70,7 +70,7 @@ function App() {
       <div className="w-10/12 m-auto p-10">
         <div className="flex gap-4 mb-4">
           <DialogAddCharacter />
-          <Button onClick={downloadJson} className="font-semibold text-md bg-lime-200">
+          <Button onClick={downloadJson} className="font-semibold text-md dark:bg-lime-200 bg-zinc-700">
             Download Config
           </Button>
         </div>
