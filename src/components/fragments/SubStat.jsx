@@ -46,7 +46,7 @@ export default function SubStat({ index, sub, mainStat, setSubStat, increaseSubS
       <div className="text-center self-center">
         {sub[index].stat !== "" ? (
           <p>
-            {(subStats.find((stat) => stat.name === sub[index].stat)?.base * (isFlat.includes(sub[index].stat) ? 1 : 100) * sub[index].step).toFixed(1)}
+            {(subStats.find((stat) => stat.name === sub[index].stat)?.value[sub[index].roll] * (isFlat.includes(sub[index].stat) ? 1 : 100) * sub[index].step).toFixed(1)}
             {isFlat.includes(sub[index].stat) ? "" : "%"}
           </p>
         ) : null}
@@ -63,14 +63,14 @@ export default function SubStat({ index, sub, mainStat, setSubStat, increaseSubS
       </div>
       <div className="flex items-center gap-3">
         <p>Roll: </p>
-        <Select disabled defaultValue={1} onValueChange={(val) => setRoll(index, val)}>
+        <Select value={sub[index].roll.toString()} onValueChange={(val) => setRoll(index, Number(val))}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Mid" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value={0}>Low</SelectItem>
-            <SelectItem value={1}>Mid</SelectItem>
-            <SelectItem value={2}>High</SelectItem>
+            <SelectItem value="0">Low</SelectItem>
+            <SelectItem value="1">Mid</SelectItem>
+            <SelectItem value="2">High</SelectItem>
           </SelectContent>
         </Select>
       </div>

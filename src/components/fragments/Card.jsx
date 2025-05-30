@@ -1,6 +1,6 @@
 import { Button } from "../ui/button";
 import { useCharStore, useConfigCharacterStore, useLightconeStore } from "@/stores/character-store";
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogContent, DialogFooter, DialogTrigger } from "../ui/dialog";
 import Character from "./Character";
 import { useShallow } from "zustand/react/shallow";
 import { mainStatHead, mainStatHand, mainStatBody, mainStatFeet, mainStatPlanar, mainStatLink, subStats } from "@/utils/dataStat";
@@ -63,6 +63,7 @@ export default function Card({ id }) {
   const feetRelicData = useRelicData(relicFeet, 3);
   const planarRelicData = useRelicData(relicPlanar, 4);
   const ropeRelicData = useRelicData(relicRope, 5);
+  const RELIC_COUNT = 6;
 
   const handleRemoveCharacter = (id) => {
     deleteConfig(id);
@@ -79,6 +80,7 @@ export default function Card({ id }) {
     resetRope();
   };
 
+  // extract relic from config json type
   const extractRelicData = (relics, mainStat) => {
     const [relicId, relicLv, mainStatId, subStatCount, ...subStat] = relics.split(",");
     const relicName = RelicsData[relicId.slice(1, 4)]?.en;
@@ -93,9 +95,39 @@ export default function Card({ id }) {
       subStats: subStat.map((stat) => {
         const [statId, step, roll] = stat.split(":");
         const subStatName = subStats.find((sub) => sub.id === parseInt(statId))?.name;
-        return { subStatName, statId: parseInt(statId), step: parseInt(step), roll: parseInt(roll) };
+        return { subStatName, statId: parseInt(statId), step: parseInt(step), roll: parseInt(roll) / parseInt(step) };
       }),
     };
+  };
+
+  const getPieceFromRelicId = (relicString) => {
+    const relicId = relicString.split(",")[0];
+    const piece = parseInt(relicId.slice(-1), 10) - 1;
+    return piece;
+  };
+
+  const setMissingRelics = (relics) => {
+    const completeRelics = Array(RELIC_COUNT).fill(null);
+
+    for (const relic of relics) {
+      const piece = getPieceFromRelicId(relic);
+      if (piece >= 0 && piece < RELIC_COUNT) {
+        completeRelics[piece] = relic;
+      }
+    }
+
+    for (let i = 0; i < RELIC_COUNT; i++) {
+      if (!completeRelics[i]) {
+        const type = i < 4 ? "relic" : "planar";
+        completeRelics[i] = placeholderRelic(type, i);
+      }
+    }
+
+    return completeRelics;
+  };
+
+  const placeholderRelic = (type, piece) => {
+    return `6${type === "relic" ? "101" : "301"}${piece},15,1,4,1:1:1,1:1:1,1:1:1,1:1:1`;
   };
 
   const setCharacterData = (character) => {
@@ -125,15 +157,16 @@ export default function Card({ id }) {
 
   const handleOpenDialog = (id) => {
     const character = config.find((item) => item.id === id);
-    const relics = character?.relics || [];
+    if (!character) return;
+
+    const relics = setMissingRelics(character.relics || []);
+
     const headRelic = extractRelicData(relics[0], mainStatHead);
     const handRelic = extractRelicData(relics[1], mainStatHand);
     const bodyRelic = extractRelicData(relics[2], mainStatBody);
     const feetRelic = extractRelicData(relics[3], mainStatFeet);
     const planarRelic = extractRelicData(relics[4], mainStatPlanar);
     const ropeRelic = extractRelicData(relics[5], mainStatLink);
-
-    if (!character) return;
 
     setCharacterData(character);
     setRelicData(headRelic, setRelicHead, setMainStatHead, setUpgradeHead, setSubStatHead);
@@ -144,6 +177,7 @@ export default function Card({ id }) {
     setRelicData(ropeRelic, setRelicRope, setMainStatRope, setUpgradeRope, setSubStatRope);
   };
 
+  // convert to config relic type
   const relic = (relic, mainStat, sub) => {
     const id = relic;
     const lv = 15;
@@ -152,7 +186,9 @@ export default function Card({ id }) {
     const subStat = sub
       .map((s) => {
         const subId = subStats.find((sub) => sub.name === s.stat)?.id;
-        return `${subId}:${s.step}:${s.step}`;
+        const step = s.step;
+        const roll = parseInt(s.roll) * step;
+        return `${subId}:${step}:${roll}`;
       })
       .join(",");
 

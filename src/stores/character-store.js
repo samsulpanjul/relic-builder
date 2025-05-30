@@ -10,6 +10,7 @@ export const useConfigCharacterStore = create()(
           config: state.config.map((item) => (item.id === id ? { ...item, ...newConfig } : item)),
         })),
       addConfig: (newConfig) => set((state) => ({ config: [...state.config, newConfig] })),
+      importConfig: (config) => set({ config }),
       deleteConfig: (delId) =>
         set((state) => ({
           config: state.config.filter((item) => item.id !== delId),

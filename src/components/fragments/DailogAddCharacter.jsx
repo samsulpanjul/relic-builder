@@ -1,4 +1,4 @@
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogContent, DialogFooter, DialogTrigger } from "../ui/dialog";
 import Character from "./Character";
 import { Button } from "../ui/button";
 import { useCharStore, useConfigCharacterStore, useLightconeStore } from "@/stores/character-store";
@@ -41,7 +41,9 @@ export default function DialogAddCharacter() {
     const subStat = sub
       .map((s) => {
         const subId = subStats.find((sub) => sub.name === s.stat)?.id;
-        return `${subId}:${s.step}:${s.step}`;
+        const step = s.step;
+        const roll = parseInt(s.roll) * step;
+        return `${subId}:${step}:${roll}`;
       })
       .join(",");
 

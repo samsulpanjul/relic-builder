@@ -139,20 +139,20 @@ export default function CharacterStat() {
     return bonus;
   }, [traces]);
 
-  const getSubStatValue = (statName, step = 0) => {
+  const getSubStatValue = (statName, step = 0, roll) => {
     const found = subStats.find((s) => s.name === statName);
     if (!found) return 0;
-    return found.base * step;
+    return found.value[roll] * step;
   };
 
   const aggregateSubStats = (subs) => {
     const statMap = {};
     subs.forEach((sub) => {
-      const { stat, step } = sub;
+      const { stat, step, roll } = sub;
       if (!stat || typeof step !== "number") {
         return;
       }
-      const value = getSubStatValue(stat, step);
+      const value = getSubStatValue(stat, step, roll);
       const key = stat.toLowerCase().replaceAll(" ", "");
       if (!statMap[key]) statMap[key] = 0;
       statMap[key] += value;

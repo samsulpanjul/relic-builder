@@ -6,10 +6,11 @@ import Card from "./components/fragments/Card";
 import { useConfigCharacterStore } from "./stores/character-store";
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./components/ui/dialog";
 
 function App() {
   const fetchRelics = useRelicStore((state) => state.fetchRelics);
-  const config = useConfigCharacterStore((state) => state.config);
+  const [config, importConfig, clearConfig] = useConfigCharacterStore((state) => [state.config, state.importConfig, state.clearConfig]);
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState([]);
   const [sort, setSort] = useState(false);
@@ -51,6 +52,14 @@ function App() {
   };
 
   const downloadJson = () => {
+    const charactersWithMissingRelics = config.filter((char) => (char.relics?.length || 0) < 6);
+    const charactersName = charactersWithMissingRelics.map((char) => char.name).join(", ");
+    if (charactersWithMissingRelics.length > 0) {
+      const isPlural = charactersWithMissingRelics.length > 1;
+      alert(`${charactersName} ${isPlural ? "have" : "has"} missing relics, add ${isPlural ? "them" : "it"} first!`);
+      return;
+    }
+
     const blob = new Blob([JSON.stringify(configJson, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
 
@@ -65,6 +74,24 @@ function App() {
     URL.revokeObjectURL(url);
   };
 
+  const handleImportConfig = async (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      const importedConfig = data.avatar_config;
+
+      const charactersWithMissingRelics = importedConfig.filter((char) => (char.relics?.length || 0) < 6);
+      const charactersName = charactersWithMissingRelics.map((char) => char.name).join(", ");
+      if (charactersWithMissingRelics.length > 0) {
+        const isPlural = charactersWithMissingRelics.length > 1;
+        alert(`${charactersName} ${isPlural ? "have" : "has"} missing relics`);
+      }
+
+      importConfig(importedConfig);
+    }
+  };
+
   return (
     <ThemeProvider>
       <div className="w-10/12 m-auto p-10">
@@ -73,6 +100,33 @@ function App() {
           <Button onClick={downloadJson} className="font-semibold text-md dark:bg-lime-200 bg-zinc-700">
             Download Config
           </Button>
+          <label htmlFor="import" className="bg-white text-black rounded-md flex items-center justify-center px-4 cursor-pointer font-semibold">
+            Import Config
+            <Input type="file" id="import" accept=".json" onChange={handleImportConfig} className="hidden" />
+          </label>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="destructive" className="font-semibold">
+                Clear Config
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Are you sure?</DialogTitle>
+                <DialogDescription>This will remove all your character configurations and cannot be undone.</DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button className="font-semibold">Nooooo</Button>
+                </DialogClose>
+                <DialogClose asChild>
+                  <Button variant="destructive" className="font-semibold" onClick={clearConfig}>
+                    Do it anyway
+                  </Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
         <div className="flex gap-4 mb-4 items-center">
           <Input type="text" placeholder="Search..." onChange={handleSearch} value={search} className="w-64" />
