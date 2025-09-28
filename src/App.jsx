@@ -43,10 +43,10 @@ function App() {
     avatar_config: config,
     battle_config: {
       battle_id: 1,
-      stage_id: 201012311,
+      stage_id: 1052086,
       cycle_count: 30,
-      monster_wave: [[4015011]],
-      monster_level: 95,
+      monster_wave: [[4035010]],
+      monster_level: 82,
       blessings: [],
     },
   };
