@@ -164,7 +164,7 @@ export default function Lightcone() {
                       setSearch("");
                     }}
                   >
-                    <img src={`https://cdn.neonteam.dev/neonteam/assets/spriteoutput/itemfigures/lightcone/${lcId}.webp`} alt={displayName} />
+                    <img src={`https://static.nanoka.cc/assets/hsr/lightconemediumicon/${lcId}.webp`} alt={displayName} />
                     <p className="font-semibold text-white text-center drop-shadow-md text-[10px] leading-tight px-1 h-8 flex items-center justify-center">
                       {displayName}
                     </p>
@@ -177,7 +177,7 @@ export default function Lightcone() {
       </Dialog>
       <div className="grid grid-cols-2">
         <div>
-          <img className="w-[300px]" src={`https://cdn.neonteam.dev/neonteam/assets/spriteoutput/itemfigures/lightcone/${id}.webp`} alt={id} />
+          <img className="w-[300px]" src={`https://static.nanoka.cc/assets/hsr/lightconemediumicon/${id}.webp`} alt={id} />
           <p className="text-xl font-semibold">{getLcName(id)}</p>
         </div>
         {id && (
