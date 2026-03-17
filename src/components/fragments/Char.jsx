@@ -94,15 +94,9 @@ const charToId = {
   "Sparxie": 1501,
   "Yao Guang": 1502,
   "Ashveil": 1504,
-  "Trailblazer(Destruction)": 8001,
-  "Trailblazer(Destruction)": 8002,
-  "Trailblazer(Preservation)": 8003,
-  "Trailblazer(Preservation)": 8004,
-  "Trailblazer(Harmony)": 8005,
-  "Trailblazer(Harmony)": 8006,
-  "Trailblazer(Remembrance)": 8007,
-  "Trailblazer(Remembrance)": 8008,
-};
+  "Evanescia" : 1505,
+  "Silver Wolf Lv.999" : 1506,
+}
 
 const idToChar = Object.fromEntries(Object.entries(charToId).map(([name, id]) => [id, name]));
 
@@ -112,6 +106,7 @@ const getFriendlyName = (id, tag) => {
   if (numId === 8003 || numId === 8004) return "Trailblazer(Preservation)";
   if (numId === 8005 || numId === 8006) return "Trailblazer(Harmony)";
   if (numId === 8007 || numId === 8008) return "Trailblazer(Remembrance)";
+  if (numId === 8010 || numId === 8009) return "Trailblazer(Elation)";
   return idToChar[numId] || tag;
 };
 
