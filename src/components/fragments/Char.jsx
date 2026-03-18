@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useEffect, useState } from "react";
 import { getData } from "@/services/hakush";
@@ -162,6 +163,10 @@ export default function Char({ isEdit = false }) {
 
   const filteredId = listId.filter((id) => {
     const character = characterData[id];
+    const numId = parseInt(id);
+    if(numId >=8001 && numId % 2 !== 0){
+      return false
+    }
     if (!character) return false;
 
     const displayName = getFriendlyName(id, character.tag);
