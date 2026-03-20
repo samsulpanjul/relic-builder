@@ -99,6 +99,10 @@ export default function DialogAddCharacter() {
       alert("Character already exists.");
       return;
     }
+    if(parseInt(id) === 1202 && technique === true){
+      alert("Tingyun's technique must be set to false, set her energy to 100% instead :>")
+      return
+    }
     if (!lightcone.id) {
       alert("Select a lightcone first.");
       return;
