@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import { Button } from "../ui/button";
 import { useCharStore, useConfigCharacterStore, useLightconeStore } from "@/stores/character-store";
 import { Dialog, DialogContent, DialogFooter, DialogTrigger } from "../ui/dialog";
@@ -136,10 +138,10 @@ export default function Card({ id }) {
     }).join(",");
     return `${relicId},15,${mainStat},${subStatCount},${subStat}`;
   };
-
+  const isTingyun = parseInt(idChar)===1202
   const handleEditCharacter = () => {
     const character = {
-      name: nameChar, id: parseInt(idChar), hp: 100, sp: energyChar / 100, level: levelChar, promotion: promotionChar, rank: rankChar, use_technique: technique,
+      name: nameChar, id: parseInt(idChar), hp: 100, sp: isTingyun? 0.9: energyChar / 100, level: levelChar, promotion: promotionChar, rank: rankChar, use_technique: isTingyun ? 0.9 : technique,
       lightcone: { id: parseInt(idLc), rank: rankLc, level: levelLc, promotion: promotionLc },
       relics: [
         formatRelicString(headRelicData.relicId, headRelicData.mainStatHeadId, subHead),
@@ -161,7 +163,7 @@ export default function Card({ id }) {
             Edit
           </DialogTrigger>
           <DialogContent className="max-w-[calc(100vw-2rem)]" onInteractOutside={(e) => e.preventDefault()} onEscapeKeyDown={() => { reset(); setOpen(false); }}>
-            <Character isEdit={true} />
+            <Character isEdit={true} isTingyun={isTingyun}/>
             <DialogFooter>
               <Button variant="destructive" onClick={() => { reset(); setOpen(false); }}>Close</Button>
               <Button onClick={handleEditCharacter}>Edit</Button>
