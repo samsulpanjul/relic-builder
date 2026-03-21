@@ -83,7 +83,7 @@ export default function DialogAddCharacter() {
       name: name,
       id: parseInt(id),
       hp: 100,
-      sp: isTingyun ? 0.9 : energy / 100,
+      sp: isTingyun ? 90 : energy / 100,
       level: level,
       promotion: promotion,
       rank: rank,

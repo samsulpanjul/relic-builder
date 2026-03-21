@@ -141,7 +141,7 @@ export default function Card({ id }) {
   const isTingyun = parseInt(idChar)===1202
   const handleEditCharacter = () => {
     const character = {
-      name: nameChar, id: parseInt(idChar), hp: 100, sp: isTingyun? 0.9: energyChar / 100, level: levelChar, promotion: promotionChar, rank: rankChar, use_technique: isTingyun ? 0.9 : technique,
+      name: nameChar, id: parseInt(idChar), hp: 100, sp: isTingyun? 90: energyChar / 100, level: levelChar, promotion: promotionChar, rank: rankChar, use_technique: isTingyun ? 0.9 : technique,
       lightcone: { id: parseInt(idLc), rank: rankLc, level: levelLc, promotion: promotionLc },
       relics: [
         formatRelicString(headRelicData.relicId, headRelicData.mainStatHeadId, subHead),
