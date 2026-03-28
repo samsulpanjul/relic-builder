@@ -1,0 +1,17 @@
+import { create } from "zustand";
+import { UserStore } from "./types";
+import { persist } from "zustand/middleware";
+import { createCharacterSlice } from "./slices/create-character.slice";
+import { createRelicSlice } from "./slices/create-relic.slice";
+
+export const useUserStore = create<UserStore>()(
+  persist(
+    (...a) => ({
+      ...createCharacterSlice(...a),
+      ...createRelicSlice(...a),
+    }),
+    {
+      name: "relic-builder-config",
+    },
+  ),
+);
