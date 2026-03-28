@@ -1,5 +1,5 @@
 import { env } from "@/src/env";
-import { getMetadata } from "@/src/lib/get-metadata";
+import { getMetadata } from "@/src/lib/neonteam/get-metadata";
 import { NextResponse } from "next/server";
 
 export async function GET() {
