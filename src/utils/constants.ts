@@ -3,6 +3,7 @@ import { CharacterConfigStore } from "../store/types";
 export const BASE_URL = {
   enka: "/api/enka",
   neonteam: "/api/neonteam",
+  internal: "/api",
 } as const;
 
 export const PATHS = [
