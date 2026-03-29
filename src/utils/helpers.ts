@@ -10,3 +10,9 @@ export const JSONParse = (data: unknown) => {
     }),
   );
 };
+
+export const isPercent = (string: string) => {
+  if (!string) return "";
+
+  return !string.includes("Delta");
+};
