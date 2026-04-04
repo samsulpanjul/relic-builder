@@ -4,6 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --font-heebo: var(--font-heebo);
+  --font-didact: var(--font-didact);
+  --font-chivo: var(--font-chivo);
+}
+
 :root {
   --background: #181a24;
   --foreground: #e6eaf3;
@@ -37,11 +43,11 @@
   --sidebar-accent-foreground: #23243a;
   --sidebar-border: #2d2e3e;
   --sidebar-ring: #ffe066;
-  --font-sans: Inter, ui-sans-serif, sans-serif, system-ui;
+  /* --font-sans: Inter, ui-sans-serif, sans-serif, system-ui;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+    "Courier New", monospace; */
   --radius: 0.5rem;
   --shadow-x: 0;
   --shadow-y: 1px;
@@ -97,9 +103,9 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-sans: var(--font-sans);
+  /* --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
-  --font-serif: var(--font-serif);
+  --font-serif: var(--font-serif); */
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -121,14 +127,14 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-chivo;
   }
 }
 
 @utility wrapper {
-  @apply w-[1280px] overflow-x-auto mx-auto;
+  @apply w-7xl overflow-x-auto mx-auto px-4;
 }
 
 @utility card {
-  @apply wrapper p-4 rounded-xl bg-background/50 backdrop-blur-lg;
+  @apply p-4 rounded-xl bg-background/50 backdrop-blur-lg;
 }

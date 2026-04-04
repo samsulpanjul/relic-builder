@@ -11,11 +11,11 @@ export interface CharacterRawDetails {
   max_sp: number;
   max_sp_enhanced: number | null;
   ranks: Record<string, CharacterRank>;
-  ranks_enhanced: Record<string, any>;
+  ranks_enhanced: Record<string, CharacterRank>;
   skills: Record<string, CharacterSkill>;
-  skills_enhanced: Record<string, any>;
+  skills_enhanced: Record<string, CharacterSkill>;
   skill_trees: Record<string, SkillTreePoint>;
-  skill_trees_enhanced: Record<string, any>;
+  skill_trees_enhanced: Record<string, SkillTreePoint>;
   promotions: Record<string, PromotionStats>;
   technique_buff: Array<{ id: number }>;
   icon: string;
@@ -69,11 +69,20 @@ export interface SkillTreePoint {
     type: string;
     value: number;
   }>;
-  servants: any | null;
+  servants: Record<string, ServantsTreePoint> | null;
   icon: string;
   desc: number;
-  params: Array<any[]>;
+  params: Array<number[]>;
   enhanced_id: number | null;
+}
+
+export interface ServantsTreePoint {
+  name: number;
+  desc: number;
+  icon: string;
+  id: number;
+  params: Array<number[]>;
+  tag: number;
 }
 
 export interface StatDetail {

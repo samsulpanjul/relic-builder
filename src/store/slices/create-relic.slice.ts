@@ -19,4 +19,13 @@ export const createRelicSlice: StateCreator<UserStore, [], [], RelicSlice> = (
         },
       };
     }),
+  deleteRelic: (id) =>
+    set((state) => {
+      const newRelics = { ...state.relics };
+      delete newRelics[id];
+
+      return {
+        relics: newRelics,
+      };
+    }),
 });

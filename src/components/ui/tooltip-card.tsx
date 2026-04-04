@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/src/lib/utils";
+import { createPortal } from "react-dom";
 
 export const Tooltip = ({
   content,
@@ -41,34 +42,34 @@ export const Tooltip = ({
     const viewportHeight = window.innerHeight;
 
     // Get tooltip dimensions
-    const tooltipWidth = 400; // min-w-[15rem] = 240px
+    const tooltipWidth = contentRef.current.offsetWidth; // min-w-[15rem] = 240px
     const tooltipHeight = tooltip.scrollHeight;
 
     // Calculate absolute position relative to viewport
     const absoluteX = containerRect.left + mouseX;
     const absoluteY = containerRect.top + mouseY;
 
-    let finalX = mouseX + 12;
-    let finalY = mouseY + 12;
+    let finalX = absoluteX + 12;
+    let finalY = absoluteY + 12;
 
-    // Check if tooltip goes beyond right edge
-    if (absoluteX + 12 + tooltipWidth > viewportWidth) {
-      finalX = mouseX - tooltipWidth - 12;
+    // right overflow
+    if (finalX + tooltipWidth > viewportWidth) {
+      finalX = absoluteX - tooltipWidth - 12;
     }
 
-    // Check if tooltip goes beyond left edge
-    if (absoluteX + finalX < 0) {
-      finalX = -containerRect.left + 12;
+    // left overflow
+    if (finalX < 0) {
+      finalX = 12;
     }
 
-    // Check if tooltip goes beyond bottom edge
-    if (absoluteY + 12 + tooltipHeight > viewportHeight) {
-      finalY = mouseY - tooltipHeight - 12;
+    // bottom overflow
+    if (finalY + tooltipHeight > viewportHeight) {
+      finalY = absoluteY - tooltipHeight - 12;
     }
 
-    // Check if tooltip goes beyond top edge
-    if (absoluteY + finalY < 0) {
-      finalY = -containerRect.top + 12;
+    // top overflow
+    if (finalY < 0) {
+      finalY = 12;
     }
 
     return { x: finalX, y: finalY };
@@ -161,33 +162,37 @@ export const Tooltip = ({
       }}
     >
       {children}
-      <AnimatePresence>
-        {isVisible && (
-          <motion.div
-            key={String(isVisible)}
-            initial={{ height: 0, opacity: 1 }}
-            animate={{ height, opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 200,
-              damping: 20,
-            }}
-            className="pointer-events-none absolute z-50 min-w-[25rem] overflow-hidden rounded-md border border-transparent bg-white shadow-sm ring-1 shadow-black/5 ring-black/5 dark:bg-neutral-900 dark:shadow-white/10 dark:ring-white/5"
-            style={{
-              top: position.y,
-              left: position.x,
-            }}
-          >
-            <div
-              ref={contentRef}
-              className="p-2 text-sm text-neutral-600 md:p-4 dark:text-neutral-400"
-            >
-              {content}
-            </div>
-          </motion.div>
+      {typeof window !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {isVisible && (
+              <motion.div
+                key={String(isVisible)}
+                initial={{ height: 0, opacity: 1 }}
+                animate={{ height, opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 20,
+                }}
+                className="pointer-events-none fixed z-9999 min-w-[25rem] max-w-sm overflow-hidden rounded-md border border-transparent bg-white shadow-sm ring-1 shadow-black/5 ring-black/5 dark:bg-neutral-900 dark:shadow-white/10 dark:ring-white/5"
+                style={{
+                  top: position.y,
+                  left: position.x,
+                }}
+              >
+                <div
+                  ref={contentRef}
+                  className="p-2 text-sm text-neutral-600 md:p-4 dark:text-neutral-400"
+                >
+                  {content}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
         )}
-      </AnimatePresence>
     </div>
   );
 };

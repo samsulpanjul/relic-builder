@@ -31,19 +31,16 @@ function DialogClose({
   return <DialogPrimitive.Close data-slot="dialog-close" {...props} />;
 }
 
-function DialogOverlay({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
+function DialogOverlay({ className }: { className?: string }) {
   return (
-    <DialogPrimitive.Overlay
-      data-slot="dialog-overlay"
-      className={cn(
-        "fixed inset-0 isolate z-90 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
-        className,
-      )}
-      {...props}
-    />
+    <DialogPrimitive.Close asChild>
+      <div
+        className={cn(
+          "fixed inset-0 z-90 bg-black/30 backdrop-blur-sm",
+          className,
+        )}
+      />
+    </DialogPrimitive.Close>
   );
 }
 

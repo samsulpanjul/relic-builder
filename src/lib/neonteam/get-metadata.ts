@@ -14,6 +14,9 @@ export const getMetadata = async () => {
         throw err;
       });
   }
-
+  console.log(
+    `current version metadata:`,
+    (await metadataPromise).CurrentVersion,
+  );
   return metadataPromise;
 };

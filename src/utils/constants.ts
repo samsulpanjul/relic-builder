@@ -7,15 +7,15 @@ export const BASE_URL = {
 } as const;
 
 export const PATHS = [
-  "Elation",
-  "Knight",
-  "Mage",
-  "Memory",
   "Priest",
-  "Rogue",
-  "Shaman",
-  "Warlock",
   "Warrior",
+  "Elation",
+  "Mage",
+  "Shaman",
+  "Rogue",
+  "Warlock",
+  "Knight",
+  "Memory",
 ];
 
 export const ELEMENTS = [
@@ -40,12 +40,12 @@ export const DEFAULT_CHAR_CONFIG: CharacterConfigStore = {
     rank: 1,
   },
   relics: {
-    head: null,
-    hand: null,
-    body: null,
-    feet: null,
-    planar: null,
-    rope: null,
+    HEAD: null,
+    HAND: null,
+    BODY: null,
+    FOOT: null,
+    NECK: null,
+    OBJECT: null,
   },
   sp: 50,
   use_technique: false,

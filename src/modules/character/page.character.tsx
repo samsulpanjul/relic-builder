@@ -12,6 +12,9 @@ import EditCard from "./components/edit-card.character";
 import { useCharacterStore } from "./store/use-character.store";
 import { useLightcones } from "./hooks/use-lightcones.hook";
 import { useParsedDesc } from "@/src/hooks/use-parsed-desc.hook";
+import ShowcaseCard from "./components/showcase-card.character";
+import { useUserStore } from "@/src/store/use-user.store";
+import { DEFAULT_CHAR_CONFIG } from "@/src/utils/constants";
 
 const CharacterPage = () => {
   const params = useParams();
@@ -22,7 +25,12 @@ const CharacterPage = () => {
   const [isEdit, setIsEdit] = useState(false);
 
   // INITIATE STORE VALUE
-  const { setId, setChar } = useCharacterStore();
+  const setId = useCharacterStore((state) => state.setId);
+  const setCharData = useCharacterStore((state) => state.setCharData);
+  const charConfig = useUserStore(
+    (state) => state.characters[id as string] ?? DEFAULT_CHAR_CONFIG,
+  );
+
   useEffect(() => {
     if (id) {
       setId(id);
@@ -35,9 +43,9 @@ const CharacterPage = () => {
 
   useEffect(() => {
     if (char) {
-      setChar(char);
+      setCharData(char);
     }
-  }, [char, setChar]);
+  }, [char, setCharData]);
 
   if (isPending || !char) {
     return;
@@ -45,9 +53,9 @@ const CharacterPage = () => {
 
   return (
     <div className="wrapper my-8 pb-16">
-      <div className="rounded-xl h-172 flex overflow-hidden relative">
+      <div className="rounded-xl h-170 flex relative">
         <Button
-          className="absolute top-2 left-2 z-60"
+          className="absolute top-2 left-2 z-51"
           onClick={() => setIsEdit((prev) => !prev)}
           size={"lg"}
         >
@@ -55,7 +63,7 @@ const CharacterPage = () => {
         </Button>
 
         {/* LEFT IMAGE */}
-        <div className="w-72 h-full overflow-hidden p-4 relative z-10">
+        <div className="w-72 h-full overflow-hidden rounded-xl p-4 relative z-10">
           <div className="bg-[url(/space.webp)] bg-cover bg-center size-full absolute left-0 top-0 -z-50 opacity-75" />
           <Image
             src={char?.portrait ?? ""}
@@ -79,7 +87,7 @@ const CharacterPage = () => {
                           ? "absolute inset-0 z-50 w-full ml-0"
                           : "relative flex-1 -ml-4 z-20"
                       }
-                      p-4 rounded-xl bg-background/50 backdrop-blur-lg flex flex-col
+                      card flex flex-col
                     `}
         >
           <motion.div
@@ -89,23 +97,22 @@ const CharacterPage = () => {
           >
             <div className="flex items-center gap-2">
               <p
-                className="text-3xl font-bold tracking-wide"
+                className="text-3xl font-bold tracking-widest font-didact"
                 dangerouslySetInnerHTML={{
                   __html: parseDesc(char.name, []) ?? "Character Name",
                 }}
               />
               <PathIcon src={char?.path ?? ""} />
               <ElementIcon src={char?.element ?? ""} />
+              {!isEdit && (
+                <p className="bg-secondary text-secondary-foreground rounded-md px-1 font-medium">
+                  Lv. {charConfig.level}
+                </p>
+              )}
             </div>
           </motion.div>
 
-          {isEdit ? (
-            <EditCard />
-          ) : (
-            <div>
-              {!isEdit && <p className="text-xl font-semibold">Lv. 80</p>}
-            </div>
-          )}
+          {isEdit ? <EditCard /> : <ShowcaseCard />}
         </motion.div>
       </div>
     </div>

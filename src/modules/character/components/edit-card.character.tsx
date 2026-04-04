@@ -1,8 +1,18 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 import CharacterTab from "./tabs/character.tab";
+import RelicTab from "./tabs/relic.tab";
 
-const TABS = ["character", "relic"];
+const TABS: Record<string, { name: string; render: React.ReactNode }> = {
+  character: {
+    name: "character",
+    render: <CharacterTab />,
+  },
+  relic: {
+    name: "relic",
+    render: <RelicTab />,
+  },
+};
 
 const EditCard = () => {
   const [activeTab, setActiveTab] = useState("character");
@@ -18,10 +28,10 @@ const EditCard = () => {
       <motion.div
         initial={{ opacity: 0, y: 5 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, type: "keyframes" }}
+        transition={{ delay: 0.8, type: "keyframes" }}
         className="flex relative"
       >
-        {TABS.map((item, index) => {
+        {Object.keys(TABS).map((item, index) => {
           const isActive = activeTab === item;
 
           return (
@@ -55,7 +65,7 @@ const EditCard = () => {
                   }}
                 >
                   {/* INVERTED ROUNDED FOR CHARACTER TAB */}
-                  {index < TABS.length - 1 && (
+                  {index < Object.keys(TABS).length - 1 && (
                     <div className="absolute -right-5 bottom-0 w-5 h-5 overflow-hidden pointer-events-none">
                       <div className="absolute top-0 left-0 w-5 h-5 rounded-bl-xl shadow-[-10px_10px_0_10px_rgba(255,255,255,0.1)]" />
                     </div>
@@ -78,7 +88,7 @@ const EditCard = () => {
       <div
         className={`p-4 bg-white/10 rounded-b-lg flex-1 flex gap-2 ${activeTab === "character" ? "rounded-tr-lg" : "rounded-tl-lg"} transition-all duration-200`}
       >
-        <CharacterTab />
+        {TABS[activeTab].render || <p>No component</p>}
       </div>
     </motion.div>
   );

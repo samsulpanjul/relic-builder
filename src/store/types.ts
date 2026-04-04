@@ -18,12 +18,12 @@ export type CharacterConfigStore = {
   rank: number;
   lightcone: LightconeConfigStore;
   relics: {
-    head: string | null;
-    hand: string | null;
-    body: string | null;
-    feet: string | null;
-    planar: string | null;
-    rope: string | null;
+    HEAD: string | null;
+    HAND: string | null;
+    BODY: string | null;
+    FOOT: string | null;
+    NECK: string | null;
+    OBJECT: string | null;
   };
   sp: number;
   use_technique: boolean;
@@ -41,6 +41,7 @@ export type LightconeConfigStore = {
 export type RelicSlice = {
   relics: Record<string, RelicConfigStore>;
   addRelic: (relic: RelicConfigStore) => void;
+  deleteRelic: (id: string) => void;
 };
 
 export type RelicConfigStore = {

@@ -11,11 +11,11 @@ export interface CharacterDetails {
   max_sp: number;
   max_sp_enhanced: number | null;
   ranks: Record<string, CharacterRank>;
-  ranks_enhanced: Record<string, any>;
+  ranks_enhanced: Record<string, CharacterRank>;
   skills: Record<string, CharacterSkill>;
-  skills_enhanced: Record<string, any>;
+  skills_enhanced: Record<string, CharacterSkill>;
   skill_trees: Record<string, SkillTreePoint>;
-  skill_trees_enhanced: Record<string, any>;
+  skill_trees_enhanced: Record<string, SkillTreePoint>;
   promotions: Record<string, PromotionStats>;
   technique_buff: Array<{ id: number }>;
   icon: string;
@@ -43,14 +43,14 @@ export interface CharacterSkill {
   max_level: number;
   element: string;
   type: string;
-  type_text: number;
+  type_text: string;
   effect: string;
-  effect_text: number;
-  simple_desc: number;
+  effect_text: string;
+  simple_desc: string;
   params: Array<number[]>;
   icon: string;
-  desc: number;
-  name: number;
+  desc: string;
+  name: string;
   toughness: number;
   ability_cost: number;
   energy_cost: number;
@@ -59,7 +59,7 @@ export interface CharacterSkill {
 
 export interface SkillTreePoint {
   id: number;
-  name: number;
+  name: string;
   max_level: number;
   anchor: string;
   pre_points: number[];
@@ -69,11 +69,20 @@ export interface SkillTreePoint {
     type: string;
     value: number;
   }>;
-  servants: any | null;
+  servants: Record<string, ServantsTreePoint> | null;
   icon: string;
-  desc: number;
-  params: Array<any[]>;
+  desc: string;
+  params: Array<number[]>;
   enhanced_id: number | null;
+}
+
+export interface ServantsTreePoint {
+  name: string;
+  desc: string;
+  icon: string;
+  id: number;
+  params: Array<number[]>;
+  tag: string;
 }
 
 export interface StatDetail {

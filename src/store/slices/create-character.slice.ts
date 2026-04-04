@@ -25,30 +25,44 @@ export const createCharacterSlice: StateCreator<
     }),
 
   equipRelic: (charId, relicId, slot) =>
-    set((state) => ({
-      characters: {
-        ...state.characters,
-        [charId]: {
-          ...state.characters[charId],
-          relics: {
-            ...state.characters[charId].relics,
-            [slot]: relicId,
+    set((state) => {
+      const currentData = state.characters[charId] ?? {
+        ...DEFAULT_CHAR_CONFIG,
+        id: charId,
+      };
+
+      return {
+        characters: {
+          ...state.characters,
+          [charId]: {
+            ...currentData,
+            relics: {
+              ...currentData.relics,
+              [slot]: relicId,
+            },
           },
         },
-      },
-    })),
+      };
+    }),
 
   unequipRelic: (charId, slot) =>
-    set((state) => ({
-      characters: {
-        ...state.characters,
-        [charId]: {
-          ...state.characters[charId],
-          relics: {
-            ...state.characters[charId].relics,
-            [slot]: null,
+    set((state) => {
+      const currentData = state.characters[charId] ?? {
+        ...DEFAULT_CHAR_CONFIG,
+        id: charId,
+      };
+
+      return {
+        characters: {
+          ...state.characters,
+          [charId]: {
+            ...currentData,
+            relics: {
+              ...currentData.relics,
+              [slot]: null,
+            },
           },
         },
-      },
-    })),
+      };
+    }),
 });

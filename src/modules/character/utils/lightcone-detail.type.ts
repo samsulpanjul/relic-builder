@@ -9,12 +9,17 @@ interface PromotionStats {
   def: StatValue;
 }
 
+interface PropertiesRank {
+  type: string;
+  value: number;
+}
+
 interface RankData {
   id: number;
   skill: string;
   desc: string;
   params: Array<number[]>;
-  properties: any[][];
+  properties: Array<PropertiesRank[]>;
 }
 
 export interface LightconeDetails {
