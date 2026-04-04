@@ -135,6 +135,7 @@ const SubAffixCreateRelic = ({ mainAffixProperty }: Props) => {
             <React.Fragment key={i}>
               {i !== 0 && <div className="h-px bg-primary" />}
               <div className="flex items-center justify-between">
+                {/* SELECT */}
                 <div>
                   <div className="flex items-center gap-1">
                     <Select
@@ -188,12 +189,13 @@ const SubAffixCreateRelic = ({ mainAffixProperty }: Props) => {
                     Roll: {currentCount}
                   </p>
                 </div>
+
                 <div className="flex flex-col items-end gap-1">
                   {currentSubAffixData && (
                     <p>
                       {isPercent(currentSubAffixData!.Property)
                         ? `${(totalValue * 100).toFixed(1)}%`
-                        : totalValue.toFixed(0)}
+                        : totalValue.toFixed(1)}
                     </p>
                   )}
                   {relic.sub_affixes[i].sub_affix_id && (

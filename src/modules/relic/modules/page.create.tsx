@@ -50,7 +50,7 @@ const CreateRelicPage = () => {
   }, [currentMainAffixData, relic.main_affix_id]);
 
   return (
-    <div className="card grid grid-cols-2 gap-8">
+    <div className="wrapper card grid grid-cols-2 gap-8">
       <div className="space-y-4">
         <p className="text-xl font-semibold">Relic Set</p>
         <div className="flex gap-4">

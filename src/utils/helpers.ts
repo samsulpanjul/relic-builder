@@ -23,13 +23,14 @@ export const calculateSubAffixValue = (
   steps: number[] | number,
   count: number,
 ) => {
-  let totalStep = 0;
-  if (typeof steps !== "number") {
-    totalStep = steps.reduce((prev, curr) => prev + curr, 0);
-  } else {
-    totalStep = steps;
+  if (typeof steps === "number") {
+    return baseValue * count + steps * stepValue;
   }
 
-  const oneRoll = baseValue + totalStep * stepValue;
-  return oneRoll * count;
+  const total = steps.reduce((acc, stepQuality) => {
+    const rollValue = baseValue + stepQuality * stepValue;
+    return acc + rollValue;
+  }, 0);
+
+  return total;
 };
