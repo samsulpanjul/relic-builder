@@ -184,6 +184,19 @@ export const useCalculateStats = (
 const mapPropertyToStats = (prop: string, val: number, stats: any) => {
   if (!prop) return;
 
+  const normalizeKey = (p: string) => {
+    const key = p
+      .replace("AddedRatio", "")
+      .replace("Delta", "")
+      .replace("Base", "")
+      .toLowerCase();
+
+    if (key === "attack") return "atk";
+    if (key === "defence") return "def";
+    if (key === "speed") return "spd";
+    return key;
+  };
+
   // --- 1. HANDLE SPEED (FLAT & PERCENT) ---
   if (prop === "SpeedDelta") {
     stats.totals.spd += val; // Stat flat (+25, +4.6, etc)
@@ -219,10 +232,7 @@ const mapPropertyToStats = (prop: string, val: number, stats: any) => {
     }
 
     // HP%, ATK%, DEF%
-    const key = prop
-      .replace("AddedRatio", "")
-      .replace("Base", "")
-      .toLowerCase();
+    const key = normalizeKey(prop);
     if (stats.ratios[key] !== undefined) {
       stats.ratios[key] += val;
     }
@@ -230,7 +240,7 @@ const mapPropertyToStats = (prop: string, val: number, stats: any) => {
 
   // --- 3. HANDLE FLAT STATS (Delta) ---
   else if (prop.includes("Delta")) {
-    const key = prop.replace("Delta", "").toLowerCase();
+    const key = normalizeKey(prop);
     if (stats.totals[key] !== undefined) {
       stats.totals[key] += val;
     }
