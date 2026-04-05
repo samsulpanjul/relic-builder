@@ -84,7 +84,7 @@ const RelicShowcase = () => {
 
             return (
               <Tooltip
-                containerClassName="hover:bg-primary/25 p-2 rounded-md w-fit"
+                containerClassName="hover:bg-primary/25 p-2 rounded-md"
                 key={idx}
                 content={
                   <div className="space-y-2">

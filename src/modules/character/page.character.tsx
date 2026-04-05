@@ -21,6 +21,7 @@ import EidolonShowcase from "./components/showcase/eidolon.showcase";
 
 const CharacterPage = () => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const charData = useCharacterStore((state) => state.charData);
 
   const saveImage = async () => {
     const node = document.getElementById("card");
@@ -37,7 +38,7 @@ const CharacterPage = () => {
       });
 
       const link = document.createElement("a");
-      link.download = `hsr-build-${Date.now()}.png`;
+      link.download = `${charData?.name}.png`;
       link.href = dataUrl;
       link.click();
 
