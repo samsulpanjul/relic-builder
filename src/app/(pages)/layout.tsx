@@ -26,6 +26,9 @@ const chivo = Chivo({
 export const metadata: Metadata = {
   title: "Relic Builder",
   description: "Relic builder cihuyy",
+  icons: {
+    icon: "/1001.webp",
+  },
 };
 
 export default function RootLayout({
