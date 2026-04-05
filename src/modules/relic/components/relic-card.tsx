@@ -40,7 +40,7 @@ const RelicCard = ({
   return (
     <div
       className={cn(
-        "rounded-xl h-full overflow-hidden flex flex-col relative group transition-all duration-200",
+        "rounded-xl h-full overflow-hidden flex flex-col relative group transition-all duration-200 text-foreground",
         onClick && "cursor-pointer hover:ring-1 ring-secondary",
         className,
       )}
@@ -64,7 +64,7 @@ const RelicCard = ({
           alt={relicData.name ?? "Relic"}
           className="drop-shadow-md"
         />
-        <p className="text-[10px] font-bold text-center leading-tight mt-2 line-clamp-1 tracking-wide opacity-70">
+        <p className="text-[10px] font-bold text-center leading-tight mt-2 line-clamp-1 tracking-wide">
           {relicData?.name}
         </p>
       </div>
@@ -73,7 +73,7 @@ const RelicCard = ({
       <div className="p-3 space-y-3 bg-background/75 flex-1 flex flex-col justify-between">
         {/* Main Stat */}
         <div className="flex justify-between items-center pb-2 gap-2">
-          <span className="text-[11px] font-medium text-muted-foreground uppercase line-clamp-2">
+          <span className="text-[11px] font-medium uppercase line-clamp-2">
             {statProperties?.[mainProp]?.name}
           </span>
           <span className="text-base font-bold text-secondary">
@@ -101,7 +101,7 @@ const RelicCard = ({
                 key={idx}
                 className="flex justify-between items-center text-[10px]"
               >
-                <div className="flex items-center gap-1 text-muted-foreground">
+                <div className="flex items-center gap-1">
                   <span className="shrink-0">
                     {statProperties?.[subData.Property]?.name}
                   </span>

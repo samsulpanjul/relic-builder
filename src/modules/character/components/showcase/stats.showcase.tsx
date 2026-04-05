@@ -81,7 +81,7 @@ const StatsShowcase = () => {
         raw: stats.heal_boost,
       },
       {
-        name: "Elation DMG Boost",
+        name: "Elation",
         val: (stats.elation_dmg * 100).toFixed(1) + "%",
         raw: stats.elation_dmg,
       },
@@ -99,9 +99,7 @@ const StatsShowcase = () => {
           key={item.name}
           className="flex justify-between text-xs items-center border-b border-white/5 pb-1"
         >
-          <p className="font-semibold text-muted-foreground tracking-wide">
-            {item.name}
-          </p>
+          <p className="font-semibold tracking-wide">{item.name}</p>
           <p className="font-bold text-secondary">{item.val}</p>
         </div>
       ))}

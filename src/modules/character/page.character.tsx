@@ -1,11 +1,11 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useCharacters } from "./hooks/use-characters.hook";
 import Image from "next/image";
 import { Button } from "@/src/components/ui/button";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import PathIcon from "@/src/components/icons/path.icon";
 import ElementIcon from "@/src/components/icons/element.icon";
 import EditCard from "./components/edit-card.character";
@@ -15,8 +15,39 @@ import { useParsedDesc } from "@/src/hooks/use-parsed-desc.hook";
 import ShowcaseCard from "./components/showcase-card.character";
 import { useUserStore } from "@/src/store/use-user.store";
 import { DEFAULT_CHAR_CONFIG } from "@/src/utils/constants";
+import { toast } from "sonner";
+import { domToPng } from "modern-screenshot";
+import EidolonShowcase from "./components/showcase/eidolon.showcase";
 
 const CharacterPage = () => {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const saveImage = async () => {
+    const node = document.getElementById("card");
+    if (!node) return;
+
+    const toastId = toast.loading("Generating image...");
+
+    try {
+      const dataUrl = await domToPng(node, {
+        scale: 2,
+        filter: (domNode: any) => {
+          return !domNode.classList?.contains("z-51");
+        },
+      });
+
+      const link = document.createElement("a");
+      link.download = `hsr-build-${Date.now()}.png`;
+      link.href = dataUrl;
+      link.click();
+
+      toast.success("Image saved!", { id: toastId });
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to generate image", { id: toastId });
+    }
+  };
+
   const params = useParams();
   const id = params.id as string;
   const { data: allCharacters, isPending } = useCharacters();
@@ -50,18 +81,41 @@ const CharacterPage = () => {
   if (isPending || !char) {
     return;
   }
-  console.log(charConfig);
 
   return (
-    <div className="wrapper my-8 pb-16">
+    <div className="wrapper my-8" id="card" ref={cardRef}>
       <div className="rounded-xl h-170 flex relative">
-        <Button
-          className="absolute top-2 left-2 z-51"
-          onClick={() => setIsEdit((prev) => !prev)}
-          size={"lg"}
-        >
-          {isEdit ? "Close" : "Edit"}
-        </Button>
+        <div className="flex gap-4 absolute top-2 left-2 z-51">
+          <Button onClick={() => setIsEdit((prev) => !prev)} size={"lg"}>
+            {isEdit ? "Close" : "Edit"}
+          </Button>
+          {!isEdit && (
+            <Button onClick={saveImage} size={"lg"}>
+              Save Image
+            </Button>
+          )}
+        </div>
+
+        {/* BACKDROP BLUR CARD */}
+        <div className="absolute inset-0 -z-20 overflow-hidden rounded-xl bg-background">
+          <div className="absolute inset-0 bg-primary/25 z-10" />
+
+          <div className="absolute inset-0 scale-110">
+            <Image
+              src={char?.portrait ?? ""}
+              alt="bg"
+              fill
+              className="object-cover opacity-50"
+              style={{ filter: "blur(0px)" }}
+            />
+          </div>
+
+          <div className="absolute inset-0 bg-linear-to-br from-black/10 via-transparent to-black/75 z-20" />
+        </div>
+
+        <AnimatePresence>
+          {!isEdit && <EidolonShowcase key="eidolon-layer" />}
+        </AnimatePresence>
 
         {/* LEFT IMAGE */}
         <div className="w-72 h-full overflow-hidden rounded-xl p-4 relative z-10">

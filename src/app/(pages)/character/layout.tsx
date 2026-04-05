@@ -6,7 +6,7 @@ export default function CharacterLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main>
+    <main className="pb-8">
       <CharacterNavbar />
 
       {children}

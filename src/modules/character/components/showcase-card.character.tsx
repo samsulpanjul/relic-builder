@@ -1,5 +1,4 @@
 import LightconeShowcase from "./showcase/lightcone.showcase";
-import EidolonShowcase from "./showcase/eidolon.showcase";
 import SkillsShowcase from "./showcase/skills.showcase";
 import RelicShowcase from "./showcase/relic.showcase";
 import StatsShowcase from "./showcase/stats.showcase";
@@ -36,7 +35,7 @@ const ShowcaseCard = () => {
       exit="exit"
     >
       {/* RANK/EIDOLON */}
-      <EidolonShowcase />
+      {/* <EidolonShowcase /> */}
 
       {/* STAT & LIGHTCONE */}
       <div className="flex flex-col gap-4 justify-between">

@@ -49,11 +49,11 @@ const LightconeShowcase = () => {
             }
           >
             <Image
-              width={84}
-              height={84}
+              width={256}
+              height={256}
               src={lightconeData.icon}
               alt={String(lightconeData.name) ?? "Lightcone"}
-              className="-rotate-12"
+              className="-rotate-12 w-16"
             />
           </Tooltip>
 
@@ -65,9 +65,7 @@ const LightconeShowcase = () => {
 
             <div className="flex items-center gap-3">
               <div className="flex flex-col">
-                <span className="text-[10px] text-muted-foreground uppercase font-medium">
-                  Level
-                </span>
+                <span className="text-[10px] uppercase font-medium">Level</span>
                 <span className="font-bold">
                   Lv. {charConfig.lightcone.level}
                 </span>
@@ -76,10 +74,10 @@ const LightconeShowcase = () => {
               <Separator orientation="vertical" className="h-8 bg-white/10" />
 
               <div className="flex flex-col">
-                <span className="text-[10px] text-muted-foreground uppercase font-medium">
+                <span className="text-[10px] uppercase font-medium">
                   Superimpose
                 </span>
-                <span className="font-bold text-secondary leading-none">
+                <span className="font-bold text-secondary">
                   S{charConfig.lightcone.rank}
                 </span>
               </div>
@@ -88,7 +86,7 @@ const LightconeShowcase = () => {
         </div>
       ) : (
         <div className="h-24 flex justify-center items-center">
-          <p className="text-xs italic text-muted-foreground">no lightcone.</p>
+          <p className="text-xs italic">no lightcone.</p>
         </div>
       )}
     </>

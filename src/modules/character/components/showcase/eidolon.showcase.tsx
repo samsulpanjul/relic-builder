@@ -51,7 +51,7 @@ const EidolonShowcase = () => {
 
   return (
     <motion.div
-      className="flex flex-col absolute -top-12 -left-16 gap-2 items-center"
+      className="flex flex-col absolute top-2 left-56 gap-2 items-center z-30"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
