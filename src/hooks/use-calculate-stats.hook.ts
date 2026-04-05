@@ -215,6 +215,11 @@ const mapPropertyToStats = (prop: string, val: number, stats: any) => {
       return;
     }
 
+    if (prop.includes("ElationDamage")) {
+      stats.totals.elation_dmg += val;
+      return;
+    }
+
     // Ele DMG
     const elements = [
       "Physical",
