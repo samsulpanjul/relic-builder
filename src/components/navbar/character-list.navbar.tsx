@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+import { ScrollArea } from "../ui/scroll-area";
 import { useCharacters } from "@/src/modules/character/hooks/use-characters.hook";
 import Image from "next/image";
 import {
@@ -13,7 +13,7 @@ import {
 } from "../ui/sheet";
 import { Search } from "lucide-react";
 import { Input } from "../ui/input";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParsedDesc } from "@/src/hooks/use-parsed-desc.hook";
 
 const CharacterNavbar = () => {
@@ -22,12 +22,24 @@ const CharacterNavbar = () => {
   const { data } = useCharacters();
   const dataCharacter = Object.values(data ?? {}).reverse();
   const parseDesc = useParsedDesc();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    };
+
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, []);
 
   const filteredData = useMemo(() => {
     if (!dataCharacter) return;
-
     if (!search) return dataCharacter;
-
     return dataCharacter.filter((char) => {
       return char.name.toLowerCase().includes(search.toLowerCase());
     });
@@ -77,14 +89,12 @@ const CharacterNavbar = () => {
                         <div
                           className={`absolute top-0 right-0 w-2 h-2 rounded-full group-hover:animate-pulse`}
                         />
-
                         <Image
                           width={128}
                           height={128}
                           src={item.icon}
                           alt={item.tag}
                         />
-
                         <div className="absolute inset-x-0 p-2 bottom-0 flex flex-col items-center justify-end">
                           <p
                             className="text-xs font-semibold uppercase tracking-wider transition-colors group-hover:text-foreground text-center line-clamp-2"
@@ -101,14 +111,17 @@ const CharacterNavbar = () => {
           </div>
         </SheetContent>
       </Sheet>
-      <ScrollArea className="w-full pr-14">
+      <div
+        ref={scrollRef}
+        className="w-full pr-14 overflow-x-auto character-scroll"
+      >
         <div className="flex gap-4 w-max p-4">
           {dataCharacter?.map((item) => {
             return (
               <Link
                 href={`/character/${item.id}`}
                 key={item.id}
-                className={`rounded-full border-2 border-secondary overflow-hidden size-16 bg-white/5 hover:bg-white/50 transition-colors duration-300 p-px`}
+                className="rounded-full border-2 border-secondary overflow-hidden size-16 bg-white/5 hover:bg-white/50 transition-colors duration-300 p-px"
               >
                 <Image
                   width={128}
@@ -120,8 +133,7 @@ const CharacterNavbar = () => {
             );
           })}
         </div>
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
+      </div>
     </div>
   );
 };
