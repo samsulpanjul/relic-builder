@@ -68,10 +68,10 @@ const RelicList = ({
             <Button
               key={type}
               onClick={() => setSelectedType(type)}
-              className={`px-4 py-2 rounded-lg transition-all capitalize ${
+              className={`px-4 py-2 rounded-lg transition-all capitalize text-foreground ${
                 selectedType === type
-                  ? "bg-background text-background-foreground shadow-md"
-                  : "bg-primary text-primary-foreground hover:bg-primary"
+                  ? "bg-background shadow-md"
+                  : "bg-primary hover:bg-primary"
               }`}
             >
               {type === "all" ? (
