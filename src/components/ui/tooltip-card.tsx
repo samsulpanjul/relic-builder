@@ -9,11 +9,13 @@ export const Tooltip = ({
   children,
   containerClassName,
   onClick,
+  contentClassName,
 }: {
   content: string | React.ReactNode;
   children: React.ReactNode;
   containerClassName?: string;
   onClick?: () => void;
+  contentClassName?: string;
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [mouse, setMouse] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -176,7 +178,10 @@ export const Tooltip = ({
                   stiffness: 200,
                   damping: 20,
                 }}
-                className="pointer-events-none fixed z-9999 min-w-[25rem] max-w-sm overflow-hidden rounded-md border border-transparent bg-white shadow-sm ring-1 shadow-black/5 ring-black/5 dark:bg-neutral-900 dark:shadow-white/10 dark:ring-white/5"
+                className={cn(
+                  "pointer-events-none fixed z-9999 min-w-[25rem] max-w-sm overflow-hidden rounded-md border border-transparent bg-white shadow-sm ring-1 shadow-black/5 ring-black/5 dark:bg-neutral-900 dark:shadow-white/10 dark:ring-white/5",
+                  contentClassName,
+                )}
                 style={{
                   top: position.y,
                   left: position.x,

@@ -1,5 +1,10 @@
 import { StateCreator } from "zustand";
-import { CharacterSlice, UserStore } from "../types";
+import {
+  CharacterConfigStore,
+  CharacterSlice,
+  RelicConfigStore,
+  UserStore,
+} from "../types";
 import { DEFAULT_CHAR_CONFIG } from "@/src/utils/constants";
 
 export const createCharacterSlice: StateCreator<
@@ -65,4 +70,13 @@ export const createCharacterSlice: StateCreator<
         },
       };
     }),
+
+  addImportedData: (
+    newRelics: Record<string, RelicConfigStore>,
+    newCharacters: Record<number, CharacterConfigStore>,
+  ) =>
+    set((state) => ({
+      relics: { ...state.relics, ...newRelics },
+      characters: { ...state.characters, ...newCharacters },
+    })),
 });

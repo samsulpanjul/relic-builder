@@ -4,6 +4,7 @@ export const BASE_URL = {
   enka: "/api/enka",
   neonteam: "/api/neonteam",
   internal: "/api",
+  mihomo: "/api/mihomo",
 } as const;
 
 export const PATHS = [

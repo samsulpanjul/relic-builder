@@ -9,6 +9,10 @@ export type CharacterSlice = {
   ) => void;
   equipRelic: (charId: number, relicId: string, slot: string) => void;
   unequipRelic: (charId: number, slot: string) => void;
+  addImportedData: (
+    newRelics: Record<string, RelicConfigStore>,
+    newCharacters: Record<number, CharacterConfigStore>,
+  ) => void;
 };
 
 export type CharacterConfigStore = {

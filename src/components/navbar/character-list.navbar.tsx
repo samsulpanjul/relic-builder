@@ -35,9 +35,15 @@ const CharacterNavbar = () => {
 
   return (
     <div className="wrapper flex gap-4 items-center overflow-hidden">
-      <Sheet open={open} onOpenChange={setOpen}>
+      <Sheet
+        open={open}
+        onOpenChange={(val) => {
+          setOpen(val);
+          setSearch("");
+        }}
+      >
         <SheetTrigger asChild>
-          <button className="flex flex-col items-center justify-center size-16 rounded-full border-2 border-dashed border-secondary hover:border-primary hover:bg-white/10 transition-all shrink-0">
+          <button className="flex py-2 flex-col items-center justify-center size-16 rounded-full border-2 border-dashed border-secondary hover:border-primary hover:bg-white/10 transition-all shrink-0">
             <Search size={24} />
             <span className="text-[10px] uppercase font-bold">Search</span>
           </button>

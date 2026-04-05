@@ -50,6 +50,7 @@ const CharacterPage = () => {
   if (isPending || !char) {
     return;
   }
+  console.log(charConfig);
 
   return (
     <div className="wrapper my-8 pb-16">
