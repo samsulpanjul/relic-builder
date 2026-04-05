@@ -249,7 +249,7 @@ const ReversedRoom = () => {
                             >
                               <img
                                 src={`https://cdn.neonteam.dev/neonteam/assets/spriteoutput/relicfigures/IconRelic_${decodedRelic.relic_set_id}_${REVERSE_SLOT_MAP[decodedRelic.type]}.webp`}
-                                alt={decodedRelic.relic_id}
+                                alt={decodedRelic.relic_id.toString()}
                                 className="size-8"
                               />
                             </Tooltip>
