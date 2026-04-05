@@ -10,6 +10,11 @@ export const getRelics = async () => {
 
   const res = await fetch(
     `${env.NEONTEAM_BASE_URL}/${metadata.CurrentVersion}/relics.json`,
+    {
+      next: {
+        revalidate: 60 * 60,
+      },
+    },
   );
 
   const data: Record<string, any> = await res.json();

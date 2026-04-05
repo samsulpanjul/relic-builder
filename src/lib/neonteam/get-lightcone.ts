@@ -11,6 +11,11 @@ export const getLightcones = async () => {
 
   const res = await fetch(
     `${env.NEONTEAM_BASE_URL}/${metadata.CurrentVersion}/lightcones.json`,
+    {
+      next: {
+        revalidate: 60 * 60,
+      },
+    },
   );
 
   const data: LightconeRawDataList = await res.json();

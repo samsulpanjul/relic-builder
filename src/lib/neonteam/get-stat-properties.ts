@@ -10,6 +10,11 @@ export const getStatProperties = async () => {
 
   const res = await fetch(
     `${env.NEONTEAM_BASE_URL}/${metadata.CurrentVersion}/stat-properties.json`,
+    {
+      next: {
+        revalidate: 60 * 60,
+      },
+    },
   );
 
   const data: Record<string, any> = await res.json();
