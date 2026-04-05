@@ -3,6 +3,7 @@ import { Chivo, Didact_Gothic, Heebo } from "next/font/google";
 import "./globals.css";
 import Providers from "../../providers/providers";
 import MenuNavbar from "@/src/components/navbar/menu.navbar";
+import { Analytics } from "@vercel/analytics/next";
 
 const heebo = Heebo({
   variable: "--font-heebo",
@@ -46,6 +47,7 @@ export default function RootLayout({
           <MenuNavbar />
           {children}
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
