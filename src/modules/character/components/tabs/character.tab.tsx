@@ -15,6 +15,7 @@ import { useMemo } from "react";
 
 const CharacterTab = () => {
   const id = useCharacterStore((state) => state.id);
+  const isTingyun = id === '1202'
   const charData = useCharacterStore((state) => state.charData);
   const { data: allLightcones, isPending } = useLightcones();
   const parsedDesc = useParsedDesc();
@@ -64,7 +65,8 @@ const CharacterTab = () => {
                 <InputNumber
                   id="energy"
                   className="w-16 border-secondary"
-                  value={charConfig.sp}
+                  value={isTingyun ? 90 : charConfig.sp}
+                  disabled = {isTingyun}
                   onChange={(val) => {
                     updateChar(Number(id), {
                       sp: val,
@@ -76,7 +78,8 @@ const CharacterTab = () => {
             <Slider
               min={0}
               max={100}
-              value={[charConfig.sp]}
+              value={[isTingyun ? 90 : charConfig.sp]}
+              disabled = {isTingyun}
               onValueChange={([val]) => {
                 updateChar(Number(id), { sp: val });
               }}
@@ -90,6 +93,7 @@ const CharacterTab = () => {
               id="use-technique"
               className="bg-foreground"
               checked={charConfig.use_technique}
+              disabled = {isTingyun}
               onCheckedChange={(val) => {
                 updateChar(Number(id), { use_technique: !!val });
               }}
