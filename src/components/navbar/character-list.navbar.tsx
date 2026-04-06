@@ -83,6 +83,7 @@ const CharacterNavbar = () => {
                       <Link
                         onClick={() => setOpen(false)}
                         href={`/character/${item.id}`}
+                        prefetch={false}
                         key={item.id}
                         className="group relative flex flex-col items-center justify-end rounded-xl border border-secondary/50 bg-white/5 transition-all hover:border-primary hover:bg-white/15 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] overflow-hidden"
                       >
@@ -121,6 +122,7 @@ const CharacterNavbar = () => {
               <Link
                 href={`/character/${item.id}`}
                 key={item.id}
+                prefetch={false}
                 className="rounded-full border-2 border-secondary overflow-hidden size-16 bg-white/5 hover:bg-white/50 transition-colors duration-300 p-px"
               >
                 <Image
