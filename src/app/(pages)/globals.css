@@ -138,3 +138,19 @@
 @utility card {
   @apply p-4 rounded-xl bg-background/50 backdrop-blur-lg;
 }
+.character-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.character-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.character-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+}
+
+.character-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
