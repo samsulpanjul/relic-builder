@@ -17,6 +17,7 @@ export const generateConfigJson = (
   selectedCharConfigs: CharacterConfigStore[],
   allRelics: Record<string, RelicConfigStore>,
 ) => {
+  const tingyunId = 1202;
   const avatar_config = selectedCharConfigs
     .filter((char) => {
       const hasLightcone = char.lightcone && char.lightcone.id !== null;
@@ -32,11 +33,13 @@ export const generateConfigJson = (
           return formatRelicToString(relicData);
         });
 
+      const isTingyun = tingyunId === char.id;
+
       return {
-        name: getName(char.id), 
+        name: getName(char.id),
         id: char.id,
         hp: 100,
-        sp: char.sp || 50,
+        sp: isTingyun ? 90 : char.sp || 50,
         level: char.level,
         promotion: char.promotion,
         rank: char.rank,
@@ -47,7 +50,7 @@ export const generateConfigJson = (
           promotion: char.lightcone.promotion,
         },
         relics: relicStrings,
-        use_technique: char.use_technique || false,
+        use_technique: isTingyun ? false : char.use_technique,
       };
     });
 
