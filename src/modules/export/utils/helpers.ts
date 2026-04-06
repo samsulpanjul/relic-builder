@@ -1,4 +1,5 @@
 import { CharacterConfigStore, RelicConfigStore } from "@/src/store/types";
+import { getName } from "@/src/modules/character/store/character-names";
 
 export const formatRelicToString = (relic: RelicConfigStore) => {
   const base = `${relic.relic_id},${relic.level},${relic.main_affix_id},4`;
@@ -32,7 +33,7 @@ export const generateConfigJson = (
         });
 
       return {
-        name: char.id,
+        name: getName(char.id), 
         id: char.id,
         hp: 100,
         sp: char.sp || 50,
