@@ -15,7 +15,7 @@ import { useMemo } from "react";
 
 const CharacterTab = () => {
   const id = useCharacterStore((state) => state.id);
-  const isTingyun = id === '1202'
+  const isTingyun = id === "1202";
   const charData = useCharacterStore((state) => state.charData);
   const { data: allLightcones, isPending } = useLightcones();
   const parsedDesc = useParsedDesc();
@@ -66,7 +66,7 @@ const CharacterTab = () => {
                   id="energy"
                   className="w-16 border-secondary"
                   value={isTingyun ? 90 : charConfig.sp}
-                  disabled = {isTingyun}
+                  disabled={isTingyun}
                   onChange={(val) => {
                     updateChar(Number(id), {
                       sp: val,
@@ -79,7 +79,7 @@ const CharacterTab = () => {
               min={0}
               max={100}
               value={[isTingyun ? 90 : charConfig.sp]}
-              disabled = {isTingyun}
+              disabled={isTingyun}
               onValueChange={([val]) => {
                 updateChar(Number(id), { sp: val });
               }}
@@ -93,7 +93,7 @@ const CharacterTab = () => {
               id="use-technique"
               className="bg-foreground"
               checked={charConfig.use_technique}
-              disabled = {isTingyun}
+              disabled={isTingyun}
               onCheckedChange={(val) => {
                 updateChar(Number(id), { use_technique: !!val });
               }}
@@ -140,6 +140,7 @@ const CharacterTab = () => {
                       </div>
                     )}
                     <Image
+                      unoptimized
                       height={52}
                       width={52}
                       src={rank.icon}

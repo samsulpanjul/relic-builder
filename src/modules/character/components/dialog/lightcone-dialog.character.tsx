@@ -60,6 +60,7 @@ const LightconeDialog = () => {
         data?.[charConfig.lightcone.id]?.portrait ? (
           <>
             <Image
+              unoptimized
               width={200}
               height={200}
               src={data?.[charConfig.lightcone.id]?.portrait}

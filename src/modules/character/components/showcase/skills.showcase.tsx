@@ -223,6 +223,7 @@ const SkillsShowcase = () => {
                     )}
                   >
                     <Image
+                      unoptimized
                       src={mainSkill.icon}
                       alt={groupName}
                       width={24}
@@ -304,6 +305,7 @@ const NodeIcon = ({ node }: { node: SkillTreePoint }) => {
         )}
       >
         <Image
+          unoptimized
           src={node.icon}
           alt="trace"
           width={24}

@@ -58,6 +58,7 @@ const RelicCard = ({
       {/* Header */}
       <div className="p-3 flex bg-background/50 flex-col items-center shrink-0 relative">
         <Image
+          unoptimized
           width={64}
           height={64}
           src={relicData.icon}

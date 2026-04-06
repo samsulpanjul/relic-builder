@@ -88,6 +88,7 @@ const EidolonShowcase = () => {
                   </div>
                 )}
                 <Image
+                  unoptimized
                   height={52}
                   width={52}
                   src={rank.icon}

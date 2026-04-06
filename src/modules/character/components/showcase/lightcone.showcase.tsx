@@ -49,6 +49,7 @@ const LightconeShowcase = () => {
             }
           >
             <Image
+              unoptimized
               width={256}
               height={256}
               src={lightconeData.icon}

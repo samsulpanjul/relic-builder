@@ -163,6 +163,7 @@ const RelicTab = () => {
                   <div className="flex items-center gap-3 mb-1">
                     <div className="relative size-8 bg-background rounded-full border border-secondary p-1">
                       <Image
+                        unoptimized
                         src={set.setIcon}
                         alt={set.setName}
                         fill
