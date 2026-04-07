@@ -201,6 +201,7 @@ const LightconeDialog = () => {
 
                 {/* IMAGE LIGHTCONE */}
                 <Image
+                  unoptimized
                   width={200}
                   height={200}
                   src={item.portrait}

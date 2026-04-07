@@ -103,6 +103,7 @@ const CharacterPage = () => {
 
           <div className="absolute inset-0 scale-110">
             <Image
+              unoptimized
               src={char?.portrait ?? ""}
               alt="bg"
               fill
@@ -122,6 +123,7 @@ const CharacterPage = () => {
         <div className="w-72 h-full overflow-hidden rounded-xl p-4 relative z-10">
           <div className="bg-[url(/space.webp)] bg-cover bg-center size-full absolute left-0 top-0 -z-50 opacity-75" />
           <Image
+            unoptimized
             src={char?.portrait ?? ""}
             alt={String(char?.name) ?? ""}
             width={2048}
