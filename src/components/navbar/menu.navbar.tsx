@@ -21,6 +21,7 @@ const MenuNavbar = () => {
 
         return (
           <Link
+            prefetch={false}
             key={item.href}
             href={item.href}
             className={`relative px-6 py-2 text-sm font-medium transition-all duration-300 rounded-full outline-none

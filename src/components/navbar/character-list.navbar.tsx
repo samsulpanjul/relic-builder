@@ -91,6 +91,7 @@ const CharacterNavbar = () => {
                           className={`absolute top-0 right-0 w-2 h-2 rounded-full group-hover:animate-pulse`}
                         />
                         <Image
+                          unoptimized
                           width={128}
                           height={128}
                           src={item.icon}
@@ -126,6 +127,7 @@ const CharacterNavbar = () => {
                 className="rounded-full border-2 border-secondary overflow-hidden size-16 bg-white/5 hover:bg-white/50 transition-colors duration-300 p-px"
               >
                 <Image
+                  unoptimized
                   width={128}
                   height={128}
                   src={`https://fribbels.github.io/hsr-optimizer/assets/icon/avatar/${item.id}.webp`}
