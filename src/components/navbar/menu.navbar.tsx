@@ -9,6 +9,7 @@ const MENU_LIST = [
   { href: "/relic", label: "Relic" },
   { href: "/import", label: "Import" },
   { href: "/export", label: "Export" },
+  { href: "/database", label: "Database" },
 ];
 
 const MenuNavbar = () => {
@@ -38,13 +39,6 @@ const MenuNavbar = () => {
                 layoutId="active-pill"
                 className="absolute inset-0 bg-primary/20 border border-primary/30 rounded-full"
                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-              />
-            )}
-
-            {isActive && (
-              <motion.div
-                layoutId="active-dot"
-                className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full shadow-[0_0_8px_var(--color-primary)]"
               />
             )}
           </Link>

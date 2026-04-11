@@ -4,11 +4,16 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import Mihomo from "./components/mihomo.import";
 import ReversedRoom from "./components/reversedroom.import";
+import Hoyolab from "./components/hoyolab.import";
 
 const TABS: Record<string, { label: string; render: React.ReactNode }> = {
   mihomo: {
     label: "mihomo",
     render: <Mihomo />,
+  },
+  hoyolab: {
+    label: "Hoyolab",
+    render: <Hoyolab />,
   },
   rr: {
     label: "Reversed Rooms",

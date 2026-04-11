@@ -3,6 +3,7 @@ import { UserStore } from "./types";
 import { persist } from "zustand/middleware";
 import { createCharacterSlice } from "./slices/create-character.slice";
 import { createRelicSlice } from "./slices/create-relic.slice";
+import { runStoreMigrations } from "./store-migrations";
 
 export const useUserStore = create<UserStore>()(
   persist(
@@ -12,6 +13,10 @@ export const useUserStore = create<UserStore>()(
     }),
     {
       name: "relic-builder-config",
+      version: 1,
+      migrate: (persistedState: any) => {
+        return runStoreMigrations(persistedState);
+      },
     },
   ),
 );

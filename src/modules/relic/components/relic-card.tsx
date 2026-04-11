@@ -7,12 +7,15 @@ import { useGetMainAffixes } from "../hooks/use-get-main-affixes.hook";
 import { useGetSubAffixes } from "../hooks/use-get-sub-affixes.hook";
 import Image from "next/image";
 import { cn } from "@/src/lib/utils";
+import { Tooltip } from "@/src/components/ui/tooltip-card";
+import { memo } from "react";
 
 interface RelicCardProps {
   relic: RelicConfigStore;
   onClick?: () => void;
   className?: string;
   renderAction?: React.ReactNode;
+  showEquippedBy?: boolean;
 }
 
 const RelicCard = ({
@@ -20,6 +23,7 @@ const RelicCard = ({
   onClick,
   className,
   renderAction,
+  showEquippedBy = false,
 }: RelicCardProps) => {
   const { data: allRelicData } = useGetRelics();
   const { data: statProperties } = useGetStatProperties();
@@ -40,12 +44,56 @@ const RelicCard = ({
   return (
     <div
       className={cn(
-        "rounded-xl h-full overflow-hidden flex flex-col relative group transition-all duration-200 text-foreground",
+        "rounded-xl h-full overflow-hidden flex flex-col relative group will-change-transform duration-200 text-foreground",
         onClick && "cursor-pointer hover:ring-1 ring-secondary",
         className,
       )}
       onClick={onClick}
     >
+      {showEquippedBy && relic.equipped_by && relic.equipped_by.length > 0 && (
+        <Tooltip
+          contentClassName="bg-primary/50 backdrop-blur-sm min-w-fit"
+          content={
+            <div className="text-foreground space-y-2">
+              <p>Equipped</p>
+              <div className="flex gap-1 flex-wrap">
+                {relic.equipped_by.map((charId) => {
+                  return (
+                    <Image
+                      key={charId}
+                      unoptimized
+                      width={52}
+                      height={52}
+                      src={`https://fribbels.github.io/hsr-optimizer/assets/icon/avatar/${charId}.webp`}
+                      alt={charId.toString()}
+                      className="rounded-full border-2 border-secondary object-cover"
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          }
+        >
+          <div className="absolute top-2 left-2 z-10 -space-x-3 flex">
+            {relic.equipped_by.slice(0, 3).map((charId, idx) => (
+              <Image
+                key={idx}
+                unoptimized
+                width={32}
+                height={32}
+                src={`https://fribbels.github.io/hsr-optimizer/assets/icon/avatar/${charId}.webp`}
+                alt={charId.toString()}
+                className="rounded-full border-2 border-primary backdrop-blur-sm object-cover"
+              />
+            ))}
+            {relic.equipped_by.length > 3 && (
+              <div className="flex items-center justify-center size-8 rounded-full border-2 border-primary bg-muted text-[10px] font-bold z-10 text-muted-foreground">
+                +{relic.equipped_by.length - 3}
+              </div>
+            )}
+          </div>
+        </Tooltip>
+      )}
       {renderAction && (
         <div
           className="absolute top-2 right-2 z-10"
@@ -128,4 +176,4 @@ const RelicCard = ({
   );
 };
 
-export default RelicCard;
+export default memo(RelicCard);

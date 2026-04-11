@@ -1,7 +1,9 @@
 import { create } from "zustand";
 import { SubAffixData } from "../../types/affixes.type";
 
-type CreateRelicType = {
+export type CreateRelicType = {
+  id?: string;
+  equipped_by?: number[];
   relic_id?: number;
   relic_set_id?: number;
   type?: string;
@@ -27,6 +29,8 @@ interface CreateRelicStore {
 }
 
 export const DEFAULT_CREATE_RELIC: CreateRelicType = {
+  id: undefined,
+  equipped_by: [],
   relic_id: undefined,
   relic_set_id: undefined,
   type: undefined,

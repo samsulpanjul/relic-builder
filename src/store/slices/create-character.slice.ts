@@ -36,6 +36,29 @@ export const createCharacterSlice: StateCreator<
         id: charId,
       };
 
+      const oldRelicId =
+        currentData.relics[slot as keyof typeof currentData.relics];
+      const newRelics = { ...state.relics };
+
+      if (oldRelicId && oldRelicId !== relicId && newRelics[oldRelicId]) {
+        newRelics[oldRelicId] = {
+          ...newRelics[oldRelicId],
+          equipped_by: (newRelics[oldRelicId].equipped_by || []).filter(
+            (id) => id !== charId,
+          ),
+        };
+      }
+
+      if (relicId && newRelics[relicId]) {
+        const currentEquippedBy = newRelics[relicId].equipped_by || [];
+        if (!currentEquippedBy.includes(charId)) {
+          newRelics[relicId] = {
+            ...newRelics[relicId],
+            equipped_by: [...currentEquippedBy, charId],
+          };
+        }
+      }
+
       return {
         characters: {
           ...state.characters,
@@ -47,6 +70,7 @@ export const createCharacterSlice: StateCreator<
             },
           },
         },
+        relics: newRelics,
       };
     }),
 
@@ -56,6 +80,19 @@ export const createCharacterSlice: StateCreator<
         ...DEFAULT_CHAR_CONFIG,
         id: charId,
       };
+
+      const oldRelicId =
+        currentData.relics[slot as keyof typeof currentData.relics];
+      const newRelics = { ...state.relics };
+
+      if (oldRelicId && newRelics[oldRelicId]) {
+        newRelics[oldRelicId] = {
+          ...newRelics[oldRelicId],
+          equipped_by: (newRelics[oldRelicId].equipped_by || []).filter(
+            (id) => id !== charId,
+          ),
+        };
+      }
 
       return {
         characters: {
@@ -68,6 +105,7 @@ export const createCharacterSlice: StateCreator<
             },
           },
         },
+        relics: newRelics,
       };
     }),
 

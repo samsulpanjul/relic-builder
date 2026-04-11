@@ -19,6 +19,19 @@ export const createRelicSlice: StateCreator<UserStore, [], [], RelicSlice> = (
         },
       };
     }),
+
+  editRelic: (id, updatedRelic) =>
+    set((state) => ({
+      relics: {
+        ...state.relics,
+        [id]: {
+          ...state.relics[id],
+          ...updatedRelic,
+          id,
+        },
+      },
+    })),
+
   deleteRelic: (id) =>
     set((state) => {
       const newRelics = { ...state.relics };

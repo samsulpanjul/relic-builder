@@ -45,6 +45,7 @@ export type LightconeConfigStore = {
 export type RelicSlice = {
   relics: Record<string, RelicConfigStore>;
   addRelic: (relic: RelicConfigStore) => void;
+  editRelic: (id: string, updatedRelic: RelicConfigStore) => void;
   deleteRelic: (id: string) => void;
 };
 
@@ -60,4 +61,5 @@ export type RelicConfigStore = {
     count: number;
     step: number;
   }[];
+  equipped_by?: number[];
 };

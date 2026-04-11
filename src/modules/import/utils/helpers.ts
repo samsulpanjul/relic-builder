@@ -1,11 +1,19 @@
 import { CharacterConfigStore, RelicConfigStore } from "@/src/store/types";
 import {
+  HOYOLAB_TO_AFFIX_ID,
+  HOYOLAB_TO_BODY,
+  HOYOLAB_TO_FOOT,
+  HOYOLAB_TO_LINK,
+  HOYOLAB_TO_SPHERE,
+  HOYOLAB_TO_SUB_AFFIX_ID,
   MAIN_AFFIX_MAP,
   SLOT_MAP,
   STAT_TYPE_TO_ID,
   TYPE_TO_GROUP,
 } from "./constants";
 import { ResponseMihomo } from "../types/response-mihomo.type";
+import { ResponseHoyolab } from "../types/response-hoyolab.type";
+import { AllRelicsData } from "../../relic/types/all-relics.type";
 
 // MIHOMO
 export const mihomoToStoreParser = (mihomoData: ResponseMihomo) => {
@@ -43,6 +51,7 @@ export const mihomoToStoreParser = (mihomoData: ResponseMihomo) => {
         type: slotKey,
         level: 15,
         main_affix_id: mainAffixId,
+        equipped_by: [charId],
 
         sub_affixes: r.sub_affix.map((sub) => ({
           sub_affix_id: STAT_TYPE_TO_ID[sub.type] || 0,
@@ -131,6 +140,7 @@ export const importConfigJsonParser = (jsonData: any) => {
       relicSlots[decoded.type] = relicUid;
       newRelics[relicUid] = {
         id: relicUid,
+        equipped_by: [charId],
         ...decoded,
       };
     });
@@ -149,6 +159,98 @@ export const importConfigJsonParser = (jsonData: any) => {
       },
       relics: relicSlots,
       use_technique: char.use_technique,
+    };
+  });
+
+  return { newRelics, newCharacters };
+};
+
+// HOYOLAB
+export const hoyolabToStoreParser = (
+  data: ResponseHoyolab,
+  relicsData: AllRelicsData,
+) => {
+  const newRelics: Record<string, RelicConfigStore> = {};
+  const newCharacters: Record<number, CharacterConfigStore> = {};
+
+  data.data.avatar_list.forEach((char) => {
+    const charId = char.id;
+    const characterRelics: CharacterConfigStore["relics"] = {
+      HEAD: null,
+      HAND: null,
+      BODY: null,
+      FOOT: null,
+      NECK: null,
+      OBJECT: null,
+    };
+
+    const allRelics = [...(char.relics || []), ...(char.ornaments || [])];
+
+    allRelics.forEach((relic) => {
+      const relicData = relicsData[relic.id];
+
+      let mainAffix = 0;
+      const mainProperty = relic.main_property.property_type;
+
+      switch (relic.pos) {
+        case 3:
+          mainAffix = HOYOLAB_TO_BODY[mainProperty];
+          break;
+        case 4:
+          mainAffix = HOYOLAB_TO_FOOT[mainProperty];
+          break;
+        case 5:
+          mainAffix = HOYOLAB_TO_SPHERE[mainProperty];
+          break;
+        case 6:
+          mainAffix = HOYOLAB_TO_LINK[mainProperty];
+          break;
+        default:
+          mainAffix = HOYOLAB_TO_AFFIX_ID[mainProperty];
+          break;
+      }
+
+      const relicUid = crypto.randomUUID();
+      const slot = SLOT_MAP[relic.pos] as keyof CharacterConfigStore["relics"];
+
+      characterRelics[slot] = relicUid;
+
+      const subAffixesItem = relic.properties.map((sub) => {
+        return {
+          sub_affix_id: HOYOLAB_TO_SUB_AFFIX_ID[sub.property_type],
+          count: sub.times || 1,
+          step: sub.times || 1,
+        };
+      });
+
+      newRelics[relicUid] = {
+        id: relicUid,
+        relic_id: relic.id,
+        relic_set_id: Math.floor(relic.id / 10) % 1000,
+        level: 15,
+        main_affix_id: mainAffix,
+        sub_affixes: subAffixesItem,
+        type: relicData.type,
+        equipped_by: [charId],
+      };
+    });
+
+    newCharacters[charId] = {
+      id: charId,
+      level: char.level,
+      rank: char.rank,
+      promotion: 6,
+      lightcone: char.equip
+        ? {
+            id: char.equip.id,
+            level: char.equip.level,
+            rank: char.equip.rank,
+            promotion: 6,
+          }
+        : { id: null, level: 80, rank: 1, promotion: 6 },
+      relics: characterRelics,
+      sp: 50,
+      use_technique: false,
     };
   });
 

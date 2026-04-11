@@ -127,7 +127,6 @@ const RelicTab = () => {
 
                 <div className="flex-1 overflow-y-auto px-4">
                   <RelicList
-                    contentClassName="grid-cols-6"
                     emptyClassName="col-span-6"
                     withDelete={false}
                     onSelect={(relicId, type) => {

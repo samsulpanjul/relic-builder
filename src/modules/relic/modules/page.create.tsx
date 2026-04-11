@@ -2,11 +2,8 @@
 
 import { useGetRelicSets } from "../hooks/use-get-relic-sets.hook";
 import { useGetRelics } from "../hooks/use-get-relics.hook";
-import {
-  DEFAULT_CREATE_RELIC,
-  useCreateRelicStore,
-} from "./store/use-create-relic.store";
-import React, { useEffect, useMemo } from "react";
+import { useCreateRelicStore } from "./store/use-create-relic.store";
+import { useMemo } from "react";
 import { useParsedDesc } from "@/src/hooks/use-parsed-desc.hook";
 import { useGetMainAffixes } from "../hooks/use-get-main-affixes.hook";
 import TypeCreateRelic from "./components/type.create-relic";
@@ -16,14 +13,8 @@ import SubAffixCreateRelic from "./components/sub-affix.create-relic";
 
 const CreateRelicPage = () => {
   const relic = useCreateRelicStore((state) => state.relic);
-  const updateRelic = useCreateRelicStore((state) => state.updateRelic);
 
   const parsedDesc = useParsedDesc();
-
-  useEffect(() => {
-    updateRelic(DEFAULT_CREATE_RELIC);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   // DATA
   const { data: allRelics } = useGetRelics();
