@@ -9,6 +9,14 @@ import { useGetRelics } from "../../relic/hooks/use-get-relics.hook";
 import { Button } from "@/src/components/ui/button";
 import { useUserStore } from "@/src/store/use-user.store";
 import { toast } from "sonner";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/src/components/ui/dialog";
+import { VisuallyHidden } from "radix-ui";
+import { Info } from "lucide-react";
 
 const Hoyolab = () => {
   const [val, setVal] = useState("");
@@ -60,7 +68,35 @@ const Hoyolab = () => {
     <div>
       <div className="space-y-2">
         <div className="flex flex-col gap-2">
-          <h2 className="text-lg font-bold">Import from Hoyolab</h2>
+          <div className="flex gap-1 items-center">
+            <h2 className="text-lg font-bold">Import from Hoyolab</h2>
+            <Dialog>
+              <Tooltip contentClassName="min-w-fit" content={<p>Tutorial</p>}>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="size-6 rounded-full"
+                  >
+                    <Info size={14} className="text-secondary" />
+                  </Button>
+                </DialogTrigger>
+              </Tooltip>
+              <DialogContent
+                showCloseButton={false}
+                className="p-0 overflow-hidden bg-black"
+              >
+                <VisuallyHidden.Root>
+                  <DialogTitle>Tutorial Import</DialogTitle>
+                </VisuallyHidden.Root>
+                <video
+                  src="/tutor.webm"
+                  controls
+                  className="w-full h-full"
+                ></video>
+              </DialogContent>
+            </Dialog>
+          </div>
           <p className="text-sm">
             Note: Sub-stat values may vary slightly from in-game stats. All
             upgrades are estimated using average (mid) rolls.
