@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { getMainAffixes } from "@/src/lib/neonteam/get-main-affixes";
 import { NextResponse } from "next/server";
 

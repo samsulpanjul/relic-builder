@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { client } from "@/src/lib/starrail";
 import { JSONParse } from "@/src/utils/helpers";
 import { NextResponse } from "next/server";

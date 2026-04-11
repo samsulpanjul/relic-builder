@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { getRelics } from "@/src/lib/neonteam/get-relics";
 import { NextResponse } from "next/server";
 

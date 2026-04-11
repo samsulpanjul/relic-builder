@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import subAffixes from "@/cache/data/RelicSubAffixConfig.json";
 import { NextResponse } from "next/server";
 

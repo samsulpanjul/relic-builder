@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { getLightcones } from "@/src/lib/neonteam/get-lightcone";
 import { NextResponse } from "next/server";
 

@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { getCharacters } from "@/src/lib/neonteam/get-character";
 import { NextResponse } from "next/server";
 

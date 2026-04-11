@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { getStatProperties } from "@/src/lib/neonteam/get-stat-properties";
 import { NextResponse } from "next/server";
 

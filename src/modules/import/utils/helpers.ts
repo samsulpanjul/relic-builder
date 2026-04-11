@@ -37,7 +37,7 @@ export const mihomoToStoreParser = (mihomoData: ResponseMihomo) => {
       const slotKey = SLOT_MAP[r.type] as keyof CharacterConfigStore["relics"];
       if (!slotKey) return;
 
-      const relicUid = `mihomo_${r.id}_${Math.random().toString(36).substr(2, 4)}`;
+      const relicUid = `mihomo-${crypto.randomUUID()}-${r.id}`;
       relicSlots[slotKey] = relicUid;
       const groupID = TYPE_TO_GROUP[r.type];
       const affixName = r.main_affix.type;
@@ -135,7 +135,7 @@ export const importConfigJsonParser = (jsonData: any) => {
 
     char.relics.forEach((relicStr: string) => {
       const decoded = decodeRelicString(relicStr);
-      const relicUid = `exported_${decoded.relic_id}_${Math.random().toString(36).substr(2, 5)}`;
+      const relicUid = `exported-${crypto.randomUUID()}-${decoded.relic_id}`;
 
       relicSlots[decoded.type] = relicUid;
       newRelics[relicUid] = {
