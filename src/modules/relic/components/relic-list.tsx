@@ -24,6 +24,7 @@ import Image from "next/image";
 import { useCharacters } from "../../character/hooks/use-characters.hook";
 import { CharacterDetails } from "../../character/utils/character-detail.type";
 import VirtualizedList from "./virtualized-list";
+import { useParsedDesc } from "@/src/hooks/use-parsed-desc.hook";
 
 interface Props {
   onSelect?: (relicId: string, type: string) => void;
@@ -50,6 +51,8 @@ const RelicList = ({
   const { data: allRellics } = useGetRelics();
   const { data: relicSets } = useGetRelicSets();
   const relicList = useUserStore((state) => state.relics);
+
+  const parseDesc = useParsedDesc();
 
   const filteredRelics = useMemo(() => {
     return Object.values(relicList).filter((item) => {
@@ -207,7 +210,12 @@ const RelicList = ({
                     alt={item.name}
                     className="size-6 shrink-0"
                   />
-                  <span className="line-clamp-2">{item.name}</span>
+                  <span
+                    className="line-clamp-2"
+                    dangerouslySetInnerHTML={{
+                      __html: parseDesc(item.name, []),
+                    }}
+                  />
                 </ComboboxItem>
               )}
             </ComboboxList>

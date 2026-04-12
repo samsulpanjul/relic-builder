@@ -8,18 +8,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/src/components/ui/select";
-import { RelicConfigStore } from "@/src/store/types";
 import { calculateSubAffixValue, isPercent } from "@/src/utils/helpers";
 import { Minus } from "lucide-react";
 import React from "react";
-import {
-  DEFAULT_CREATE_RELIC,
-  useCreateRelicStore,
-} from "../store/use-create-relic.store";
+import { useCreateRelicStore } from "../store/use-create-relic.store";
 import { useGetSubAffixes } from "../../hooks/use-get-sub-affixes.hook";
-import { toast } from "sonner";
-import { useUserStore } from "@/src/store/use-user.store";
-import { useRouter } from "next/navigation";
 import { useGetStatProperties } from "../../hooks/use-get-stat-properties.hook";
 
 interface Props {
@@ -27,15 +20,9 @@ interface Props {
 }
 
 const SubAffixCreateRelic = ({ mainAffixProperty }: Props) => {
-  const router = useRouter();
-
   const { data: statPorperties } = useGetStatProperties();
   const { data: subAffixes } = useGetSubAffixes();
 
-  const addRelic = useUserStore((state) => state.addRelic);
-  const editRelic = useUserStore((state) => state.editRelic);
-
-  const updateRelic = useCreateRelicStore((state) => state.updateRelic);
   const relic = useCreateRelicStore((state) => state.relic);
   const randomizeStat = useCreateRelicStore((state) => state.randomizeStat);
   const randomizeRolls = useCreateRelicStore((state) => state.randomizeRolls);
@@ -64,7 +51,7 @@ const SubAffixCreateRelic = ({ mainAffixProperty }: Props) => {
               Upgrades: {totalUpgradesUsed}/5
             </p>
           </div>
-          <div>
+          <div className="space-x-1">
             <Button
               disabled={!mainAffixProperty}
               onClick={() => randomizeStat(mainAffixProperty ?? "", subAffixes)}
@@ -80,53 +67,6 @@ const SubAffixCreateRelic = ({ mainAffixProperty }: Props) => {
             </Button>
           </div>
         </div>
-        <Button
-          variant={"secondary"}
-          className="justify-self-end font-semibold"
-          onClick={() => {
-            const missingSubStat = relic.sub_affixes.some(
-              (r) => !r.sub_affix_id,
-            );
-            if (
-              !relic.type ||
-              !relic.relic_set_id ||
-              !relic.main_affix_id ||
-              missingSubStat
-            )
-              return toast.warning("Please complete all relic fields.");
-
-            const transformedSubAffixes = relic.sub_affixes.map((sub) => {
-              const totalStep = (sub.steps ?? []).reduce(
-                (acc, curr) => acc + curr,
-                0,
-              );
-
-              return {
-                sub_affix_id: sub.sub_affix_id,
-                count: sub.count,
-                step: totalStep,
-              };
-            });
-
-            const createRelic = {
-              ...relic,
-              sub_affixes: transformedSubAffixes,
-            } as RelicConfigStore;
-
-            router.push("/relic");
-            updateRelic(DEFAULT_CREATE_RELIC);
-
-            if (relic.id) {
-              editRelic(relic.id, createRelic);
-              toast.success("Relic has been updated.");
-            } else {
-              addRelic(createRelic);
-              toast.success("Relic has been added.");
-            }
-          }}
-        >
-          Save
-        </Button>
       </div>
 
       {/* RIGHT */}
