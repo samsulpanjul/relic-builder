@@ -10,7 +10,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/src/components/ui/dialog";
 import RelicList from "@/src/modules/relic/components/relic-list";
 import { useMemo, useState } from "react";
@@ -23,7 +22,7 @@ import RelicCard from "@/src/modules/relic/components/relic-card";
 import { RELIC_SLOTS } from "../../utils/constants";
 
 const RelicTab = () => {
-  const [openSlot, setOpenSlot] = useState<string | null>(null);
+  const [openSlot, setOpenSlot] = useState<string | undefined>(undefined);
   const charId = useCharacterStore((state) => state.id);
   const parseDesc = useParsedDesc();
 
@@ -87,60 +86,34 @@ const RelicTab = () => {
             : null;
 
           return (
-            <Dialog
-              modal={false}
+            <div
+              className="relative group rounded-xl cursor-pointer overflow-hidden"
               key={slot.id}
-              open={openSlot === slot.id}
-              onOpenChange={(open) => setOpenSlot(open ? slot.id : null)}
+              onClick={() => setOpenSlot(slot.id)}
             >
-              <DialogTrigger asChild>
-                <div className="relative group rounded-xl cursor-pointer overflow-hidden">
-                  <p className="absolute top-2 left-3 text-[10px] uppercase tracking-widest text-muted-foreground font-bold z-20">
-                    {slot.name}
-                  </p>
+              <p className="absolute top-2 left-3 text-[10px] uppercase tracking-widest text-muted-foreground font-bold z-20">
+                {slot.name}
+              </p>
 
-                  {relicEntry ? (
-                    <RelicCard
-                      relic={relicEntry}
-                      renderAction={
-                        <Button
-                          variant="destructive"
-                          size="icon-sm"
-                          onClick={() => unequipRelic(Number(charId), slot.id)}
-                        >
-                          <X size={14} />
-                        </Button>
-                      }
-                    />
-                  ) : (
-                    <div className="flex flex-col items-center justify-center bg-card/15 hover:bg-card/25 transition-colors duration-150 size-full">
-                      <Plus className="text-muted-foreground" />
-                    </div>
-                  )}
+              {relicEntry ? (
+                <RelicCard
+                  relic={relicEntry}
+                  renderAction={
+                    <Button
+                      variant="destructive"
+                      size="icon-sm"
+                      onClick={() => unequipRelic(Number(charId), slot.id)}
+                    >
+                      <X size={14} />
+                    </Button>
+                  }
+                />
+              ) : (
+                <div className="flex flex-col items-center justify-center bg-card/15 hover:bg-card/25 transition-colors duration-150 size-full">
+                  <Plus className="text-muted-foreground" />
                 </div>
-              </DialogTrigger>
-
-              <DialogContent className="h-[80vh] flex flex-col">
-                <DialogHeader>
-                  <DialogTitle>Select {slot.name}</DialogTitle>
-                </DialogHeader>
-
-                <div className="flex-1 overflow-y-auto px-4">
-                  <RelicList
-                    emptyClassName="col-span-6"
-                    withDelete={false}
-                    onSelect={(relicId, type) => {
-                      if (charId) {
-                        equipRelic(Number(charId), relicId, type);
-
-                        setOpenSlot(null);
-                      }
-                    }}
-                    type={slot.id}
-                  />
-                </div>
-              </DialogContent>
-            </Dialog>
+              )}
+            </div>
           );
         })}
       </div>
@@ -211,7 +184,7 @@ const RelicTab = () => {
                       className="flex justify-between text-sm bg-background/40 p-1.5 rounded"
                     >
                       <span className="text-muted-foreground">
-                        {statProperties?.[prop.type]?.name}
+                        {statProperties?.[prop.type]?.name ?? "SPD"}
                       </span>
                       <span className="text-secondary">
                         +{(prop.value * 100).toFixed(0)}%
@@ -223,6 +196,32 @@ const RelicTab = () => {
           </div>
         )}
       </div>
+
+      <Dialog
+        open={!!openSlot}
+        onOpenChange={(open) => setOpenSlot(open ? openSlot : undefined)}
+      >
+        <DialogContent className="h-[80vh] flex flex-col">
+          <DialogHeader>
+            <DialogTitle>Select Relic</DialogTitle>
+          </DialogHeader>
+
+          <div className="flex-1 overflow-y-auto px-4">
+            <RelicList
+              emptyClassName="col-span-6"
+              withDelete={false}
+              onSelect={(relicId, type) => {
+                if (charId) {
+                  equipRelic(Number(charId), relicId, type);
+
+                  setOpenSlot(undefined);
+                }
+              }}
+              type={openSlot}
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
