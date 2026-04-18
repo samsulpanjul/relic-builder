@@ -198,6 +198,7 @@ const RelicTab = () => {
       </div>
 
       <Dialog
+        modal={false}
         open={!!openSlot}
         onOpenChange={(open) => setOpenSlot(open ? openSlot : undefined)}
       >
