@@ -8,6 +8,7 @@ import { useGetRelics } from "@/src/modules/relic/hooks/use-get-relics.hook";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/src/components/ui/dialog";
@@ -20,6 +21,7 @@ import { useGetRelicSets } from "@/src/modules/relic/hooks/use-get-relic-sets.ho
 import { useParsedDesc } from "@/src/hooks/use-parsed-desc.hook";
 import RelicCard from "@/src/modules/relic/components/relic-card";
 import { RELIC_SLOTS } from "../../utils/constants";
+import { VisuallyHidden } from "radix-ui";
 
 const RelicTab = () => {
   const [openSlot, setOpenSlot] = useState<string | undefined>(undefined);
@@ -205,6 +207,11 @@ const RelicTab = () => {
         <DialogContent className="h-[80vh] flex flex-col">
           <DialogHeader>
             <DialogTitle>Select Relic</DialogTitle>
+            <VisuallyHidden.Root>
+              <DialogDescription>
+                Select a relic to equip to the character.
+              </DialogDescription>
+            </VisuallyHidden.Root>
           </DialogHeader>
 
           <div className="flex-1 overflow-y-auto px-4">
