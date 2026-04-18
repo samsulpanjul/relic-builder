@@ -77,7 +77,7 @@ const RelicShowcase = () => {
           );
         })}
       </div>
-      <div className="grid grid-cols-2 gap-x-2 gap-y-4">
+      <div className="grid grid-cols-2 gap-2">
         {activeSets.length > 0 ? (
           activeSets.map((set, idx) => {
             const params = set.properties.map((p: any) => p.value);
@@ -98,11 +98,11 @@ const RelicShowcase = () => {
                   </div>
                 }
               >
-                <div>
-                  <p className="text-[10px] font-bold text-secondary leading-none">
-                    {set.setName}
-                    <span className="ml-2 text-[10px] bg-secondary px-1.5 py-0.5 rounded text-secondary-foreground">
-                      {set.requirement}-Pc
+                <div className="min-w-0">
+                  <p className="text-[10px] flex items-center font-bold text-secondary leading-none">
+                    <span className="truncate">{set.setName}</span>
+                    <span className="ml-2 text-[10px] shrink-0 bg-secondary px-1.5 py-0.5 rounded text-secondary-foreground">
+                      {set.requirement}
                     </span>
                   </p>
                 </div>
