@@ -1,3 +1,4 @@
+import { memo, useCallback, useMemo, useState } from "react";
 import EditRelicButton from "./edit-relic-button";
 import RelicCard from "./relic-card";
 import { useVirtualizer } from "@tanstack/react-virtual";
@@ -7,7 +8,6 @@ import { X } from "lucide-react";
 import DeleteDialog from "@/src/components/dialog/delete.dialog";
 import { useDialog } from "@/src/hooks/use-dialog.hook";
 import { useUserStore } from "@/src/store/use-user.store";
-import { useState } from "react";
 
 interface Props {
   onSelect?: (relicId: string, type: string) => void;
@@ -25,16 +25,24 @@ const VirtualizedList = ({ withDelete, onSelect, rows, parentRef }: Props) => {
     count: rows.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 280,
-    overscan: 1,
+    overscan: 2,
   });
 
-  const handleDeleteRelic = () => {
+  const handleDeleteRelic = useCallback(() => {
     if (selectedRelic) {
       deleteRelic(selectedRelic);
       deleteDialog.setOpen(false);
       setSelectedRelic(null);
     }
-  };
+  }, [selectedRelic, deleteRelic, deleteDialog]);
+
+  const handleOpenDelete = useCallback(
+    (id: string) => {
+      setSelectedRelic(id);
+      deleteDialog.setOpen(true);
+    },
+    [deleteDialog],
+  );
 
   return (
     <div ref={parentRef} className="h-[calc(100vh-312px)] overflow-auto p-2">
@@ -60,35 +68,15 @@ const VirtualizedList = ({ withDelete, onSelect, rows, parentRef }: Props) => {
               }}
               className="grid grid-cols-7 gap-4"
             >
-              {rows[virtualRow.index].map((item) => {
-                return (
-                  <RelicCard
-                    key={item.id}
-                    relic={item}
-                    onClick={() => onSelect?.(item.id as string, item.type)}
-                    renderAction={
-                      withDelete && (
-                        <div className="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-100">
-                          <Button
-                            variant="destructive"
-                            size="icon-sm"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              if (!item.id) return;
-                              setSelectedRelic(item.id);
-                              deleteDialog.setOpen(true);
-                            }}
-                          >
-                            <X className="h-4 w-4" />
-                          </Button>
-                          <EditRelicButton item={item} />
-                        </div>
-                      )
-                    }
-                    showEquippedBy
-                  />
-                );
-              })}
+              {rows[virtualRow.index].map((item) => (
+                <RelicListItem
+                  key={item.id}
+                  item={item}
+                  onSelect={onSelect}
+                  withDelete={withDelete}
+                  onOpenDelete={handleOpenDelete}
+                />
+              ))}
             </div>
           );
         })}
@@ -104,5 +92,51 @@ const VirtualizedList = ({ withDelete, onSelect, rows, parentRef }: Props) => {
     </div>
   );
 };
+
+const RelicListItem = memo(function RelicListItem({
+  item,
+  onSelect,
+  withDelete,
+  onOpenDelete,
+}: {
+  item: RelicConfigStore;
+  onSelect?: (id: string, type: string) => void;
+  withDelete?: boolean;
+  onOpenDelete: (id: string) => void;
+}) {
+  const handleClick = useCallback(() => {
+    if (item.id) onSelect?.(item.id, item.type);
+  }, [item.id, item.type, onSelect]);
+
+  const handleDelete = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (item.id) onOpenDelete(item.id);
+    },
+    [item.id, onOpenDelete],
+  );
+
+  const actions = useMemo(
+    () =>
+      withDelete && (
+        <div className="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-100">
+          <Button variant="destructive" size="icon-sm" onClick={handleDelete}>
+            <X className="h-4 w-4" />
+          </Button>
+          <EditRelicButton item={item} />
+        </div>
+      ),
+    [withDelete, handleDelete, item],
+  );
+
+  return (
+    <RelicCard
+      relic={item}
+      onClick={handleClick}
+      renderAction={actions}
+      showEquippedBy
+    />
+  );
+});
 
 export default VirtualizedList;
