@@ -225,6 +225,19 @@ const CharacterTab = () => {
                         },
                       });
                     }}
+                    onBlur={() => {
+                      if (
+                        !charConfig.lightcone.rank ||
+                        charConfig.lightcone.rank < 1
+                      ) {
+                        updateChar(Number(id), {
+                          lightcone: {
+                            ...charConfig.lightcone,
+                            rank: 1,
+                          },
+                        });
+                      }
+                    }}
                   />
                 </label>
               </div>
