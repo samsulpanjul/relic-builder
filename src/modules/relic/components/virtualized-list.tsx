@@ -1,8 +1,13 @@
-import DeleteRelicDialog from "./delete-relic-dialog";
 import EditRelicButton from "./edit-relic-button";
 import RelicCard from "./relic-card";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { RelicConfigStore } from "@/src/store/types";
+import { Button } from "@/src/components/ui/button";
+import { X } from "lucide-react";
+import DeleteDialog from "@/src/components/dialog/delete.dialog";
+import { useDialog } from "@/src/hooks/use-dialog.hook";
+import { useUserStore } from "@/src/store/use-user.store";
+import { useState } from "react";
 
 interface Props {
   onSelect?: (relicId: string, type: string) => void;
@@ -12,12 +17,24 @@ interface Props {
 }
 
 const VirtualizedList = ({ withDelete, onSelect, rows, parentRef }: Props) => {
+  const [selectedRelic, setSelectedRelic] = useState<string | null>(null);
+  const deleteRelic = useUserStore((state) => state.deleteRelic);
+  const deleteDialog = useDialog();
+
   const rowVirtualizer = useVirtualizer({
     count: rows.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 280,
     overscan: 1,
   });
+
+  const handleDeleteRelic = () => {
+    if (selectedRelic) {
+      deleteRelic(selectedRelic);
+      deleteDialog.setOpen(false);
+      setSelectedRelic(null);
+    }
+  };
 
   return (
     <div ref={parentRef} className="h-[calc(100vh-312px)] overflow-auto p-2">
@@ -52,7 +69,18 @@ const VirtualizedList = ({ withDelete, onSelect, rows, parentRef }: Props) => {
                     renderAction={
                       withDelete && (
                         <div className="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-100">
-                          <DeleteRelicDialog relic={item} />
+                          <Button
+                            variant="destructive"
+                            size="icon-sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (!item.id) return;
+                              setSelectedRelic(item.id);
+                              deleteDialog.setOpen(true);
+                            }}
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
                           <EditRelicButton item={item} />
                         </div>
                       )
@@ -65,6 +93,14 @@ const VirtualizedList = ({ withDelete, onSelect, rows, parentRef }: Props) => {
           );
         })}
       </div>
+
+      <DeleteDialog
+        open={deleteDialog.open}
+        onOpenChange={deleteDialog.setOpen}
+        onConfirm={handleDeleteRelic}
+        title="Delete Relic"
+        description="Are you sure? This will permanently remove the relic from your inventory."
+      />
     </div>
   );
 };
