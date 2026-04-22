@@ -18,6 +18,7 @@ import { DEFAULT_CHAR_CONFIG } from "@/src/utils/constants";
 import { toast } from "sonner";
 import { domToPng } from "modern-screenshot";
 import EidolonShowcase from "./components/showcase/eidolon.showcase";
+import { CHARACTER_OFFSETS } from "./utils/constants";
 
 const CharacterPage = () => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -120,7 +121,7 @@ const CharacterPage = () => {
         </AnimatePresence>
 
         {/* LEFT IMAGE */}
-        <div className="w-72 h-full overflow-hidden rounded-xl p-4 relative z-10">
+        <div className="w-72 h-full overflow-hidden rounded-xl relative z-10">
           <div className="bg-[url(/space.webp)] bg-cover bg-center size-full absolute left-0 top-0 -z-50 opacity-75" />
           <Image
             unoptimized
@@ -128,7 +129,12 @@ const CharacterPage = () => {
             alt={String(char?.name) ?? ""}
             width={2048}
             height={2048}
-            className="object-cover object-center scale-200 h-full"
+            className="absolute top-1/2 left-1/2 min-w-[200%] min-h-[200%] max-w-none object-contain"
+            style={{
+              transform:
+                CHARACTER_OFFSETS[Number(id)]?.transform ??
+                "translate(-50%, -50%) scale(0.6)",
+            }}
           />
         </div>
 
