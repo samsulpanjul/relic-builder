@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 
 const lcToId = {
-  "Encounter at Flowering's Coming": 23058,"Welcome to the City of Stars": 23057, "The Finale of a Lie": 23056, "When She Decided to See": 23054, "Dazzled by a Flowery World": 23053, "This Love, Forever": 23052,
+  "Reforged in Hellfire": 23059, "Encounter at Flowering's Coming": 23058,"Welcome to the City of Stars": 23057, "The Finale of a Lie": 23056, "When She Decided to See": 23054, "Dazzled by a Flowery World": 23053, "This Love, Forever": 23052,
   "Though Worlds Apart": 23051, "Never Forget Her Flame": 23050, "To Evernight's Stars": 23049, "Epoch Etched in Golden Blood": 23048,
   "Why Does the Ocean Sing": 23047, "The Hell Where Ideals Burn": 23046, "A Thankless Coronation": 23045, "Thus Burns the Dawn": 23044,
   "Lies Dance on the Breeze": 23043, "Long May Rainbows Adorn the Sky": 23042, "Life Should Be Cast to Flames": 23041,
