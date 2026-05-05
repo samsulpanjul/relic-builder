@@ -7,6 +7,7 @@ import { Lock } from "lucide-react";
 import Image from "next/image";
 import { useParsedDesc } from "@/src/hooks/use-parsed-desc.hook";
 import { motion } from "motion/react";
+import { imgUrl } from "@/src/utils/helpers";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -91,7 +92,7 @@ const EidolonShowcase = () => {
                   unoptimized
                   height={52}
                   width={52}
-                  src={rank.icon}
+                  src={imgUrl(rank.icon, "skillicons")}
                   alt={`Eidolon ${rank.rank}`}
                   className={`w-10 ${isLocked ? "grayscale opacity-50" : ""}`}
                 />

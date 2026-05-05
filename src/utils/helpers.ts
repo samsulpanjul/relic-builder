@@ -34,3 +34,9 @@ export const calculateSubAffixValue = (
 
   return total;
 };
+
+export const imgUrl = (icon: string, category: string, isSplit = true) => {
+  const imgName = isSplit ? icon?.split("/").pop()?.replace(".webp", "") : icon;
+
+  return `https://static.nanoka.cc/assets/hsr/${category}/${imgName}.webp`;
+};

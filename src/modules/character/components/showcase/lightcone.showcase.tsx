@@ -7,6 +7,7 @@ import { Tooltip } from "@/src/components/ui/tooltip-card";
 import { useParsedDesc } from "@/src/hooks/use-parsed-desc.hook";
 import Image from "next/image";
 import { Separator } from "@/src/components/ui/separator";
+import { imgUrl } from "@/src/utils/helpers";
 
 const LightconeShowcase = () => {
   const { data: allLightcones } = useLightcones();
@@ -52,7 +53,11 @@ const LightconeShowcase = () => {
               unoptimized
               width={256}
               height={256}
-              src={lightconeData.icon}
+              src={imgUrl(
+                String(charConfig.lightcone.id),
+                "lightconemediumicon",
+                false,
+              )}
               alt={String(lightconeData.name) ?? "Lightcone"}
               className="-rotate-12 w-16"
             />

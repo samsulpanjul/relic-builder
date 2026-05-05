@@ -19,6 +19,7 @@ import { toast } from "sonner";
 import { domToPng } from "modern-screenshot";
 import EidolonShowcase from "./components/showcase/eidolon.showcase";
 import { CHARACTER_OFFSETS } from "./utils/constants";
+import { imgUrl } from "@/src/utils/helpers";
 
 const CharacterPage = () => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -105,7 +106,7 @@ const CharacterPage = () => {
           <div className="absolute inset-0 scale-110">
             <Image
               unoptimized
-              src={char?.portrait ?? ""}
+              src={imgUrl(id, "avatardrawcard", false)}
               alt="bg"
               fill
               className="object-cover opacity-50"
@@ -125,7 +126,7 @@ const CharacterPage = () => {
           <div className="bg-[url(/space.webp)] bg-cover bg-center size-full absolute left-0 top-0 -z-50 opacity-75" />
           <Image
             unoptimized
-            src={char?.portrait ?? ""}
+            src={imgUrl(id, "avatardrawcard", false)}
             alt={String(char?.name) ?? ""}
             width={2048}
             height={2048}

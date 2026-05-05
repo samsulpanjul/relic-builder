@@ -40,6 +40,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "api.yatta.top",
       },
+      {
+        protocol: "https",
+        hostname: "static.nanoka.cc",
+      },
     ],
   },
 };

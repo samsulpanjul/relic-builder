@@ -7,7 +7,7 @@ import { Tooltip } from "@/src/components/ui/tooltip-card";
 import Image from "next/image";
 import { cn } from "@/src/lib/utils";
 import { SkillTreePoint } from "../../utils/character-detail.type";
-import { isPercent } from "@/src/utils/helpers";
+import { imgUrl, isPercent } from "@/src/utils/helpers";
 
 const SkillsShowcase = () => {
   const charData = useCharacterStore((state) => state.charData);
@@ -213,7 +213,7 @@ const SkillsShowcase = () => {
                   </div>
                 }
               >
-                <div className="flex flex-col items-center gap-1 group cursor-help">
+                <div className="flex flex-col items-center gap-1 group">
                   <div
                     className={cn(
                       "size-9 rounded-full border flex items-center justify-center transition-all relative",
@@ -224,7 +224,7 @@ const SkillsShowcase = () => {
                   >
                     <Image
                       unoptimized
-                      src={mainSkill.icon}
+                      src={imgUrl(mainSkill.icon, "skillicons")}
                       alt={groupName}
                       width={24}
                       height={24}
@@ -306,7 +306,7 @@ const NodeIcon = ({ node }: { node: SkillTreePoint }) => {
       >
         <Image
           unoptimized
-          src={node.icon}
+          src={imgUrl(node.icon, "skillicons")}
           alt="trace"
           width={24}
           height={24}

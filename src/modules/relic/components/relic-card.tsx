@@ -1,5 +1,5 @@
 import { RelicConfigStore } from "@/src/store/types";
-import { calculateSubAffixValue, isPercent } from "@/src/utils/helpers";
+import { calculateSubAffixValue, imgUrl, isPercent } from "@/src/utils/helpers";
 import { ChevronRight } from "lucide-react";
 import { useGetRelics } from "../hooks/use-get-relics.hook";
 import { useGetStatProperties } from "../hooks/use-get-stat-properties.hook";
@@ -40,6 +40,8 @@ const RelicCard = ({
     : 0;
 
   if (!relicData) return;
+
+  console.log(relicData);
 
   return (
     <div
@@ -109,7 +111,7 @@ const RelicCard = ({
           unoptimized
           width={64}
           height={64}
-          src={relicData.icon}
+          src={imgUrl(relicData.icon, "relicfigures")}
           alt={relicData.name ?? "Relic"}
           className="drop-shadow-md"
         />
