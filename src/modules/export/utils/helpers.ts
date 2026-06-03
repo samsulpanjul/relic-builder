@@ -56,9 +56,9 @@ export const generateConfigJson = (
 
   const battle_config = {
     battle_id: 1,
-    stage_id: 1052086,
+    stage_id: 1052096,
     cycle_count: 30,
-    monster_wave: [[4035010]],
+    monster_wave: [[8015030]],
     monster_level: 82,
     blessings: [],
   };
