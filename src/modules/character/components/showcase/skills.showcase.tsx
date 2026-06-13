@@ -41,6 +41,7 @@ const SkillsShowcase = () => {
       Ultimate: [],
       Talent: [],
       Technique: [],
+      Assist: [],
       Elation: [],
     };
 
@@ -48,14 +49,15 @@ const SkillsShowcase = () => {
       if (skill.type === "MazeNormal") return;
       if (!skill.desc) return;
 
-      const type = skill.type_text;
-      if (type.includes("Basic")) groups["Basic ATK"].push(skill);
-      else if (type.includes("Skill") && !type.includes("Elation"))
-        groups["Skill"].push(skill);
-      else if (type.includes("Ultimate")) groups["Ultimate"].push(skill);
-      else if (type.includes("Talent")) groups["Talent"].push(skill);
-      else if (type.includes("Technique")) groups["Technique"].push(skill);
-      else if (type.includes("Elation Skill")) groups["Elation"].push(skill);
+      const type = skill.type;
+      if (type.includes("Normal")) groups["Basic ATK"].push(skill);
+      else if (type.includes("Assist")) groups["Assist"].push(skill);
+      else if (type.includes("BPSkill")) groups["Skill"].push(skill);
+      else if (type.includes("Ultra")) groups["Ultimate"].push(skill);
+      else if (type.includes("Unknown")) groups["Talent"].push(skill);
+      else if (type.includes("Maze") && !type.includes("MazeNormal"))
+        groups["Technique"].push(skill);
+      else if (type.includes("ElationDamage")) groups["Elation"].push(skill);
     });
 
     // Filter empty group
@@ -187,7 +189,7 @@ const SkillsShowcase = () => {
                                 }}
                               />
                               <p className="text-[9px] uppercase tracking-tighter opacity-50 font-semibold">
-                                {skill.type_text}
+                                {groupName}
                               </p>
                             </div>
                             <p

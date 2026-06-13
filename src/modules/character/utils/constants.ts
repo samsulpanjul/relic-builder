@@ -30,4 +30,7 @@ export const CHARACTER_OFFSETS: Record<
   1502: { transform: "translate(-50%, -50%) scale(0.6) translate(3%, 0%)" }, // YAO GUANG
   1505: { transform: "translate(-50%, -50%) scale(0.6) translate(-2%, 1%)" }, // EVANESCIA
   1205: { transform: "translate(-50%, -50%) scale(0.55) translate(0%, 15%)" }, // BLADE
+  1508: { transform: "translate(-50%, -50%) scale(0.5) translate(-2%, 0%)" }, // RIN
+  1509: { transform: "translate(-50%, -50%) scale(0.55) translate(-5%, 4%)" }, // GILGAMESH
+  1510: { transform: "translate(-50%, -50%) scale(0.6) translate(3%, 2%)" }, // HIMEKO NOVA
 };

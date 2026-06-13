@@ -41,8 +41,6 @@ const RelicCard = ({
 
   if (!relicData) return;
 
-  console.log(relicData);
-
   return (
     <div
       className={cn(
