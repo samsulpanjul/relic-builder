@@ -82,7 +82,7 @@ export const useCalculateStats = (
     // --- 3. TRACES ---
     Object.values(charData.skill_trees).forEach((node) => {
       node.status_add_list?.forEach((s) =>
-        mapPropertyToStats(s.type, s.value, stats),
+        mapPropertyToStats(s.type, s.value, stats, charData.element),
       );
     });
 
@@ -92,7 +92,7 @@ export const useCalculateStats = (
       const lcAbilityProps =
         lightconeData.rank.properties?.[charConfig.lightcone.rank - 1];
       lcAbilityProps?.forEach((p) => {
-        mapPropertyToStats(p.type, p.value, stats);
+        mapPropertyToStats(p.type, p.value, stats, charData.element);
       });
     }
 
@@ -116,7 +116,7 @@ export const useCalculateStats = (
       if (mainInfo) {
         const val =
           mainInfo.BaseValue.Value + relic.level * mainInfo.LevelAdd.Value;
-        mapPropertyToStats(mainInfo.Property, val, stats);
+        mapPropertyToStats(mainInfo.Property, val, stats, charData.element);
       }
 
       // Sub Stats
@@ -129,7 +129,7 @@ export const useCalculateStats = (
             sub.step,
             sub.count,
           );
-          mapPropertyToStats(subData.Property, val, stats);
+          mapPropertyToStats(subData.Property, val, stats, charData.element);
         }
       });
     });
@@ -141,7 +141,7 @@ export const useCalculateStats = (
       setData.set_bonus.forEach(([reqCount, bonus]) => {
         if (count >= parseInt(reqCount)) {
           bonus.properties.forEach((p) =>
-            mapPropertyToStats(p.type, p.value, stats),
+            mapPropertyToStats(p.type, p.value, stats, charData.element),
           );
         }
       });
@@ -181,7 +181,12 @@ export const useCalculateStats = (
   ]);
 };
 
-const mapPropertyToStats = (prop: string, val: number, stats: any) => {
+const mapPropertyToStats = (
+  prop: string,
+  val: number,
+  stats: any,
+  charElement: string,
+) => {
   if (!prop) return;
 
   const normalizeKey = (p: string) => {
@@ -232,7 +237,10 @@ const mapPropertyToStats = (prop: string, val: number, stats: any) => {
     ];
     const foundElement = elements.find((el) => prop.startsWith(el));
     if (foundElement) {
-      stats.totals.element_dmg += val;
+      // only count DMG boost matching the character's element
+      if (foundElement === charElement) {
+        stats.totals.element_dmg += val;
+      }
       return;
     }
 
