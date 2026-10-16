@@ -33,4 +33,5 @@ export const CHARACTER_OFFSETS: Record<
   1508: { transform: "translate(-50%, -50%) scale(0.5) translate(-2%, 0%)" }, // RIN
   1509: { transform: "translate(-50%, -50%) scale(0.55) translate(-5%, 4%)" }, // GILGAMESH
   1510: { transform: "translate(-50%, -50%) scale(0.6) translate(3%, 2%)" }, // HIMEKO NOVA
+  1511: { transform: "translate(-50%, -50%) scale(0.55) translate(7%, -2%)" }, // AHA
 };
