@@ -1,34 +1,26 @@
 import { env } from "@/src/env";
-import { getMetadata } from "./get-metadata";
+import { cachedByVersion, fetchJson } from "./cache";
 import { getTextmaps } from "./get-textmaps";
 
-export const getRelics = async () => {
-  const [metadata, textmaps] = await Promise.all([
-    getMetadata(),
-    getTextmaps(),
-  ]);
+export const getRelics = () =>
+  cachedByVersion("relics", async (version) => {
+    const [data, textmaps] = await Promise.all([
+      fetchJson<Record<string, any>>(
+        `${env.NEONTEAM_BASE_URL}/${version}/relics.json`,
+      ),
+      getTextmaps(),
+    ]);
 
-  const res = await fetch(
-    `${env.NEONTEAM_BASE_URL}/${metadata.CurrentVersion}/relics.json`,
-    {
-      next: {
-        revalidate: 60 * 60,
-      },
-    },
-  );
+    const allRelics = Object.entries(data).map(([id, lightcone]) => {
+      const parsedRelic = {
+        ...lightcone,
+        name: textmaps?.[lightcone.name],
+      };
 
-  const data: Record<string, any> = await res.json();
+      return [id, parsedRelic];
+    });
 
-  const allRelics = Object.entries(data).map(([id, lightcone]) => {
-    const parsedRelic = {
-      ...lightcone,
-      name: textmaps?.[lightcone.name],
-    };
+    const parsedData = Object.fromEntries(allRelics);
 
-    return [id, parsedRelic];
+    return parsedData;
   });
-
-  const parsedData = Object.fromEntries(allRelics);
-
-  return parsedData;
-};

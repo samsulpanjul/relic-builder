@@ -1,46 +1,38 @@
 import { env } from "@/src/env";
-import { getMetadata } from "./get-metadata";
+import { cachedByVersion, fetchJson } from "./cache";
 import { getTextmaps } from "./get-textmaps";
 
-export const getRelicSets = async () => {
-  const [metadata, textmaps] = await Promise.all([
-    getMetadata(),
-    getTextmaps(),
-  ]);
+export const getRelicSets = () =>
+  cachedByVersion("relic-sets", async (version) => {
+    const [data, textmaps] = await Promise.all([
+      fetchJson<Record<string, any>>(
+        `${env.NEONTEAM_BASE_URL}/${version}/relic-sets.json`,
+      ),
+      getTextmaps(),
+    ]);
 
-  const res = await fetch(
-    `${env.NEONTEAM_BASE_URL}/${metadata.CurrentVersion}/relic-sets.json`,
-    {
-      next: {
-        revalidate: 60 * 60,
-      },
-    },
-  );
+    const sets = Object.entries(data).map(([id, set]) => {
+      const setBonus = Object.entries(set.set_bonus).map(
+        ([id, bonus]: [string, any]) => {
+          const parsedBonus = {
+            ...bonus,
+            desc: textmaps?.[bonus.desc],
+          };
 
-  const data: Record<string, any> = await res.json();
+          return [id, parsedBonus];
+        },
+      );
 
-  const sets = Object.entries(data).map(([id, set]) => {
-    const setBonus = Object.entries(set.set_bonus).map(
-      ([id, bonus]: [string, any]) => {
-        const parsedBonus = {
-          ...bonus,
-          desc: textmaps?.[bonus.desc],
-        };
+      const parsedSet = {
+        ...set,
+        name: textmaps?.[set.name],
+        set_bonus: setBonus,
+      };
 
-        return [id, parsedBonus];
-      },
-    );
+      return [id, parsedSet];
+    });
 
-    const parsedSet = {
-      ...set,
-      name: textmaps?.[set.name],
-      set_bonus: setBonus,
-    };
+    const parsedData = Object.fromEntries(sets);
 
-    return [id, parsedSet];
+    return parsedData;
   });
-
-  const parsedData = Object.fromEntries(sets);
-
-  return parsedData;
-};

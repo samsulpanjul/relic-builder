@@ -1,35 +1,27 @@
 import { env } from "@/src/env";
-import { getMetadata } from "./get-metadata";
+import { cachedByVersion, fetchJson } from "./cache";
 import { getTextmaps } from "./get-textmaps";
 
-export const getStatProperties = async () => {
-  const [metadata, textmaps] = await Promise.all([
-    getMetadata(),
-    getTextmaps(),
-  ]);
+export const getStatProperties = () =>
+  cachedByVersion("stat-properties", async (version) => {
+    const [data, textmaps] = await Promise.all([
+      fetchJson<Record<string, any>>(
+        `${env.NEONTEAM_BASE_URL}/${version}/stat-properties.json`,
+      ),
+      getTextmaps(),
+    ]);
 
-  const res = await fetch(
-    `${env.NEONTEAM_BASE_URL}/${metadata.CurrentVersion}/stat-properties.json`,
-    {
-      next: {
-        revalidate: 60 * 60,
-      },
-    },
-  );
+    const statProperties = Object.entries(data).map(([id, stat]) => {
+      const parsedStat = {
+        ...stat,
+        name: textmaps?.[stat.name],
+        name_skill_tree: textmaps?.[stat.name_skill_tree],
+      };
 
-  const data: Record<string, any> = await res.json();
+      return [id, parsedStat];
+    });
 
-  const statProperties = Object.entries(data).map(([id, stat]) => {
-    const parsedStat = {
-      ...stat,
-      name: textmaps?.[stat.name],
-      name_skill_tree: textmaps?.[stat.name_skill_tree],
-    };
+    const parsedData = Object.fromEntries(statProperties);
 
-    return [id, parsedStat];
+    return parsedData;
   });
-
-  const parsedData = Object.fromEntries(statProperties);
-
-  return parsedData;
-};

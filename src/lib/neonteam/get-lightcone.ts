@@ -1,40 +1,32 @@
 import { env } from "@/src/env";
-import { getMetadata } from "./get-metadata";
+import { cachedByVersion, fetchJson } from "./cache";
 import { getTextmaps } from "./get-textmaps";
 import { LightconeRawDataList } from "@/src/types/neonteam/lightcone";
 
-export const getLightcones = async () => {
-  const [metadata, textmaps] = await Promise.all([
-    getMetadata(),
-    getTextmaps(),
-  ]);
+export const getLightcones = () =>
+  cachedByVersion("lightcones", async (version) => {
+    const [data, textmaps] = await Promise.all([
+      fetchJson<LightconeRawDataList>(
+        `${env.NEONTEAM_BASE_URL}/${version}/lightcones.json`,
+      ),
+      getTextmaps(),
+    ]);
 
-  const res = await fetch(
-    `${env.NEONTEAM_BASE_URL}/${metadata.CurrentVersion}/lightcones.json`,
-    {
-      next: {
-        revalidate: 60 * 60,
-      },
-    },
-  );
+    const allLightcones = Object.entries(data).map(([id, lightcone]) => {
+      const parsedLightcone = {
+        ...lightcone,
+        name: textmaps?.[lightcone.name],
+        rank: {
+          ...lightcone.rank,
+          desc: textmaps?.[lightcone.rank.desc],
+          skill: textmaps?.[lightcone.rank.skill],
+        },
+      };
 
-  const data: LightconeRawDataList = await res.json();
+      return [id, parsedLightcone];
+    });
 
-  const allLightcones = Object.entries(data).map(([id, lightcone]) => {
-    const parsedLightcone = {
-      ...lightcone,
-      name: textmaps?.[lightcone.name],
-      rank: {
-        ...lightcone.rank,
-        desc: textmaps?.[lightcone.rank.desc],
-        skill: textmaps?.[lightcone.rank.skill],
-      },
-    };
+    const parsedData = Object.fromEntries(allLightcones);
 
-    return [id, parsedLightcone];
+    return parsedData;
   });
-
-  const parsedData = Object.fromEntries(allLightcones);
-
-  return parsedData;
-};

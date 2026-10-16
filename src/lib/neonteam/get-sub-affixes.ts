@@ -1,29 +1,21 @@
 import { env } from "@/src/env";
-import { getMetadata } from "./get-metadata";
+import { cachedByVersion, fetchJson } from "./cache";
 
-export const getSubAffixes = async () => {
-  const [metadata] = await Promise.all([getMetadata()]);
+export const getSubAffixes = () =>
+  cachedByVersion("relic-sub-affixes", async (version) => {
+    const data = await fetchJson<Record<string, any>>(
+      `${env.NEONTEAM_BASE_URL}/${version}/relic-sub-affixes.json`,
+    );
 
-  const res = await fetch(
-    `${env.NEONTEAM_BASE_URL}/${metadata.CurrentVersion}/relic-sub-affixes.json`,
-    {
-      next: {
-        revalidate: 60 * 60,
-      },
-    },
-  );
+    const affixes = Object.entries(data).map(([id, affix]) => {
+      const parsedAffix = {
+        ...affix,
+      };
 
-  const data: Record<string, any> = await res.json();
+      return [id, parsedAffix];
+    });
 
-  const affixes = Object.entries(data).map(([id, affix]) => {
-    const parsedAffix = {
-      ...affix,
-    };
+    const parsedData = Object.fromEntries(affixes);
 
-    return [id, parsedAffix];
+    return parsedData;
   });
-
-  const parsedData = Object.fromEntries(affixes);
-
-  return parsedData;
-};

@@ -1,32 +1,11 @@
 import { env } from "../../env";
-import { getMetadata } from "./get-metadata";
+import { cachedByVersion, fetchJson } from "./cache";
 
-let textmapsCache: Record<number, string> | null = null;
-let textmapsVersion: string | null = null;
+export const getTextmaps = () =>
+  cachedByVersion("textmaps", async (version) => {
+    const data = await fetchJson<{ EN: Record<number, string> }>(
+      `${env.NEONTEAM_BASE_URL}/${version}/textmaps.json`,
+    );
 
-export const getTextmaps = async () => {
-  const metadata = await getMetadata();
-
-  // kalau version sama → reuse
-  if (textmapsCache && textmapsVersion === metadata.CurrentVersion) {
-    return textmapsCache;
-  }
-
-  console.log("Hit textmaps neonteam");
-
-  const res = await fetch(
-    `${env.NEONTEAM_BASE_URL}/${metadata.CurrentVersion}/textmaps.json`,
-    {
-      next: {
-        revalidate: 60 * 60,
-      },
-    },
-  );
-
-  const data = await res.json();
-
-  textmapsCache = data.EN;
-  textmapsVersion = metadata.CurrentVersion;
-
-  return textmapsCache;
-};
+    return data.EN;
+  });
