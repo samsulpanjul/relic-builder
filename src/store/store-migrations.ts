@@ -34,6 +34,28 @@ export const runStoreMigrations = (importedData: any) => {
     currentVersion = 1;
   }
 
+  if (currentVersion === 1) {
+    console.log("Migrating data from v1 to v2...");
+    const relics = migratedData.relics || {};
+    const updatedCharacters = { ...migratedData.characters };
+
+    // clear slots pointing to relics that no longer exist
+    Object.entries(updatedCharacters).forEach(
+      ([charId, char]: [string, any]) => {
+        const updatedSlots = { ...char.relics };
+        Object.entries(updatedSlots).forEach(([slot, relicUid]) => {
+          if (relicUid && !relics[relicUid as string]) {
+            updatedSlots[slot] = null;
+          }
+        });
+        updatedCharacters[charId] = { ...char, relics: updatedSlots };
+      },
+    );
+
+    migratedData.characters = updatedCharacters;
+    currentVersion = 2;
+  }
+
   migratedData.version = currentVersion;
   return migratedData;
 };

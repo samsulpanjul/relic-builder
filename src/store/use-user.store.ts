@@ -13,7 +13,7 @@ export const useUserStore = create<UserStore>()(
     }),
     {
       name: "relic-builder-config",
-      version: 1,
+      version: 2,
       migrate: (persistedState: any) => {
         return runStoreMigrations(persistedState);
       },
